@@ -7,6 +7,7 @@
 #include<ctime>
 
 bool Guess(int number) {
+<<<<<<< HEAD
 	static int = -1;
 
 	srand(time(NULL));
@@ -24,6 +25,18 @@ bool Guess(int number) {
 		return false;
 	}
 	return true;
+=======
+	static int target = -1;
+
+	srand(time(NULL));
+	if(target == -1) {
+		target = rand() % 100 + 1;
+	}
+
+	if (number == target)
+		return true;
+	return false;
+>>>>>>> ad60777c6ca8d516dfddc0246033802d49cefda4
 }
 int main()
 {
