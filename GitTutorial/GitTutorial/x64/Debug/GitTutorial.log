@@ -1,2 +1,13 @@
 ﻿  GitTutorial.cpp
-  GitTutorial.vcxproj -> C:\Users\JIMBO\OneDrive\桌面\Subject\program\OOP\project\GitTutorial\x64\Debug\GitTutorial.exe
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(10): error C2059: 語法錯誤: '<<'
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(13): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(14): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(15): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(18): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(23): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(28): error C2059: 語法錯誤: '=='
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(31): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(32): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(33): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(36): error C2065: 'target': 未宣告的識別項
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(39): error C2059: 語法錯誤: '>>'
