@@ -1,0 +1,19 @@
+把圖片放進RES資料夾，在Bitmap按下右鍵匯入圖片，更改圖片ID。
+
+
+在mygame.h宣告 class CGameStateRun : public CGameState
+
+宣告 CMovingBitmap   XXX;
+
+mygame.cpp 
+
+-----------------------
+CGameStateRun::OnInit()  
+
+XXX.LoadBitmap(ID)	讀取圖片
+-----------------------
+CGameStateRun::OnMove()	
+XXX.SetTopLeft(10, 10);	設定座標
+-----------------------
+CGameStateRun::OnShow()
+XXX.ShowBitmap();	顯示圖片	
