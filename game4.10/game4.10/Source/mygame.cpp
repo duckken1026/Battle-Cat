@@ -227,6 +227,11 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+	Background.SetTopLeft(0, 0);						// 設定背景座標
+	Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
+	Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
+	//giant.SetTopLeft(1500, 500);
+	neko.OnMove();
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -298,6 +303,20 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
 	hits_left.LoadBitmap();									
+
+	Background.LoadBitmap(IDB_scene);						//載入背景圖片
+	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
+	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
+
+	neko.AddBitmap(IDB_neko0, RGB(255, 0, 0));				//載入貓咪動畫圖片0
+	neko.AddBitmap(IDB_neko1, RGB(255, 0, 0));				//載入貓咪動畫圖片1
+	neko.AddBitmap(IDB_neko2, RGB(255, 0, 0));				//載入貓咪動畫圖片2
+	neko.AddBitmap(IDB_neko3, RGB(255, 0, 0));				//載入貓咪動畫圖片3
+	neko.AddBitmap(IDB_neko4, RGB(255, 0, 0));				//載入貓咪動畫圖片4
+
+	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));					// 載入巨神貓
+	neko.SetDelayCount(5);
+
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 	CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
@@ -373,19 +392,28 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
-	background.ShowBitmap();			// 貼上背景圖
+
+	Background.ShowBitmap();			//貼上背景圖
+	Mybase.ShowBitmap();				//貼上我方砲塔
+	eraser.OnShow();					// 貼上擦子
+	Rivalbase.ShowBitmap();				//貼上敵方砲塔
+	neko.SetTopLeft(1300, 700);				// 設定貓咪座標
+	neko.OnShow();						//貼上貓咪
+	//giant.ShowBitmap(0.8);
+	/*
+	background.ShowBitmap();			// 貼上學校圖
 	help.ShowBitmap();					// 貼上說明圖
 	hits_left.ShowBitmap();
 	for (int i=0; i < NUMBALLS; i++)
 		ball[i].OnShow();				// 貼上第i號球
 	bball.OnShow();						// 貼上彈跳的球
-	eraser.OnShow();					// 貼上擦子
+	
 	//
 	//  貼上左上及右下角落的圖
 	//
 	corner.SetTopLeft(0,0);
 	corner.ShowBitmap();
 	corner.SetTopLeft(SIZE_X-corner.Width(), SIZE_Y-corner.Height());
-	corner.ShowBitmap();
+	corner.ShowBitmap();*/
 }
 }

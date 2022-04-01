@@ -173,4 +173,33 @@
       <Filter>MFC</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="RES\背景\雪地.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\塔\tower.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\塔\Tw.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\貓咪\貓咪0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\貓咪\貓咪1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\貓咪\貓咪2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\貓咪\貓咪3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\貓咪\貓咪4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\圖片\neko9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

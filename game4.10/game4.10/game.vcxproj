@@ -323,6 +323,17 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="RES\圖片\neko9.bmp" />
+    <Image Include="RES\塔\tower.bmp" />
+    <Image Include="RES\塔\Tw.bmp" />
+    <Image Include="RES\背景\雪地.bmp" />
+    <Image Include="RES\貓咪\貓咪0.bmp" />
+    <Image Include="RES\貓咪\貓咪1.bmp" />
+    <Image Include="RES\貓咪\貓咪2.bmp" />
+    <Image Include="RES\貓咪\貓咪3.bmp" />
+    <Image Include="RES\貓咪\貓咪4.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
