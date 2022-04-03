@@ -105,7 +105,8 @@ namespace game_framework {
 		CMovingBitmap	Mybase;		// §Ú¤è¯¥¶ð
 		CMovingBitmap	Rivalbase;	// ¼Ä¤è¯¥¶ð
 		CAnimation		neko;		// ¿ß«}
-		CMovingBitmap   giant;       // ¥¨¯«¿ß
+		CAnimation		doge;		//ª¯¥J
+		CMovingBitmap   giant;      // ¥¨¯«¿ß
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

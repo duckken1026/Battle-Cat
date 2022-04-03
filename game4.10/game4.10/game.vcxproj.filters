@@ -201,5 +201,29 @@
     <Image Include="RES\圖片\neko9.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\狗仔\狗狗5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
