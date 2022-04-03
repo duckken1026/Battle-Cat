@@ -41,6 +41,8 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
+#include "nekoAnimation.h"
+#include "dogeAnimation.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -104,9 +106,10 @@ namespace game_framework {
 		CMovingBitmap   Background; // ¹CÀ¸­I´º¹Ï
 		CMovingBitmap	Mybase;		// §Ú¤è¯¥¶ð
 		CMovingBitmap	Rivalbase;	// ¼Ä¤è¯¥¶ð
-		CAnimation		neko;		// ¿ß«}
-		CAnimation		doge;		//ª¯¥J
 		CMovingBitmap   giant;      // ¥¨¯«¿ß
+		nekoAnimation   neko;		//¿ß«}
+		nekoAnimation	neko2;		//²Ä¤G°¦¿ß«}
+		dogeAnimation   doge;		//ª¯¥J
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

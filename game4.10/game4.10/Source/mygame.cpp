@@ -191,6 +191,8 @@ CGameStateRun::CGameStateRun(CGame *g)
 : CGameState(g), NUMBALLS(28)
 {
 	ball = new CBall [NUMBALLS];
+	neko2.SetCoordinate(1511, 640);						//設定貓咪座標
+	doge.SetCoordinate(270, 640);						//設定狗狗座標
 }
 
 CGameStateRun::~CGameStateRun()
@@ -231,9 +233,14 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
 	Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
 	//giant.SetTopLeft(1500, 500);
+	
 	neko.OnMove();										//貓咪動畫開始變換
-	doge.OnMove();										//狗仔動畫開始變換
 
+	neko2.OnMove();										//貓咪動畫開始變換
+	neko2.MoveForward();
+
+	doge.OnMove();										//貓咪動畫開始變換
+	doge.MoveForward();
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -310,18 +317,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
 	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
 
-	neko.AddBitmap(IDB_neko0, RGB(255, 0, 0));				//載入貓咪動畫圖片0
-	neko.AddBitmap(IDB_neko1, RGB(255, 0, 0));				//載入貓咪動畫圖片1
-	neko.AddBitmap(IDB_neko2, RGB(255, 0, 0));				//載入貓咪動畫圖片2
-	neko.AddBitmap(IDB_neko3, RGB(255, 0, 0));				//載入貓咪動畫圖片3
-	neko.AddBitmap(IDB_neko4, RGB(255, 0, 0));				//載入貓咪動畫圖片4
-	neko.SetDelayCount(5);									//貓咪動畫轉換延遲速度
+	neko.LoadBitmap();										//載入貓咪動畫
+	neko2.LoadBitmap();										//載入貓咪動畫
+	doge.LoadBitmap();										//載入貓咪動畫
 
-	doge.AddBitmap(IDB_doge0, RGB(255, 0, 0));				//載入狗仔動畫圖片0
-	doge.AddBitmap(IDB_doge1, RGB(255, 0, 0));				//載入狗仔動畫圖片1
-	doge.AddBitmap(IDB_doge2, RGB(255, 0, 0));				//載入狗仔動畫圖片2
-	doge.AddBitmap(IDB_doge3, RGB(255, 0, 0));				//載入狗仔動畫圖片3
-	doge.SetDelayCount(5);									//狗仔動畫轉換延遲速度
+
 
 	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));					// 載入巨神貓
 	
@@ -406,9 +406,8 @@ void CGameStateRun::OnShow()
 	Mybase.ShowBitmap();				//貼上我方砲塔
 	eraser.OnShow();					// 貼上擦子
 	Rivalbase.ShowBitmap();				//貼上敵方砲塔
-	neko.SetTopLeft(1300, 700);			// 設定貓咪座標
 	neko.OnShow();						//貼上貓咪
-	doge.SetTopLeft(300, 700);			// 設定狗仔座標
+	neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
 	//giant.ShowBitmap(0.8);
 	/*
