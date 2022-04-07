@@ -6,6 +6,7 @@
 #include "gamelib.h"
 #include "nekoAnimation.h"
 
+
 namespace game_framework
 {
 	/////////////////////////////////////////////////////////////////////////////
@@ -55,10 +56,12 @@ namespace game_framework
 	}
 
 	void nekoAnimation::MoveForward()
-	{	
+	{
 		if (x > 285) {
 			x -= 3;
 		}
 	}
+
+
 
 }

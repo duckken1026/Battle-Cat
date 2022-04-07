@@ -135,6 +135,9 @@
     <ClCompile Include="Source\dogeAnimation.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ImageNumber.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -177,6 +180,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\dogeAnimation.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImageNumber.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

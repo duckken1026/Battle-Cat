@@ -222,9 +222,12 @@ void CGameStateRun::OnBeginState()
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-	CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	currentMoney.SetDigits(1);
+	currentMoney.SetInteger(0);							//設定現有金額初始值為0
+	currentMoney.SetTopLeft(1520, 0);					//設定現有金額顯示的座標
+	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+	CAudio::Instance()->Play(AUDIO_BackgroundMusic, true);			// 撥放 背景音樂
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -233,7 +236,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
 	Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
 	//giant.SetTopLeft(1500, 500);
-	
+
 	neko.OnMove();										//貓咪動畫開始變換
 
 	neko2.OnMove();										//貓咪動畫開始變換
@@ -264,6 +267,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 判斷擦子是否碰到球
 	//
+
+	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
+
+
+
 	for (i=0; i < NUMBALLS; i++)
 		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 			ball[i].SetIsAlive(false);
@@ -274,7 +282,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			//
 			if (hits_left.GetInteger() <= 0) {
 				CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-				CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+				CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
 				GotoGameState(GAME_STATE_OVER);
 			}
 		}
@@ -312,7 +320,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
 	hits_left.LoadBitmap();									
-
+	currentMoney.LoadBitmap();								//載入數字圖形
 	Background.LoadBitmap(IDB_scene);						//載入背景圖片
 	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
 	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
@@ -328,7 +336,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
-	CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
+	CAudio::Instance()->Load(AUDIO_BackgroundMusic,  "sounds\\InvadingJapan!.mp3");	// 載入編號2的聲音Invading Japan!.mp3
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
@@ -409,6 +417,7 @@ void CGameStateRun::OnShow()
 	neko.OnShow();						//貼上貓咪
 	neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
+	currentMoney.ShowBitmap();			//貼上現有金額
 	//giant.ShowBitmap(0.8);
 	/*
 	background.ShowBitmap();			// 貼上學校圖

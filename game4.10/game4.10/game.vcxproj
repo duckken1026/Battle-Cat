@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\dogeAnimation.cpp" />
+    <ClCompile Include="Source\ImageNumber.cpp" />
     <ClCompile Include="Source\nekoAnimation.cpp" />
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\CBall.cpp" />
@@ -307,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\dogeAnimation.h" />
+    <ClInclude Include="Source\ImageNumber.h" />
     <ClInclude Include="Source\nekoAnimation.h" />
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\CBall.h" />

@@ -43,6 +43,7 @@
 #include "CBouncingBall.h"
 #include "nekoAnimation.h"
 #include "dogeAnimation.h"
+#include "ImageNumber.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -52,7 +53,7 @@ namespace game_framework {
 	enum AUDIO_ID {				// 定義各種音效的編號
 		AUDIO_DING,				// 0
 		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
+		AUDIO_BackgroundMusic	// 2   背景音樂
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -110,6 +111,7 @@ namespace game_framework {
 		nekoAnimation   neko;		//貓咪
 		nekoAnimation	neko2;		//第二隻貓咪
 		dogeAnimation   doge;		//狗仔
+		ImageNumber		currentMoney; //現有的錢
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
