@@ -41,8 +41,8 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
+#include "rivalAnimation.h"
 #include "nekoAnimation.h"
-#include "dogeAnimation.h"
 #include "ImageNumber.h"
 
 namespace game_framework {
@@ -110,7 +110,7 @@ namespace game_framework {
 		CMovingBitmap   giant;      // 巨神貓
 		nekoAnimation   neko;		//貓咪
 		nekoAnimation	neko2;		//第二隻貓咪
-		dogeAnimation   doge;		//狗仔
+		rivalAnimation  doge;		//狗仔
 		ImageNumber		currentMoney; //現有的錢
 	};
 

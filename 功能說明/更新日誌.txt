@@ -13,3 +13,13 @@
 2022/4/7:
 
 新增金錢功能(ImageNumber)，更改遊戲背景音樂
+
+2022/4/8:
+
+將Class(dogeAnimation)改名為(rivalAnimation)
+
+貓咪使用 nekoAnimation
+
+敵人使用 rivalAnimation
+
+將兩個類別去互相引用對方始角色可存取目前敵方的資訊

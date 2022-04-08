@@ -258,7 +258,7 @@
     <None Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\dogeAnimation.cpp" />
+    <ClCompile Include="Source\rivalAnimation.cpp" />
     <ClCompile Include="Source\ImageNumber.cpp" />
     <ClCompile Include="Source\nekoAnimation.cpp" />
     <ClCompile Include="Source\audio.cpp" />
@@ -307,7 +307,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\dogeAnimation.h" />
+    <ClInclude Include="Source\rivalAnimation.h" />
     <ClInclude Include="Source\ImageNumber.h" />
     <ClInclude Include="Source\nekoAnimation.h" />
     <ClInclude Include="Source\audio.h" />

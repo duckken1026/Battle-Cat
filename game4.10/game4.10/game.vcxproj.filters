@@ -132,10 +132,10 @@
     <ClCompile Include="Source\nekoAnimation.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\dogeAnimation.cpp">
+    <ClCompile Include="Source\ImageNumber.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ImageNumber.cpp">
+    <ClCompile Include="Source\rivalAnimation.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,10 +179,10 @@
     <ClInclude Include="Source\nekoAnimation.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\dogeAnimation.h">
+    <ClInclude Include="Source\ImageNumber.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ImageNumber.h">
+    <ClInclude Include="Source\rivalAnimation.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

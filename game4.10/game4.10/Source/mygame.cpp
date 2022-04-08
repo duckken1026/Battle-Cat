@@ -225,6 +225,7 @@ void CGameStateRun::OnBeginState()
 	currentMoney.SetDigits(1);
 	currentMoney.SetInteger(0);							//設定現有金額初始值為0
 	currentMoney.SetTopLeft(1520, 0);					//設定現有金額顯示的座標
+
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_BackgroundMusic, true);			// 撥放 背景音樂
@@ -240,10 +241,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	neko.OnMove();										//貓咪動畫開始變換
 
 	neko2.OnMove();										//貓咪動畫開始變換
-	neko2.MoveForward();
+	neko2.MoveForward(doge);
 
 	doge.OnMove();										//貓咪動畫開始變換
-	doge.MoveForward();
+	doge.MoveForward(neko2);
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -270,6 +271,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
 
+	
 
 
 	for (i=0; i < NUMBALLS; i++)
