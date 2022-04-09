@@ -240,7 +240,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	neko.OnMove();										//貓咪動畫開始變換
 
-	neko2.OnMove();										//貓咪動畫開始變換
+	//neko2.OnMove();									//貓咪動畫開始變換
 	neko2.MoveForward(doge);
 
 	doge.OnMove();										//貓咪動畫開始變換
@@ -270,7 +270,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 
 	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
-
+	
 	
 
 
@@ -436,5 +436,19 @@ void CGameStateRun::OnShow()
 	corner.ShowBitmap();
 	corner.SetTopLeft(SIZE_X-corner.Width(), SIZE_Y-corner.Height());
 	corner.ShowBitmap();*/
+
+
+	//將數值顯示在螢幕上
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 0));
+	char str[80];								// Demo 數字對字串的轉換
+	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth()) ;
+	pDC->TextOut(300, 250, str);
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 }

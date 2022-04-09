@@ -14,7 +14,12 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	rivalAnimation::rivalAnimation() {
-		x = y = 0;
+		//產生此物件的初始值
+		x1 = x2 = y = 0;
+		IsAlive = true;			
+		range = 4;						//實際距離為26+4=30
+		health = 100;
+		attack = 1;
 	}
 
 	void rivalAnimation::LoadBitmap() {
@@ -26,17 +31,26 @@ namespace game_framework {
 	}
 
 	void rivalAnimation::OnMove() {
+		x2 = x1 + image.Width();								//將X2設定為圖片最右邊的X座標
 		image.OnMove();											//狗仔動畫開始變換
 	}
 
 	void rivalAnimation::OnShow() {
-		image.SetTopLeft(x, y);									// 設定狗仔座標
-		image.OnShow();											//貼上狗仔
+		if (IsAlive == true)
+		{
+			image.SetTopLeft(x1, y);								// 設定狗仔座標
+			image.OnShow();											//貼上狗仔
+		}
 	}
 
-	int rivalAnimation::GetX()									//取得X座標
+	int rivalAnimation::GetX1()									//取得X座標
 	{
-		return x;
+		return x1;
+	}
+
+	int rivalAnimation::GetX2()
+	{
+		return x2;
 	}
 
 	int rivalAnimation::GetY()									//取得Y座標
@@ -46,15 +60,35 @@ namespace game_framework {
 
 	void rivalAnimation::SetCoordinate(int NewX, int NewY)		//設定座標
 	{
-		x = NewX;
+		x1 = NewX;
 		y = NewY;
 	}
 
 	void rivalAnimation::MoveForward(nekoAnimation neko)
 	{
-		if (neko.GetX1() > x) {
-			x += 5;
+		if (neko.GetX1() > x2 + range) {			//判斷有無碰撞
+			x1 += 5;
+			x2 += 5;
 		}
+		else {								//如果碰到就消失
+			//IsAlive = false;
+		}
+
+	}
+
+	bool rivalAnimation::GetIsAlive()
+	{
+		return IsAlive;
+	}
+
+	int rivalAnimation::GetAttack()
+	{
+		return attack;
+	}
+
+	int rivalAnimation::GetHealth()
+	{
+		return health;
 	}
 
 }
