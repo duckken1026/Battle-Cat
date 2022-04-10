@@ -17,10 +17,12 @@ namespace game_framework{
 		int  GetX2();							//取得圖片X(右)座標
 		int  GetY();							//取得圖片Y座標
 		void SetCoordinate(int NewX, int NewY);	//設定圖片座標
-		void MoveForward(nekoAnimation neko);	//向前走動
+		void MoveForward(nekoAnimation *neko);	//向前走動
 		bool GetIsAlive();							//取得是否還活著
 		int	 GetAttack();						//取得攻擊力
 		int	 GetHealth();						//取得體力
+		void SetHealth(int NewHealth);					//更改體力值
+		
 	private:
 		CAnimation	image;		// 狗仔動畫物件
 		int x1, y;				// X,Y座標
@@ -29,5 +31,8 @@ namespace game_framework{
 		int range;				// 角色可攻擊的範圍
 		int health;				//角色生命值
 		int attack;				//角色攻擊力
+		int attackDelay;		//角色攻擊頻率
+		int delay;				//去計算目前已經Delay了幾次
+		void die();				//判斷體力小於等於零，成立則執行此函數
 	};
 }

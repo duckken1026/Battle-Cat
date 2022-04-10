@@ -18,8 +18,10 @@ namespace game_framework {
 		x1 = x2 = y = 0;
 		IsAlive = true;			
 		range = 4;						//實際距離為26+4=30
-		health = 100;
+		health = 10;
 		attack = 1;
+		attackDelay = 10;				//framework一秒執行10次延遲10次就等於1秒執行一次
+		delay = 1;
 	}
 
 	void rivalAnimation::LoadBitmap() {
@@ -36,7 +38,7 @@ namespace game_framework {
 	}
 
 	void rivalAnimation::OnShow() {
-		if (IsAlive == true)
+		//if (IsAlive == true)
 		{
 			image.SetTopLeft(x1, y);								// 設定狗仔座標
 			image.OnShow();											//貼上狗仔
@@ -64,14 +66,32 @@ namespace game_framework {
 		y = NewY;
 	}
 
-	void rivalAnimation::MoveForward(nekoAnimation neko)
+	void rivalAnimation::MoveForward(nekoAnimation *neko)
 	{
-		if (neko.GetX1() > x2 + range) {			//判斷有無碰撞
+
+		if (!IsAlive)				//若死亡就不在執行以下程式碼
+			return;
+
+		die();						//判斷體力小於等於零，成立則執行此函數
+
+		if ((neko->GetX1() > x2 + range) || (neko->GetIsAlive() == false)){			//判斷有無碰撞和敵方是否活著
+
 			x1 += 5;
 			x2 += 5;
+			OnMove();
 		}
-		else {								//如果碰到就消失
-			//IsAlive = false;
+		else {								//如果碰到開始進行攻擊
+
+			if (delay >= attackDelay)		//若延遲1秒後攻擊對方
+			{
+				neko->SetHealth(neko->GetHealth() - attack);	//取得對方的體力每X秒扣除對方體力***
+				delay = 1;										//將延遲重制
+			}
+			else
+			{
+				delay += 1;
+			}
+
 		}
 
 	}
@@ -89,6 +109,22 @@ namespace game_framework {
 	int rivalAnimation::GetHealth()
 	{
 		return health;
+	}
+
+	void rivalAnimation::SetHealth(int NewHealth)
+	{
+		health = NewHealth;
+	}
+
+	void rivalAnimation::die()
+	{
+		if (health <= 0)					 //判斷體力小於等於零，成立則執行此函數
+		{
+			IsAlive = false;
+			x1 -= 15;
+			x2 -= 15;
+			y = 0;
+		}
 	}
 
 }
