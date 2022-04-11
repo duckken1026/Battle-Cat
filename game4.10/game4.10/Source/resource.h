@@ -38,11 +38,6 @@
 #define IDB_scene                       158
 #define IDB_Mybase                      159
 #define IDB_Rivalbase                   160
-#define IDB_neko0                       161
-#define IDB_neko1                       162
-#define IDB_neko2                       163
-#define IDB_neko3                       164
-#define IDB_neko4                       165
 #define IDB_BITMAP3                     166
 #define IDB_giant                       166
 #define IDB_doge0                       180

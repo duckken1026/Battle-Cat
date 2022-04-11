@@ -28,11 +28,9 @@ namespace game_framework
 
 	void nekoAnimation::LoadBitmap()
 	{
-		image.AddBitmap(IDB_neko0, RGB(255, 0, 0));				//¸ü¤J¿ß«}°Êµe¹Ï¤ù0
-		//image.AddBitmap(IDB_neko1, RGB(255, 0, 0));			//¸ü¤J¿ß«}°Êµe¹Ï¤ù1
-		image.AddBitmap(IDB_neko2, RGB(255, 0, 0));				//¸ü¤J¿ß«}°Êµe¹Ï¤ù2
-		image.AddBitmap(IDB_neko3, RGB(255, 0, 0));				//¸ü¤J¿ß«}°Êµe¹Ï¤ù3
-		image.AddBitmap(IDB_neko4, RGB(255, 0, 0));				//¸ü¤J¿ß«}°Êµe¹Ï¤ù4
+		char *temp[12] = {".\\bitmaps\\¿ß«}\\¿ß«}0.bmp",".\\bitmaps\\¿ß«}\\¿ß«}1.bmp",".\\bitmaps\\¿ß«}\\¿ß«}2.bmp",".\\bitmaps\\¿ß«}\\¿ß«}3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»0.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»2.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»4.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»6.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»7.bmp"};
+		for (int i = 0; i < 12; i++)
+			image.AddBitmap(temp[i], RGB(255, 0, 0));
 		image.SetDelayCount(3);									//¿ß«}°ÊµeÂà´«©µ¿ð³t«×
 	}
 

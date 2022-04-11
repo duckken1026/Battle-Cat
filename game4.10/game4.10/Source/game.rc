@@ -108,16 +108,6 @@ IDB_Mybase              BITMAP                  "..\\res\\¶ð\\tower.bmp"
 
 IDB_Rivalbase           BITMAP                  "..\\RES\\¶ð\\Tw.bmp"
 
-IDB_neko0               BITMAP                  "..\\RES\\¿ß«}\\¿ß«}0.bmp"
-
-IDB_neko1               BITMAP                  "..\\RES\\¿ß«}\\¿ß«}1.bmp"
-
-IDB_neko2               BITMAP                  "..\\RES\\¿ß«}\\¿ß«}2.bmp"
-
-IDB_neko3               BITMAP                  "..\\RES\\¿ß«}\\¿ß«}3.bmp"
-
-IDB_neko4               BITMAP                  "..\\RES\\¿ß«}\\¿ß«}4.bmp"
-
 IDB_giant               BITMAP                  "..\\RES\\¹Ï¤ù\\neko9.bmp"
 
 IDB_scene               BITMAP                  "..\\RES\\­I´º\\³·¦a.bmp"
