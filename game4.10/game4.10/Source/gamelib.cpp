@@ -203,6 +203,16 @@ void CAnimation::Reset()
 	bmp_counter = 0;
 }
 
+void CAnimation::SetCurrentBitmap(int x)
+{
+	Reset();
+	for (int i = 0; i < x; i++)
+	{
+		bmp_iter++;
+		bmp_counter++;
+	}
+}
+
 void CAnimation::SetDelayCount(int dc)
 {
 	GAME_ASSERT(dc > 0, "CAnimation: Delay count must be >= 1");

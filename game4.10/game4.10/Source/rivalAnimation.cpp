@@ -18,17 +18,20 @@ namespace game_framework {
 		x1 = x2 = y = 0;
 		IsAlive = true;			
 		range = 4;						//實際距離為26+4=30
-		health = 10;
+		health = 100;
 		attack = 1;
-		attackDelay = 10;				//framework一秒執行10次延遲10次就等於1秒執行一次
+		attackDelay = 20;				//framework一秒執行10次延遲10次就等於1秒執行一次
 		delay = 1;
 	}
 
 	void rivalAnimation::LoadBitmap() {
-		image.AddBitmap(IDB_doge0, RGB(255, 0, 0));				//載入狗仔動畫圖片0
-		image.AddBitmap(IDB_doge1, RGB(255, 0, 0));				//載入狗仔動畫圖片1
-		image.AddBitmap(IDB_doge2, RGB(255, 0, 0));				//載入狗仔動畫圖片2
-		image.AddBitmap(IDB_doge3, RGB(255, 0, 0));				//載入狗仔動畫圖片3
+		char *temp[4] = { ".\\bitmaps\\狗仔\\狗狗0.bmp",".\\bitmaps\\狗仔\\狗狗1.bmp",".\\bitmaps\\狗仔\\狗狗2.bmp",".\\bitmaps\\狗仔\\狗狗3.bmp"};
+		for (int i = 0; i < 4; i++)
+			image.AddBitmap(temp[i], RGB(255, 0, 0));
+		//image.AddBitmap(IDB_doge0, RGB(255, 0, 0));				//載入狗仔動畫圖片0
+		//image.AddBitmap(IDB_doge1, RGB(255, 0, 0));				//載入狗仔動畫圖片1
+		//image.AddBitmap(IDB_doge2, RGB(255, 0, 0));				//載入狗仔動畫圖片2
+		//image.AddBitmap(IDB_doge3, RGB(255, 0, 0));				//載入狗仔動畫圖片3
 		image.SetDelayCount(5);									//狗仔動畫轉換延遲速度
 	}
 

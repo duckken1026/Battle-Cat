@@ -19,7 +19,8 @@ namespace game_framework {
 		int	 GetAttack();						//取得攻擊力
 		int	 GetHealth();						//取得體力
 		void SetHealth(int NewHealth);			//更改體力值
-		
+		int  GetAnimationNumber();
+		void SetCurrentBitmap(int);
 	private:
 		CAnimation	image;		// 貓咪動畫物件
 		int x1, y;				// X(左),Y座標
@@ -31,5 +32,9 @@ namespace game_framework {
 		int attackDelay;		//角色攻擊頻率
 		int delay;				//去計算目前已經Delay了幾次
 		void die();				//判斷體力小於等於零，成立則執行此函數
+		int walkAnimationStart;	//第一個行走動畫
+		int walkAnimationEnd;	//最後一個行走動畫
+		int attackAnimationStart;//第一個攻擊動畫
+		int attackAnimationEnd;	//最後一個攻擊動畫
 	};
 }
