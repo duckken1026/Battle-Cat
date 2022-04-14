@@ -71,6 +71,8 @@ CGameStateInit::CGameStateInit(CGame *g)
 
 void CGameStateInit::OnInit()
 {
+	CAudio::Instance()->Load(AUDIO_Beginning, "sounds\\beginning.mp3");		//Load 開頭音樂
+	CAudio::Instance()->Play(AUDIO_Beginning);								//Play 開頭音樂
 	//
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
@@ -202,6 +204,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
+	CAudio::Instance()->Stop(AUDIO_Beginning);		//Close 開頭音樂
 	const int BALL_GAP = 90;
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 7;
@@ -339,8 +342,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));					// 載入巨神貓
 	
 
-	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
-	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 	CAudio::Instance()->Load(AUDIO_BackgroundMusic,  "sounds\\InvadingJapan!.mp3");	// 載入編號2的聲音Invading Japan!.mp3
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
