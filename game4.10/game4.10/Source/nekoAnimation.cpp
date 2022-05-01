@@ -22,18 +22,23 @@ namespace game_framework
 		range = 3;							//實際距離為27+3=30
 		health = 100;
 		attack = 1;
-		attackDelay = 20;				//framework一秒執行10次延遲12次就等於1.2秒執行一次
+		attackDelay = 10;				//framework一秒執行10次延遲12次就等於1.2秒執行一次
 		delay = 1;				
 		walkAnimationStart = 0;
 		walkAnimationEnd = 3;
 		attackAnimationStart = 4;
 		attackAnimationEnd = 8;
+		deathAnimationStart = 9;
+		deathAnimationEnd = 16;
+		deathDelay = 0;
+		deathHeightChange = 101;
+		moveSpeed = 3;
 	}
 
 	void nekoAnimation::LoadBitmap()
 	{
-		char *temp[9] = {".\\bitmaps\\貓咪\\貓咪0.bmp",".\\bitmaps\\貓咪\\貓咪1.bmp",".\\bitmaps\\貓咪\\貓咪2.bmp",".\\bitmaps\\貓咪\\貓咪3.bmp",".\\bitmaps\\貓咪\\攻擊0.bmp",".\\bitmaps\\貓咪\\攻擊1.bmp",".\\bitmaps\\貓咪\\攻擊3.bmp",".\\bitmaps\\貓咪\\攻擊4.bmp",".\\bitmaps\\貓咪\\攻擊5.bmp"};
-		for (int i = 0; i < 9; i++)
+		char *temp[17] = {".\\bitmaps\\貓咪\\貓咪0.bmp",".\\bitmaps\\貓咪\\貓咪1.bmp",".\\bitmaps\\貓咪\\貓咪2.bmp",".\\bitmaps\\貓咪\\貓咪3.bmp",".\\bitmaps\\貓咪\\攻擊0.bmp",".\\bitmaps\\貓咪\\攻擊1.bmp",".\\bitmaps\\貓咪\\攻擊3.bmp",".\\bitmaps\\貓咪\\攻擊4.bmp",".\\bitmaps\\貓咪\\攻擊5.bmp",".\\bitmaps\\貓咪\\擊退0.bmp",".\\bitmaps\\貓咪\\擊退1.bmp",".\\bitmaps\\貓咪\\擊退2.bmp",".\\bitmaps\\貓咪\\擊退3.bmp",".\\bitmaps\\貓咪\\擊退4.bmp",".\\bitmaps\\貓咪\\擊退5.bmp",".\\bitmaps\\貓咪\\擊退6.bmp",".\\bitmaps\\貓咪\\擊退7.bmp" };
+		for (int i = 0; i < 17; i++)
 			image.AddBitmap(temp[i], RGB(255, 0, 0));
 		image.SetDelayCount(3);									//貓咪動畫轉換延遲速度
 	}
@@ -46,11 +51,16 @@ namespace game_framework
 
 	void nekoAnimation::OnShow()
 	{
-		//if (IsAlive == true)
+		if (IsAlive == true)			//若角色還活著會顯示在畫面
 		{
 			image.SetTopLeft(x1, y);								// 設定貓咪座標
 			image.OnShow();											//貼上貓咪
 		}
+		else if (IsAlive == false && deathDelay < (deathAnimationEnd - deathAnimationStart)) {	//擊退時要將角色的Y座標做調整
+			image.SetTopLeft(x1, y-deathHeightChange);
+			image.OnShow();
+		}
+		//死亡就不顯示在畫面
 	}
 
 	int nekoAnimation::GetX1()								//取得X(左)座標
@@ -77,16 +87,15 @@ namespace game_framework
 	void nekoAnimation::MoveForward(rivalAnimation *rival)
 	{
 
+		die();						//判斷體力小於等於零，成立則執行此函數
 		if (!IsAlive)				//若死亡就不在執行以下程式碼
 			return;
 
-		die();						//判斷體力小於等於零，成立則執行此函數	
-
 		if ((rival->GetX2() < x1 - range) || (rival->GetIsAlive() == false)){	//判斷有無碰撞和敵方是否活著
-			x1 -= 3;
-			x2 -= 3;
+			x1 -= moveSpeed;
+			x2 -= moveSpeed;
 			OnMove();
-			if (image.GetCurrentBitmapNumber() == walkAnimationEnd + 1)		//若行走動畫播完了再重頭播一次
+			if (image.GetCurrentBitmapNumber() > walkAnimationEnd + 1)		//若行走動畫播完了再重頭播一次
 			{
 				image.Reset();
 				image.SetDelayCount(3);				//設定延遲速度
@@ -94,24 +103,28 @@ namespace game_framework
 		}
 		else {								//如果碰到開始進行攻擊
 			
-			if (delay >= attackDelay)		//若延遲1秒後攻擊對方
-			{
-				rival->SetHealth(rival->GetHealth() - attack);	//取得對方的體力每X秒扣除對方體力***
-				delay = 1;										//將延遲重制
-				image.SetCurrentBitmap(4);
+			if (delay == 1) {			//設定攻擊初始動畫
+				image.SetDelayCount(1);		//設定延遲速度
+				image.SetCurrentBitmap(attackAnimationStart);
+				delay += 1;
+				OnMove();
 			}
-			else if (delay >= attackDelay - (attackAnimationEnd - attackAnimationStart))	//攻擊動畫開始
-			{
+			else if (delay < attackAnimationStart+1) {		//播放攻擊動畫
 				OnMove();
 				delay += 1;
 			}
-			else												//停止不動
-			{
-				image.SetDelayCount(1);							//設定延遲速度
-				image.SetCurrentBitmap(4);
-				delay += 1;					
+			else if (delay == attackAnimationStart + 1) {		//取得對方的體力每X秒扣除對方體力
+				rival->SetHealth(rival->GetHealth() - attack);	
+				delay += 1;
 			}
-			
+			else {						//攻擊冷卻狀態
+				image.SetCurrentBitmap(attackAnimationStart);
+				delay += 1;
+				if (delay >= attackDelay) {	//若等於冷卻時間將delay重制
+					delay = 1;
+				}
+			}
+
 		}
 	}
 
@@ -150,10 +163,18 @@ namespace game_framework
 		if (health <= 0)					 //判斷體力小於等於零，成立則執行此函數
 		{
 			IsAlive = false;
-			x1 += 15;
-			x2 += 15;
-			y = 0;
+			if (deathDelay == 0) {			//體力小於等於零後先初始化讓動畫變成第一張擊退動畫
+				image.SetCurrentBitmap(deathAnimationStart);
+				deathDelay++;
+				image.OnMove();
+			}		
+			else if (deathDelay < (deathAnimationEnd - deathAnimationStart)) {	//擊退動畫開始播放直到播完
+				image.OnMove();
+				deathDelay++;
+			}
+			
 		}
+
 	}
 
 

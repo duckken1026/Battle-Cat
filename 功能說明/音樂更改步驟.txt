@@ -12,4 +12,3 @@ CAudio::Instance()->Play(AUDIO_BackgroundMusic);
 不要放在進去別人的OnInite
 CAudio::Instance()->Stop(AUDIO_BackgroundMusic);
 
-That's all! 很簡單吧!

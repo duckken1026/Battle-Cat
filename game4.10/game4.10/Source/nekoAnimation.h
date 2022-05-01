@@ -19,8 +19,8 @@ namespace game_framework {
 		int	 GetAttack();						//取得攻擊力
 		int	 GetHealth();						//取得體力
 		void SetHealth(int NewHealth);			//更改體力值
-		int  GetAnimationNumber();
-		void SetCurrentBitmap(int);
+		int  GetAnimationNumber();				//取得現在動畫播到哪一張
+		void SetCurrentBitmap(int);				//設定目前動畫
 	private:
 		CAnimation	image;		// 貓咪動畫物件
 		int x1, y;				// X(左),Y座標
@@ -36,5 +36,10 @@ namespace game_framework {
 		int walkAnimationEnd;	//最後一個行走動畫
 		int attackAnimationStart;//第一個攻擊動畫
 		int attackAnimationEnd;	//最後一個攻擊動畫
+		int deathAnimationStart;//第一個死亡動畫
+		int deathAnimationEnd;	//最後一個死亡動畫
+		int deathDelay;			//擊退動畫延遲時間
+		int deathHeightChange;	//擊退角色Y座標調整
+		int moveSpeed;			//角色移動速度
 	};
 }

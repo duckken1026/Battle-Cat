@@ -54,5 +54,13 @@
 
 角色現在可以播放行走和攻擊的動畫
 
+2022/5/1:
 
+(角色互動行為更新)
+
+新增擊退時的動畫，體力小於等於零時會播放擊退動畫播放完畢後角色會從畫面消失
+
+修改攻擊模式:角色會先攻擊後再進入冷卻模式
+
+新增變數至角色的Class中:deathAnimationStart,deathAnimationEnd,deathDelay,deathHeightChange,moveSpeed.
 

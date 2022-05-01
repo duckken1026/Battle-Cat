@@ -195,6 +195,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 	ball = new CBall [NUMBALLS];
 	neko2.SetCoordinate(1511, 640);						//設定貓咪座標
 	doge.SetCoordinate(270, 640);						//設定狗狗座標
+	neko.SetCoordinate(0,-101);
 }
 
 CGameStateRun::~CGameStateRun()
@@ -243,7 +244,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	neko.OnMove();										//貓咪動畫開始變換
 	if (neko.GetAnimationNumber() == 0) {
-		neko.SetCurrentBitmap(4);
+		neko.SetCurrentBitmap(9);
 	}
 
 	//neko2.OnMove();									//貓咪動畫開始變換
