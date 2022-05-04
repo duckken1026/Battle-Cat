@@ -4,9 +4,9 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
+#include "nekoLibrary.h"
 #include "rivalAnimation.h"			//需先匯入才能讀取
 #include "nekoAnimation.h"
-
 
 namespace game_framework
 {
@@ -16,23 +16,25 @@ namespace game_framework
 	
 	nekoAnimation::nekoAnimation()
 	{
-		//產生此物件的初始值
+		nekoLibrary data("Tank Cat");//產生此物件的初始值
+		
 		x1 = x2 = y = 0;
 		IsAlive = true;
-		range = 3;							//實際距離為27+3=30
-		health = 100;
-		attack = 1;
-		attackDelay = 10;				//framework一秒執行10次延遲12次就等於1.2秒執行一次
+		range = data.range;					//實際距離為27+3=30
+		health = data.health;
+		attack = data.attack;
+		attackDelay = data.attackDelay;		//framework一秒執行10次延遲12次就等於1.2秒執行一次
 		delay = 1;				
-		walkAnimationStart = 0;
-		walkAnimationEnd = 3;
-		attackAnimationStart = 4;
-		attackAnimationEnd = 8;
-		deathAnimationStart = 9;
-		deathAnimationEnd = 16;
+		walkAnimationStart = data.walkAnimationStart;
+		walkAnimationEnd = data.walkAnimationEnd;
+		attackAnimationStart = data.attackAnimationStart;
+		attackAnimationEnd = data.attackAnimationEnd;
+		deathAnimationStart = data.deathAnimationStart;
+		deathAnimationEnd = data.deathAnimationEnd;
 		deathDelay = 0;
-		deathHeightChange = 101;
-		moveSpeed = 3;
+		deathHeightChange = data.deathHeightChange;
+		moveSpeed = data.moveSpeed;
+		
 	}
 
 	void nekoAnimation::LoadBitmap()
@@ -40,7 +42,7 @@ namespace game_framework
 		char *temp[17] = {".\\bitmaps\\貓咪\\貓咪0.bmp",".\\bitmaps\\貓咪\\貓咪1.bmp",".\\bitmaps\\貓咪\\貓咪2.bmp",".\\bitmaps\\貓咪\\貓咪3.bmp",".\\bitmaps\\貓咪\\攻擊0.bmp",".\\bitmaps\\貓咪\\攻擊1.bmp",".\\bitmaps\\貓咪\\攻擊3.bmp",".\\bitmaps\\貓咪\\攻擊4.bmp",".\\bitmaps\\貓咪\\攻擊5.bmp",".\\bitmaps\\貓咪\\擊退0.bmp",".\\bitmaps\\貓咪\\擊退1.bmp",".\\bitmaps\\貓咪\\擊退2.bmp",".\\bitmaps\\貓咪\\擊退3.bmp",".\\bitmaps\\貓咪\\擊退4.bmp",".\\bitmaps\\貓咪\\擊退5.bmp",".\\bitmaps\\貓咪\\擊退6.bmp",".\\bitmaps\\貓咪\\擊退7.bmp" };
 		for (int i = 0; i < 17; i++)
 			image.AddBitmap(temp[i], RGB(255, 0, 0));
-		image.SetDelayCount(3);									//貓咪動畫轉換延遲速度
+		image.SetDelayCount(2);									//貓咪動畫轉換延遲速度
 	}
 
 	void nekoAnimation::OnMove()
@@ -95,10 +97,10 @@ namespace game_framework
 			x1 -= moveSpeed;
 			x2 -= moveSpeed;
 			OnMove();
-			if (image.GetCurrentBitmapNumber() > walkAnimationEnd + 1)		//若行走動畫播完了再重頭播一次
+			if (image.GetCurrentBitmapNumber() > walkAnimationEnd)		//若行走動畫播完了再重頭播一次
 			{
 				image.Reset();
-				image.SetDelayCount(3);				//設定延遲速度
+				image.SetDelayCount(2);				//設定延遲速度
 			}
 		}
 		else {								//如果碰到開始進行攻擊
@@ -109,11 +111,11 @@ namespace game_framework
 				delay += 1;
 				OnMove();
 			}
-			else if (delay < attackAnimationStart+1) {		//播放攻擊動畫
+			else if (delay < (attackAnimationEnd - attackAnimationStart) + 1) {		//播放攻擊動畫
 				OnMove();
 				delay += 1;
 			}
-			else if (delay == attackAnimationStart + 1) {		//取得對方的體力每X秒扣除對方體力
+			else if (delay == (attackAnimationEnd - attackAnimationStart) + 1) {		//取得對方的體力每X秒扣除對方體力
 				rival->SetHealth(rival->GetHealth() - attack);	
 				delay += 1;
 			}

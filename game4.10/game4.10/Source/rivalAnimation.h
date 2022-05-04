@@ -5,7 +5,6 @@ namespace game_framework{
 	/////////////////////////////////////////////////////////////////////////////
 
 	class nekoAnimation;						//先讓編譯器知道之後會有nekoAnimation的存在之後再來include
-	
 	class rivalAnimation 
 	{
 	public:
@@ -18,11 +17,12 @@ namespace game_framework{
 		int  GetY();							//取得圖片Y座標
 		void SetCoordinate(int NewX, int NewY);	//設定圖片座標
 		void MoveForward(nekoAnimation *neko);	//向前走動
-		bool GetIsAlive();							//取得是否還活著
+		bool GetIsAlive();						//取得是否還活著
 		int	 GetAttack();						//取得攻擊力
 		int	 GetHealth();						//取得體力
-		void SetHealth(int NewHealth);					//更改體力值
-		
+		void SetHealth(int NewHealth);			//更改體力值
+		int  GetAnimationNumber();				//取得現在動畫播到哪一張
+		void SetCurrentBitmap(int);				//設定目前動畫
 	private:
 		CAnimation	image;		// 狗仔動畫物件
 		int x1, y;				// X,Y座標
@@ -34,5 +34,16 @@ namespace game_framework{
 		int attackDelay;		//角色攻擊頻率
 		int delay;				//去計算目前已經Delay了幾次
 		void die();				//判斷體力小於等於零，成立則執行此函數
+
+
+		int walkAnimationStart;	//第一個行走動畫
+		int walkAnimationEnd;	//最後一個行走動畫
+		int attackAnimationStart;//第一個攻擊動畫
+		int attackAnimationEnd;	//最後一個攻擊動畫
+		int deathAnimationStart;//第一個死亡動畫
+		int deathAnimationEnd;	//最後一個死亡動畫
+		int deathDelay;			//擊退動畫延遲時間
+		int deathHeightChange;	//擊退角色Y座標調整
+		int moveSpeed;			//角色移動速度
 	};
 }

@@ -64,3 +64,16 @@
 
 新增變數至角色的Class中:deathAnimationStart,deathAnimationEnd,deathDelay,deathHeightChange,moveSpeed.
 
+2022/5/4:
+
+修正攻擊動畫未完全播完的bug
+
+新增敵方攻擊動畫
+
+新Class:
+
+新增nekoLibrary貓咪的圖鑑可以得到貓咪各項資訊(由nekoAnimation存取)
+
+新增rivalLibrary敵方的圖鑑可以得到敵方各項資訊(由rivalAnimation存取)
+
+

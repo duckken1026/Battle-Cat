@@ -1,0 +1,14 @@
+#include "stdafx.h"
+#include "Resource.h"
+#include <mmsystem.h>
+#include <ddraw.h>
+#include "audio.h"
+#include "gamelib.h"
+#include "rivalLibrary.h"
+
+namespace game_framework {
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class提供貓咪圖鑑收集貓咪的各項資料
+	// 
+	/////////////////////////////////////////////////////////////////////////////
+}
