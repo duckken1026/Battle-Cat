@@ -39,9 +39,11 @@ namespace game_framework
 
 	void nekoAnimation::LoadBitmap()
 	{
-		char *temp[17] = {".\\bitmaps\\¿ß«}\\¿ß«}0.bmp",".\\bitmaps\\¿ß«}\\¿ß«}1.bmp",".\\bitmaps\\¿ß«}\\¿ß«}2.bmp",".\\bitmaps\\¿ß«}\\¿ß«}3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»0.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»4.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\À»°h0.bmp",".\\bitmaps\\¿ß«}\\À»°h1.bmp",".\\bitmaps\\¿ß«}\\À»°h2.bmp",".\\bitmaps\\¿ß«}\\À»°h3.bmp",".\\bitmaps\\¿ß«}\\À»°h4.bmp",".\\bitmaps\\¿ß«}\\À»°h5.bmp",".\\bitmaps\\¿ß«}\\À»°h6.bmp",".\\bitmaps\\¿ß«}\\À»°h7.bmp" };
-		for (int i = 0; i < 17; i++)
-			image.AddBitmap(temp[i], RGB(255, 0, 0));
+		nekoLibrary data("Tank Cat");//²£¥Í¦¹ª«¥óªºªì©l­È
+		
+		//char *temp[17] = {".\\bitmaps\\¿ß«}\\¿ß«}0.bmp",".\\bitmaps\\¿ß«}\\¿ß«}1.bmp",".\\bitmaps\\¿ß«}\\¿ß«}2.bmp",".\\bitmaps\\¿ß«}\\¿ß«}3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»0.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»3.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»4.bmp",".\\bitmaps\\¿ß«}\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\À»°h0.bmp",".\\bitmaps\\¿ß«}\\À»°h1.bmp",".\\bitmaps\\¿ß«}\\À»°h2.bmp",".\\bitmaps\\¿ß«}\\À»°h3.bmp",".\\bitmaps\\¿ß«}\\À»°h4.bmp",".\\bitmaps\\¿ß«}\\À»°h5.bmp",".\\bitmaps\\¿ß«}\\À»°h6.bmp",".\\bitmaps\\¿ß«}\\À»°h7.bmp" };
+		for (int i = 0; i < 10; i++)
+			image.AddBitmap(data.imageList("Tank Cat",i), RGB(255, 0, 0));
 		image.SetDelayCount(2);									//¿ß«}°ÊµeÂà´«©µ¿ð³t«×
 	}
 
