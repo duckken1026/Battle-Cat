@@ -21,6 +21,7 @@ namespace game_framework {
 		int deathHeightChange;	//擊退角色Y座標調整
 		int moveSpeed;			//角色移動速度
 		char *imageList(string name,int);//回傳角色圖片
+		int imageQuantity;		//圖片數量
 	};
 
 

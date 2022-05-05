@@ -20,7 +20,7 @@ namespace game_framework {
 	{
 		if (name == "Cat") {				//貓咪資料
 			range = 3;
-			health = 1;
+			health = 100;
 			attack = 1;
 			attackDelay = 10;
 			walkAnimationStart = 0;
@@ -31,7 +31,7 @@ namespace game_framework {
 			deathAnimationEnd = 16;
 			deathHeightChange = 101;
 			moveSpeed = 3;
-			
+			imageQuantity = 17;
 		
 		}
 		else if (name == "Tank Cat") {		//牆貓資料
@@ -47,7 +47,7 @@ namespace game_framework {
 			deathAnimationEnd = 16;
 			deathHeightChange = 101;
 			moveSpeed = 5;
-
+			imageQuantity = 10;
 		}
 		
 		

@@ -4,6 +4,7 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
+#include "rivalLibrary.h"
 #include "rivalAnimation.h"
 #include "nekoAnimation.h"
 
@@ -14,29 +15,34 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	rivalAnimation::rivalAnimation() {
-		//²£¥Í¦¹ª«¥óªºªì©l­È
+		
+		rivalLibrary data("Doge");		//²£¥Í¦¹ª«¥óªºªì©l­È
+
 		x1 = x2 = y = 0;
 		IsAlive = true;			
-		range = 4;						//¹ê»Ú¶ZÂ÷¬°26+4=30
-		health = 100;
-		attack = 1;
-		attackDelay = 20;				//framework¤@¬í°õ¦æ10¦¸©µ¿ð10¦¸´Nµ¥©ó1¬í°õ¦æ¤@¦¸
+		range = data.range;				//¹ê»Ú¶ZÂ÷¬°26+4=30
+		health = data.health;
+		attack = data.attack;
+		attackDelay = data.attackDelay;	//framework¤@¬í°õ¦æ10¦¸©µ¿ð10¦¸´Nµ¥©ó1¬í°õ¦æ¤@¦¸
 		delay = 1;
-		walkAnimationStart = 0;
-		walkAnimationEnd = 3;
-		attackAnimationStart = 4;
-		attackAnimationEnd = 8;
-		deathAnimationStart = 9;
-		deathAnimationEnd = 16;
+		walkAnimationStart = data.walkAnimationStart;
+		walkAnimationEnd = data.walkAnimationEnd;
+		attackAnimationStart = data.attackAnimationStart;
+		attackAnimationEnd = data.attackAnimationEnd;
+		deathAnimationStart = data.deathAnimationStart;
+		deathAnimationEnd = data.deathAnimationEnd;
 		deathDelay = 0;
-		deathHeightChange = 101;
-		moveSpeed = 3;
+		deathHeightChange = data.deathHeightChange;
+		moveSpeed = data.moveSpeed;
 	}
 
-	void rivalAnimation::LoadBitmap() {
-		char *temp[9] = { ".\\bitmaps\\ª¯¥J\\ª¯ª¯0.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯1.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯2.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»0.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»2.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»4.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»5.bmp"};
-		for (int i = 0; i < 9; i++)
-			image.AddBitmap(temp[i], RGB(255, 0, 0));
+	void rivalAnimation::LoadBitmap() 
+	{
+		rivalLibrary data("Doge");
+		
+		//char *temp[9] = { ".\\bitmaps\\ª¯¥J\\ª¯ª¯0.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯1.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯2.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»0.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»2.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»4.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»5.bmp"};
+		for (int i = 0; i < data.imageQuantity; i++)
+			image.AddBitmap(data.imageList("Doge",i), RGB(255, 0, 0));
 		image.SetDelayCount(2);									//ª¯¥J°ÊµeÂà´«©µ¿ð³t«×
 	}
 
