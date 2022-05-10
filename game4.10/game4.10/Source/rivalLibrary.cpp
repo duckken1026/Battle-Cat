@@ -20,7 +20,7 @@ namespace game_framework {
 		if (name == "Doge")
 		{
 			range = 4;
-			health = 90;
+			health = 1000;
 			attack = 1;
 			attackDelay = 20;
 			walkAnimationStart = 0;

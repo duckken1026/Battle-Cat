@@ -113,6 +113,9 @@ namespace game_framework {
 		nekoAnimation	neko2;		//第二隻貓咪
 		rivalAnimation  doge;		//狗仔
 		ImageNumber		currentMoney; //現有的錢
+		nekoAnimation	*Neko;		//貓咪陣列
+		const int		maxNeko;	// 球的總數
+		int				showCatDelay;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -190,9 +190,13 @@ void CGameStateOver::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateRun::CGameStateRun(CGame *g)
-: CGameState(g), NUMBALLS(28)
+: CGameState(g), NUMBALLS(28), maxNeko(20)
 {
 	ball = new CBall [NUMBALLS];
+	Neko = new nekoAnimation[maxNeko];
+	for (int i = 0; i < maxNeko; i++) {
+		Neko[i].SetCoordinate(1511, 640);
+	}
 	neko2.SetCoordinate(1511, 640);						//設定貓咪座標
 	doge.SetCoordinate(270, 640);						//設定狗狗座標
 	neko.SetCoordinate(0,-101);
@@ -201,6 +205,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 CGameStateRun::~CGameStateRun()
 {
 	delete [] ball;
+	delete [] Neko;
 }
 
 void CGameStateRun::OnBeginState()
@@ -214,6 +219,7 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 60;
 	const int ANIMATION_SPEED = 15;
+	showCatDelay = 0;
 	for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
 		int x_pos = i % BALL_PER_ROW;
 		int y_pos = i / BALL_PER_ROW;
@@ -247,6 +253,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		neko.SetCurrentBitmap(9);
 	}
 
+	for (int i = 0; i <= showCatDelay / 100; i++) {
+		Neko[i].MoveForward(&doge);
+	}
+	if (showCatDelay < 1999) {
+		showCatDelay++;
+	}
+	
 	//neko2.OnMove();									//貓咪動畫開始變換
 	neko2.MoveForward(&doge);
 
@@ -337,7 +350,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	neko.LoadBitmap();										//載入貓咪動畫
 	neko2.LoadBitmap();										//載入貓咪動畫
 	doge.LoadBitmap();										//載入貓咪動畫
-
+	for (int i = 0; i < maxNeko; i++) {
+		Neko[i].LoadBitmap();
+	}
 
 
 	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));					// 載入巨神貓
@@ -416,7 +431,7 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
-
+	
 	Background.ShowBitmap();			//貼上背景圖
 	Mybase.ShowBitmap();				//貼上我方砲塔
 	eraser.OnShow();					// 貼上擦子
@@ -425,6 +440,9 @@ void CGameStateRun::OnShow()
 	neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
+	for (int i = 0; i <= showCatDelay / 100; i++) {
+		Neko[i].OnShow();
+	}
 	//giant.ShowBitmap(0.8);
 	/*
 	background.ShowBitmap();			// 貼上學校圖
@@ -453,7 +471,7 @@ void CGameStateRun::OnShow()
 	char str[80];								// Demo 數字對字串的轉換
 	char str1[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
+	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), showCatDelay);
 	pDC->TextOut(300, 250, str);
 	pDC->TextOut(300, 300, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
