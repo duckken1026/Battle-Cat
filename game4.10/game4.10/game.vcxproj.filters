@@ -144,6 +144,9 @@
     <ClCompile Include="Source\rivalLibrary.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\nekoButton.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -195,6 +198,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\rivalLibrary.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\nekoButton.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

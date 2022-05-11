@@ -16,11 +16,18 @@ namespace game_framework {
 
 	rivalAnimation::rivalAnimation() {
 		
-		rivalLibrary data("Doge");		//產生此物件的初始值
+		
+	}
 
-		x1 = x2 = y = 0;
-		IsAlive = true;			
-		range = data.range;				
+	rivalAnimation::rivalAnimation(string name)
+	{
+		rivalType = name;
+		rivalLibrary data(rivalType);		//產生此物件的初始值
+
+		x1 = x2 = 270;
+		y = data.originY;
+		IsAlive = true;
+		range = data.range;
 		health = data.health;
 		attack = data.attack;
 		attackDelay = data.attackDelay;	//framework一秒執行10次延遲10次就等於1秒執行一次
@@ -33,17 +40,18 @@ namespace game_framework {
 		deathAnimationEnd = data.deathAnimationEnd;
 		deathDelay = 0;
 		deathHeightChange = data.deathHeightChange;
+		deathXChange = data.deathXChange;
 		moveSpeed = data.moveSpeed;
 		headGap = data.headGap;
 	}
 
 	void rivalAnimation::LoadBitmap() 
 	{
-		rivalLibrary data("Doge");
+		rivalLibrary data(rivalType);
 		
 		//char *temp[9] = { ".\\bitmaps\\狗仔\\狗狗0.bmp",".\\bitmaps\\狗仔\\狗狗1.bmp",".\\bitmaps\\狗仔\\狗狗2.bmp",".\\bitmaps\\狗仔\\狗狗3.bmp",".\\bitmaps\\狗仔\\攻擊0.bmp",".\\bitmaps\\狗仔\\攻擊2.bmp",".\\bitmaps\\狗仔\\攻擊3.bmp",".\\bitmaps\\狗仔\\攻擊4.bmp",".\\bitmaps\\狗仔\\攻擊5.bmp"};
 		for (int i = 0; i < data.imageQuantity; i++)
-			image.AddBitmap(data.imageList("Doge",i), RGB(255, 0, 0));
+			image.AddBitmap(data.imageList(rivalType,i), RGB(255, 0, 0));
 		image.SetDelayCount(2);									//狗仔動畫轉換延遲速度
 	}
 
@@ -53,11 +61,17 @@ namespace game_framework {
 	}
 
 	void rivalAnimation::OnShow() {
-		//if (IsAlive == true)
+		
+		if (IsAlive == true)			//若角色還活著會顯示在畫面
 		{
-			image.SetTopLeft(x1, y);								// 設定狗仔座標
-			image.OnShow();											//貼上狗仔
+			image.SetTopLeft(x1, y);								// 設定敵方座標
+			image.OnShow();											// 貼上敵方
 		}
+		else if (IsAlive == false && deathDelay < (deathAnimationEnd - deathAnimationStart)) {	//擊退時要將角色的Y座標做調整
+			image.SetTopLeft(x1 - deathXChange, y - deathHeightChange);
+			image.OnShow();
+		}
+		//死亡就不顯示在畫面
 	}
 
 	int rivalAnimation::GetX1()									//取得X座標

@@ -44,6 +44,7 @@
 #include "rivalAnimation.h"
 #include "nekoAnimation.h"
 #include "ImageNumber.h"
+#include "nekoButton.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -115,6 +116,7 @@ namespace game_framework {
 		ImageNumber		currentMoney; //現有的錢
 		nekoAnimation	*Neko;		//貓咪陣列
 		const int		maxNeko;	// 球的總數
+		nekoButton		button;		//角色按鈕
 		int				showCatDelay;
 	};
 

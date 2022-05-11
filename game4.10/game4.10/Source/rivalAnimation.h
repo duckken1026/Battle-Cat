@@ -9,6 +9,7 @@ namespace game_framework{
 	{
 	public:
 		rivalAnimation();
+		rivalAnimation(string name);
 		void LoadBitmap();						//讀取圖片
 		void OnMove();							//動畫開始移動
 		void OnShow();							//將動畫顯示在畫面
@@ -36,8 +37,6 @@ namespace game_framework{
 		int attackDelay;		//角色攻擊頻率
 		int delay;				//去計算目前已經Delay了幾次
 		void die();				//判斷體力小於等於零，成立則執行此函數
-
-
 		int walkAnimationStart;	//第一個行走動畫
 		int walkAnimationEnd;	//最後一個行走動畫
 		int attackAnimationStart;//第一個攻擊動畫
@@ -46,6 +45,8 @@ namespace game_framework{
 		int deathAnimationEnd;	//最後一個死亡動畫
 		int deathDelay;			//擊退動畫延遲時間
 		int deathHeightChange;	//擊退角色Y座標調整
+		int deathXChange;		//擊退角色X座標調整
 		int moveSpeed;			//角色移動速度
+		string rivalType;		//敵方種類
 	};
 }

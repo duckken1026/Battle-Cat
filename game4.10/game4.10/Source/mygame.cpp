@@ -195,10 +195,14 @@ CGameStateRun::CGameStateRun(CGame *g)
 	ball = new CBall [NUMBALLS];
 	Neko = new nekoAnimation[maxNeko];
 	for (int i = 0; i < maxNeko; i++) {
-		Neko[i].SetCoordinate(1511, 640);
+		//Neko[i].SetCoordinate(1511, 640);
+		Neko[i] = nekoAnimation("Cat");
 	}
-	neko2.SetCoordinate(1511, 640);						//設定貓咪座標
-	doge.SetCoordinate(270, 640);						//設定狗狗座標
+	neko = nekoAnimation("Cat");
+	neko2 = nekoAnimation("Cat");
+	doge = rivalAnimation("Doge");
+	//neko2.SetCoordinate(1511, 640);						//設定貓咪座標
+	//doge.SetCoordinate(270, 640);						//設定狗狗座標
 	neko.SetCoordinate(0,-101);
 }
 
@@ -265,6 +269,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	//doge.OnMove();										//貓咪動畫開始變換
 	doge.MoveForward(&neko2);
+	button.SetTopLeft();									//設定按鈕位置
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -353,9 +358,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	for (int i = 0; i < maxNeko; i++) {
 		Neko[i].LoadBitmap();
 	}
+	button.LoadBitmap();									//載入貓咪按鈕
 
-
-	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));					// 載入巨神貓
+	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));			// 載入巨神貓
 	
 
 	CAudio::Instance()->Load(AUDIO_BackgroundMusic,  "sounds\\InvadingJapan!.mp3");	// 載入編號2的聲音Invading Japan!.mp3
@@ -443,6 +448,7 @@ void CGameStateRun::OnShow()
 	for (int i = 0; i <= showCatDelay / 100; i++) {
 		Neko[i].OnShow();
 	}
+	button.ShowBitmap();				//貼上角色按鈕
 	//giant.ShowBitmap(0.8);
 	/*
 	background.ShowBitmap();			// 貼上學校圖

@@ -18,8 +18,9 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	nekoLibrary::nekoLibrary(string name)	
 	{
+		
 		if (name == "Cat") {				//貓咪資料
-			range = 4;
+			range = 20;
 			health = 100;
 			attack = 1;
 			attackDelay = 10;
@@ -32,7 +33,8 @@ namespace game_framework {
 			deathHeightChange = 101;
 			moveSpeed = 3;
 			imageQuantity = 17;
-			headGap = 27;			
+			headGap = 27;		
+			originY = 640;
 		}
 		else if (name == "Tank Cat") {		//牆貓資料
 			range = 3;
@@ -49,6 +51,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 10;
 			headGap = 76;
+			originY = 600;
 		}
 		
 		

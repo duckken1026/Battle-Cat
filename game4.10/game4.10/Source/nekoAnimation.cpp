@@ -14,17 +14,25 @@ namespace game_framework
 	// class nekoAnimation 貓咪動畫的函式定義
 	/////////////////////////////////////////////////////////////////////////////
 	
+
+
 	nekoAnimation::nekoAnimation()
 	{
-		nekoLibrary data("Cat");//產生此物件的初始值
-		
-		x1 = x2 = y = 0;
+	}
+
+	nekoAnimation::nekoAnimation(string name)
+	{
+		nekoType = name;
+		nekoLibrary data(nekoType);//產生此物件的初始值
+
+		x1 = x2 = 1511;
+		y = data.originY;
 		IsAlive = true;
-		range = data.range;					
+		range = data.range;
 		health = data.health;
 		attack = data.attack;
 		attackDelay = data.attackDelay;		//framework一秒執行10次延遲12次就等於1.2秒執行一次
-		delay = 1;				
+		delay = 1;
 		walkAnimationStart = data.walkAnimationStart;
 		walkAnimationEnd = data.walkAnimationEnd;
 		attackAnimationStart = data.attackAnimationStart;
@@ -39,11 +47,11 @@ namespace game_framework
 
 	void nekoAnimation::LoadBitmap()
 	{
-		nekoLibrary data("Cat");//產生此物件的初始值
+		nekoLibrary data(nekoType);//產生此物件的初始值
 		
 		//char *temp[17] = {".\\bitmaps\\貓咪\\貓咪0.bmp",".\\bitmaps\\貓咪\\貓咪1.bmp",".\\bitmaps\\貓咪\\貓咪2.bmp",".\\bitmaps\\貓咪\\貓咪3.bmp",".\\bitmaps\\貓咪\\攻擊0.bmp",".\\bitmaps\\貓咪\\攻擊1.bmp",".\\bitmaps\\貓咪\\攻擊3.bmp",".\\bitmaps\\貓咪\\攻擊4.bmp",".\\bitmaps\\貓咪\\攻擊5.bmp",".\\bitmaps\\貓咪\\擊退0.bmp",".\\bitmaps\\貓咪\\擊退1.bmp",".\\bitmaps\\貓咪\\擊退2.bmp",".\\bitmaps\\貓咪\\擊退3.bmp",".\\bitmaps\\貓咪\\擊退4.bmp",".\\bitmaps\\貓咪\\擊退5.bmp",".\\bitmaps\\貓咪\\擊退6.bmp",".\\bitmaps\\貓咪\\擊退7.bmp" };
 		for (int i = 0; i < data.imageQuantity; i++)
-			image.AddBitmap(data.imageList("Cat",i), RGB(255, 0, 0));
+			image.AddBitmap(data.imageList(nekoType,i), RGB(255, 0, 0));
 		image.SetDelayCount(2);									//貓咪動畫轉換延遲速度
 	}
 

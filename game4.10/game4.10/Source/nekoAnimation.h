@@ -7,6 +7,7 @@ namespace game_framework {
 	{
 	public:
 		nekoAnimation();
+		nekoAnimation(string name);
 		void LoadBitmap();						//讀取圖片
 		void OnMove();							//動畫開始移動
 		void OnShow();							//將動畫顯示在畫面
@@ -43,5 +44,6 @@ namespace game_framework {
 		int deathDelay;			//擊退動畫延遲時間
 		int deathHeightChange;	//擊退角色Y座標調整
 		int moveSpeed;			//角色移動速度
+		string nekoType;		//貓咪種類
 	};
 }

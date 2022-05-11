@@ -19,10 +19,12 @@ namespace game_framework {
 		int deathAnimationStart;//第一個死亡動畫
 		int deathAnimationEnd;	//最後一個死亡動畫
 		int deathHeightChange;	//擊退角色Y座標調整
+		int deathXChange;		//擊退角色X座標調整
 		int moveSpeed;			//角色移動速度
 		char *imageList(string name, int);//回傳角色圖片
 		int imageQuantity;		//圖片數量
 		int headGap;			//角色圖片起始位置間距
+		int originY;			//角色起始Y位置
 	};
 
 
