@@ -23,12 +23,14 @@ namespace game_framework{
 		void SetHealth(int NewHealth);			//更改體力值
 		int  GetAnimationNumber();				//取得現在動畫播到哪一張
 		void SetCurrentBitmap(int);				//設定目前動畫
+		int  GetHeadGap();						//回傳角色實際間距
 	private:
 		CAnimation	image;		// 狗仔動畫物件
 		int x1, y;				// X,Y座標
 		int x2;					// X(右)
 		bool IsAlive;			// 是否活著
 		int range;				// 角色可攻擊的範圍
+		int headGap;			// 角色圖片起始位置間距
 		int health;				//角色生命值
 		int attack;				//角色攻擊力
 		int attackDelay;		//角色攻擊頻率

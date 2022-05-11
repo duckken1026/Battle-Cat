@@ -20,7 +20,7 @@ namespace game_framework
 		
 		x1 = x2 = y = 0;
 		IsAlive = true;
-		range = data.range;					//實際距離為27+3=30
+		range = data.range;					
 		health = data.health;
 		attack = data.attack;
 		attackDelay = data.attackDelay;		//framework一秒執行10次延遲12次就等於1.2秒執行一次
@@ -34,7 +34,7 @@ namespace game_framework
 		deathDelay = 0;
 		deathHeightChange = data.deathHeightChange;
 		moveSpeed = data.moveSpeed;
-		
+		headGap = data.headGap;
 	}
 
 	void nekoAnimation::LoadBitmap()
@@ -95,7 +95,7 @@ namespace game_framework
 		if (!IsAlive)				//若死亡就不在執行以下程式碼
 			return;
 
-		if ((rival->GetX2() < x1 - range) || (rival->GetIsAlive() == false)){	//判斷有無碰撞和敵方是否活著
+		if (((rival->GetX2() - rival->GetHeadGap()) < x1 + headGap - range) || (rival->GetIsAlive() == false)) {	//判斷有無碰撞和敵方是否活著
 			x1 -= moveSpeed;
 			x2 -= moveSpeed;
 			OnMove();
@@ -160,6 +160,11 @@ namespace game_framework
 	void nekoAnimation::SetCurrentBitmap(int x)
 	{
 		image.SetCurrentBitmap(x);
+	}
+
+	int nekoAnimation::GetHeadGap()
+	{
+		return headGap;
 	}
 
 	void nekoAnimation::die()

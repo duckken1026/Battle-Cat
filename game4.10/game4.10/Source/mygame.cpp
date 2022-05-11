@@ -471,7 +471,7 @@ void CGameStateRun::OnShow()
 	char str[80];								// Demo 數字對字串的轉換
 	char str1[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), showCatDelay);
+	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
 	pDC->TextOut(300, 250, str);
 	pDC->TextOut(300, 300, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)

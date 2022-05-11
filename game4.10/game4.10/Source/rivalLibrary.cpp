@@ -19,7 +19,7 @@ namespace game_framework {
 	rivalLibrary::rivalLibrary(string name) {
 		if (name == "Doge")
 		{
-			range = 4;
+			range = 3;
 			health = 1000;
 			attack = 1;
 			attackDelay = 20;
@@ -28,10 +28,11 @@ namespace game_framework {
 			attackAnimationStart = 4;
 			attackAnimationEnd = 8;
 			deathAnimationStart = 9;
-			deathAnimationEnd = 16;
+			deathAnimationEnd = 20;
 			deathHeightChange = 101;
 			moveSpeed = 3;
-			imageQuantity = 9;
+			imageQuantity = 21;
+			headGap = 26;
 		}
 		else {
 			range = 4;
@@ -47,6 +48,7 @@ namespace game_framework {
 			deathHeightChange = 101;
 			moveSpeed = 3;
 			imageQuantity = 17;
+			headGap = 26;
 		}
 	}
 
@@ -56,7 +58,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	char * rivalLibrary::imageList(string name, int imageNumber)
 	{
-		char *temp[9] = { ".\\bitmaps\\ª¯¥J\\ª¯ª¯0.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯1.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯2.bmp",".\\bitmaps\\ª¯¥J\\ª¯ª¯3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»0.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»2.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»3.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»4.bmp",".\\bitmaps\\ª¯¥J\\§ðÀ»5.bmp" };
+		char *temp[21] = { ".\\bitmaps\\¼Ä¤è\\ª¯¥J\\ª¯ª¯0.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\ª¯ª¯1.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\ª¯ª¯2.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\ª¯ª¯3.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\§ðÀ»0.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\§ðÀ»2.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\§ðÀ»3.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\§ðÀ»4.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\§ðÀ»5.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h0.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h1.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h2.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h3.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h4.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h5.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h6.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h7.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h8.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h9.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h10.bmp",".\\bitmaps\\¼Ä¤è\\ª¯¥J\\À»°h11.bmp" };
 		return temp[imageNumber];
 	}
 

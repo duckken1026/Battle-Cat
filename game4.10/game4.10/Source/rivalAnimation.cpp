@@ -20,7 +20,7 @@ namespace game_framework {
 
 		x1 = x2 = y = 0;
 		IsAlive = true;			
-		range = data.range;				//實際距離為26+4=30
+		range = data.range;				
 		health = data.health;
 		attack = data.attack;
 		attackDelay = data.attackDelay;	//framework一秒執行10次延遲10次就等於1秒執行一次
@@ -34,6 +34,7 @@ namespace game_framework {
 		deathDelay = 0;
 		deathHeightChange = data.deathHeightChange;
 		moveSpeed = data.moveSpeed;
+		headGap = data.headGap;
 	}
 
 	void rivalAnimation::LoadBitmap() 
@@ -86,7 +87,7 @@ namespace game_framework {
 		if (!IsAlive)				//若死亡就不在執行以下程式碼
 			return;
 
-		if ((neko->GetX1() > x2 + range) || (neko->GetIsAlive() == false)){			//判斷有無碰撞和敵方是否活著
+		if (((neko->GetX1() + neko->GetHeadGap()) > x2 - headGap + range) || (neko->GetIsAlive() == false)){			//判斷有無碰撞和敵方是否活著
 			x1 += moveSpeed;
 			x2 += moveSpeed;
 			OnMove();
@@ -154,15 +155,27 @@ namespace game_framework {
 		image.SetCurrentBitmap(x);
 	}
 
+	int rivalAnimation::GetHeadGap()
+	{
+		return headGap;
+	}
+
 
 	void rivalAnimation::die()
 	{
 		if (health <= 0)					 //判斷體力小於等於零，成立則執行此函數
 		{
 			IsAlive = false;
-			x1 -= 15;
-			x2 -= 15;
-			y = 0;
+			if (deathDelay == 0) {			//體力小於等於零後先初始化讓動畫變成第一張擊退動畫
+				image.SetCurrentBitmap(deathAnimationStart);
+				deathDelay++;
+				image.OnMove();
+			}
+			else if (deathDelay < (deathAnimationEnd - deathAnimationStart)) {	//擊退動畫開始播放直到播完
+				image.OnMove();
+				deathDelay++;
+			}
+
 		}
 	}
 
