@@ -196,7 +196,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 	Neko = new nekoAnimation[maxNeko];
 	for (int i = 0; i < maxNeko; i++) {
 		//Neko[i].SetCoordinate(1511, 640);
-		Neko[i] = nekoAnimation("Cat");
+		Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
 	neko2 = nekoAnimation("Cat");
@@ -424,6 +424,9 @@ void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	eraser.SetMovingRight(false);
+	if ((420 < point.x) && (point.x < 596) && (790<point.y) && (point.y <924)) {
+		button.SetIsClicked(true);
+	}
 }
 
 void CGameStateRun::OnShow()

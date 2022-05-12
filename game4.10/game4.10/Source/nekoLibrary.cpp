@@ -51,7 +51,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 10;
 			headGap = 76;
-			originY = 600;
+			originY = 580;
 		}
 		
 		

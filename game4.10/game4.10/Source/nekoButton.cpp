@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -11,34 +11,55 @@ namespace game_framework {
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ImageNumber:³o­Óclass´£¨ÑÅã¥Ü¨¤¦â«ö¶sªº¯à¤O
+// ImageNumber:é€™å€‹classæä¾›é¡¯ç¤ºè§’è‰²æŒ‰éˆ•çš„èƒ½åŠ›
 // 
 // 
 /////////////////////////////////////////////////////////////////////////////
 
+	CMovingBitmap nekoButton::button[10];
 
+	nekoButton::nekoButton()
+	{
+		isBmpLoaded = false;
+		isClicked = false;
+	}
 
 	void nekoButton::LoadBitmap()
 	{
-		char *d[11] = { ".\\bitmaps\\neko button\\Cat.bmp",".\\bitmaps\\neko button\\Tank Cat.bmp"};
-		for (int i = 0; i < 1; i++) {
-			button[i].LoadBitmap(d[i]);
+		if (!isBmpLoaded) {
+		char *L[10] = { ".\\bitmaps\\neko button\\Cat.bmp",".\\bitmaps\\neko button\\Tank Cat.bmp",".\\bitmaps\\neko button\\Axe Cat.bmp",".\\bitmaps\\neko button\\Gross Cat.bmp",".\\bitmaps\\neko button\\Cow Cat.bmp",".\\bitmaps\\neko button\\Bird Cat.bmp",".\\bitmaps\\neko button\\Fish Cat.bmp",".\\bitmaps\\neko button\\Lizard Cat.bmp",".\\bitmaps\\neko button\\Titan Cat.bmp",".\\bitmaps\\neko button\\None.bmp" };
+		for (int i = 0; i < 10; i++) {
+			button[i].LoadBitmap(L[i]);
 		}
-			
+		isBmpLoaded = true;
+		}
 	}
 
 	void nekoButton::ShowBitmap()
 	{
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 10; i++) {
 			button[i].ShowBitmap();
 		}
 	}
 
 	void nekoButton::SetTopLeft()
 	{
-		for (int i = 0; i < 1; i++) {
-			button[i].SetTopLeft(271,840);
+		int width = button[0].Width();	//åœ–ç‰‡å¯¬åº¦
+		int height = button[0].Height();//åœ–ç‰‡é«˜åº¦
+		xGap = 50;
+		yGap = 10;
+		static int x[10] ;//æŒ‰éˆ•xåº§æ¨™
+		static int y[10];//æŒ‰éˆ•yåº§æ¨™
+		for (int i = 0; i < 10; i++) {
+			x[i] = 420 + (width + xGap) * (i % 5);
+			y[i] = 790 +(height +yGap) * (i / 5);
+			button[i].SetTopLeft(x[i], y[i]);
 		}
 	}
 
+	void nekoButton::SetIsClicked(bool clicked)
+	{
+		isClicked = clicked;
+	}
+	
 }

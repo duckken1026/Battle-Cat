@@ -6,13 +6,16 @@ namespace game_framework {
 
 	class nekoButton {
 	public:
+		nekoButton();
 		void LoadBitmap();				//讀取圖片
 		void ShowBitmap();				//顯示圖片
 		void SetTopLeft();				//設定座標
-
+		void SetIsClicked(bool clicked);//設定是否被按下
 	private:
-		CMovingBitmap button[1];		//按鈕圖形
-		int x[10];						//按鈕x座標
-		int y[10];						//按鈕y座標
+		static CMovingBitmap button[10];		//按鈕圖形
+		int xGap;						//按鈕與按鈕之間的X間距
+		int yGap;						//按鈕與按鈕之間的Y間距
+		bool isBmpLoaded;				// 是否已經載入圖形
+		bool isClicked;					//按鈕是否被按下
 	};
 }
