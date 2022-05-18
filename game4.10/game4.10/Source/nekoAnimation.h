@@ -44,6 +44,8 @@ namespace game_framework {
 		int deathDelay;			//擊退動畫延遲時間
 		int deathHeightChange;	//擊退角色Y座標調整
 		int moveSpeed;			//角色移動速度
+		int walkAnimationSpeed;	//行走動畫速度
+		int attackAnimationSpeed;//攻擊動畫速度
 		string nekoType;		//貓咪種類
 	};
 }

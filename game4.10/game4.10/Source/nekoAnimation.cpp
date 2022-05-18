@@ -43,16 +43,16 @@ namespace game_framework
 		deathHeightChange = data.deathHeightChange;
 		moveSpeed = data.moveSpeed;
 		headGap = data.headGap;
+		walkAnimationSpeed = data.walkAnimationSpeed;
+		attackAnimationSpeed = data.attackAnimationSpeed;
 	}
 
 	void nekoAnimation::LoadBitmap()
 	{
 		nekoLibrary data(nekoType);//產生此物件的初始值
-		
-		//char *temp[17] = {".\\bitmaps\\貓咪\\貓咪0.bmp",".\\bitmaps\\貓咪\\貓咪1.bmp",".\\bitmaps\\貓咪\\貓咪2.bmp",".\\bitmaps\\貓咪\\貓咪3.bmp",".\\bitmaps\\貓咪\\攻擊0.bmp",".\\bitmaps\\貓咪\\攻擊1.bmp",".\\bitmaps\\貓咪\\攻擊3.bmp",".\\bitmaps\\貓咪\\攻擊4.bmp",".\\bitmaps\\貓咪\\攻擊5.bmp",".\\bitmaps\\貓咪\\擊退0.bmp",".\\bitmaps\\貓咪\\擊退1.bmp",".\\bitmaps\\貓咪\\擊退2.bmp",".\\bitmaps\\貓咪\\擊退3.bmp",".\\bitmaps\\貓咪\\擊退4.bmp",".\\bitmaps\\貓咪\\擊退5.bmp",".\\bitmaps\\貓咪\\擊退6.bmp",".\\bitmaps\\貓咪\\擊退7.bmp" };
 		for (int i = 0; i < data.imageQuantity; i++)
 			image.AddBitmap(data.imageList(nekoType,i), RGB(255, 0, 0));
-		image.SetDelayCount(2);									//貓咪動畫轉換延遲速度
+		image.SetDelayCount(walkAnimationSpeed);				//貓咪動畫轉換延遲速度
 	}
 
 	void nekoAnimation::OnMove()
@@ -110,13 +110,13 @@ namespace game_framework
 			if (image.GetCurrentBitmapNumber() > walkAnimationEnd)		//若行走動畫播完了再重頭播一次
 			{
 				image.Reset();
-				image.SetDelayCount(2);				//設定延遲速度
+				image.SetDelayCount(walkAnimationSpeed);				//設定延遲速度
 			}
 		}
 		else {								//如果碰到開始進行攻擊
 			
 			if (delay == 1) {			//設定攻擊初始動畫
-				image.SetDelayCount(1);		//設定延遲速度
+				image.SetDelayCount(attackAnimationSpeed);		//設定延遲速度
 				image.SetCurrentBitmap(attackAnimationStart);
 				delay += 1;
 				OnMove();

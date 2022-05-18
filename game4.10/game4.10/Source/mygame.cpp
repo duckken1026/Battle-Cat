@@ -199,7 +199,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 		//Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Cow Cat");
+	neko2 = nekoAnimation("Titan Cat");
 	doge = rivalAnimation("Doge");
 	//neko2.SetCoordinate(1511, 640);						//設定貓咪座標
 	//doge.SetCoordinate(270, 640);						//設定狗狗座標

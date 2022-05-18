@@ -24,6 +24,8 @@ namespace game_framework {
 		int imageQuantity;		//圖片數量
 		int headGap;			//角色圖片起始位置間距
 		int originY;			//角色起始Y位置
+		int walkAnimationSpeed;	//行走動畫速度
+		int attackAnimationSpeed;//攻擊動畫速度
 	};
 
 
