@@ -196,10 +196,10 @@ CGameStateRun::CGameStateRun(CGame *g)
 	Neko = new nekoAnimation[maxNeko];
 	for (int i = 0; i < maxNeko; i++) {
 		//Neko[i].SetCoordinate(1511, 640);
-		Neko[i] = nekoAnimation("Tank Cat");
+		//Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Cat");
+	neko2 = nekoAnimation("Cow Cat");
 	doge = rivalAnimation("Doge");
 	//neko2.SetCoordinate(1511, 640);						//設定貓咪座標
 	//doge.SetCoordinate(270, 640);						//設定狗狗座標
@@ -258,7 +258,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	for (int i = 0; i <= showCatDelay / 100; i++) {
-		Neko[i].MoveForward(&doge);
+		//Neko[i].MoveForward(&doge);
 	}
 	if (showCatDelay < 1999) {
 		showCatDelay++;
@@ -356,7 +356,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	neko2.LoadBitmap();										//載入貓咪動畫
 	doge.LoadBitmap();										//載入貓咪動畫
 	for (int i = 0; i < maxNeko; i++) {
-		Neko[i].LoadBitmap();
+		//Neko[i].LoadBitmap();
 	}
 	button.LoadBitmap();									//載入貓咪按鈕
 
@@ -449,7 +449,7 @@ void CGameStateRun::OnShow()
 	doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
 	for (int i = 0; i <= showCatDelay / 100; i++) {
-		Neko[i].OnShow();
+		//Neko[i].OnShow();
 	}
 	button.ShowBitmap();				//貼上角色按鈕
 	//giant.ShowBitmap(0.8);
