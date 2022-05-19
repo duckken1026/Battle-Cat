@@ -196,13 +196,11 @@ CGameStateRun::CGameStateRun(CGame *g)
 	Neko = new nekoAnimation[maxNeko];
 	for (int i = 0; i < maxNeko; i++) {
 		//Neko[i].SetCoordinate(1511, 640);
-		//Neko[i] = nekoAnimation("Tank Cat");
+		//Neko[i] = nekoAnimation("Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Titan Cat");
+	neko2 = nekoAnimation("Cat");
 	doge = rivalAnimation("Doge");
-	//neko2.SetCoordinate(1511, 640);						//設定貓咪座標
-	//doge.SetCoordinate(270, 640);						//設定狗狗座標
 	neko.SetCoordinate(0,-101);
 }
 
@@ -269,7 +267,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	//doge.OnMove();										//貓咪動畫開始變換
 	doge.MoveForward(&neko2);
-	button.SetTopLeft();									//設定按鈕位置
+	Button.SetTopLeft();									//設定按鈕位置
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -358,7 +356,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	for (int i = 0; i < maxNeko; i++) {
 		//Neko[i].LoadBitmap();
 	}
-	button.LoadBitmap();									//載入貓咪按鈕
+	Button.LoadBitmap();									//載入貓咪按鈕
 
 	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));			// 載入巨神貓
 	
@@ -409,6 +407,7 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	eraser.SetMovingLeft(false);
+	Button.SetClicked(point.x,point.y);
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -424,9 +423,6 @@ void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	eraser.SetMovingRight(false);
-	if ((420 < point.x) && (point.x < 596) && (790<point.y) && (point.y <924)) {
-		button.SetIsClicked(true);
-	}
 }
 
 void CGameStateRun::OnShow()
@@ -451,7 +447,7 @@ void CGameStateRun::OnShow()
 	for (int i = 0; i <= showCatDelay / 100; i++) {
 		//Neko[i].OnShow();
 	}
-	button.ShowBitmap();				//貼上角色按鈕
+	Button.ShowBitmap();				//貼上角色按鈕
 	//giant.ShowBitmap(0.8);
 	/*
 	background.ShowBitmap();			// 貼上學校圖

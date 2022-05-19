@@ -26,6 +26,7 @@ namespace game_framework {
 		int originY;			//角色起始Y位置
 		int walkAnimationSpeed;	//行走動畫速度
 		int attackAnimationSpeed;//攻擊動畫速度
+		int buttonDelay;		//可派出貓咪的延遲時間
 	};
 
 
