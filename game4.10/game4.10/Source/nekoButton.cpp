@@ -28,6 +28,8 @@ namespace game_framework {
 			buttonDelay[i] = data.buttonDelay;
 			delay[i] = 0;
 		}
+		currentNekoQuantity = 0;
+		clickedTimes = 0;
 	}
 
 	void nekoButton::LoadBitmap()
@@ -71,10 +73,13 @@ namespace game_framework {
 
 	void nekoButton::SetIsClicked(int buttonNum,bool clicked)
 	{
-		if (isClicked[buttonNum] == false) {			//若還沒按下則開始計時延遲
+		if (isClicked[buttonNum] == false) {			//若還沒按下則設定計時延遲
 			delay[buttonNum] = buttonDelay[buttonNum]; //從buttonDelay中取得延長時間
 		}
 		isClicked[buttonNum] = clicked;
+		if (checkNowClicked(buttonNum) == true) {
+			clickedTimes += 1;
+		}
 	}
 
 	void nekoButton::SetClicked(int pointX, int pointY)
@@ -94,6 +99,21 @@ namespace game_framework {
 		else {
 			return false;
 		}
+	}
+
+	int nekoButton::getClickedTimes()
+	{
+		return clickedTimes;
+	}
+
+	int nekoButton::getButtonNum(int pointX, int pointY)
+	{
+		for (int i = 0; i < 10; i++) {
+			if ((x[i] < pointX) && (pointX < x[i] + button->Width()) && (y[i] < pointY) && (pointY < y[i] + button->Height())) {
+				return i;
+			}
+		}
+		return 0;
 	}
 	
 }

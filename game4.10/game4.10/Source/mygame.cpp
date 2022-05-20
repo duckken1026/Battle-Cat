@@ -192,11 +192,11 @@ void CGameStateOver::OnShow()
 CGameStateRun::CGameStateRun(CGame *g)
 : CGameState(g), NUMBALLS(28), maxNeko(20)
 {
+	
 	ball = new CBall [NUMBALLS];
 	Neko = new nekoAnimation[maxNeko];
 	for (int i = 0; i < maxNeko; i++) {
-		//Neko[i].SetCoordinate(1511, 640);
-		//Neko[i] = nekoAnimation("Cat");
+		Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
 	neko2 = nekoAnimation("Cat");
@@ -221,7 +221,6 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 60;
 	const int ANIMATION_SPEED = 15;
-	showCatDelay = 0;
 	for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
 		int x_pos = i % BALL_PER_ROW;
 		int y_pos = i / BALL_PER_ROW;
@@ -237,7 +236,7 @@ void CGameStateRun::OnBeginState()
 	currentMoney.SetDigits(1);
 	currentMoney.SetInteger(0);							//設定現有金額初始值為0
 	currentMoney.SetTopLeft(1520, 0);					//設定現有金額顯示的座標
-
+	activateNeko = 0;
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_BackgroundMusic, true);			// 撥放 背景音樂
@@ -255,11 +254,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		neko.SetCurrentBitmap(9);
 	}
 
-	for (int i = 0; i <= showCatDelay / 100; i++) {
-		//Neko[i].MoveForward(&doge);
+	if (Button.getClickedTimes() <= maxNeko) {
+	activateNeko = Button.getClickedTimes();
 	}
-	if (showCatDelay < 1999) {
-		showCatDelay++;
+	for (int i = 0; i < activateNeko; i++) {
+		Neko[i].MoveForward(&doge);
 	}
 	
 	//neko2.OnMove();									//貓咪動畫開始變換
@@ -300,7 +299,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (i=0; i < NUMBALLS; i++)
 		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 			ball[i].SetIsAlive(false);
-			CAudio::Instance()->Play(AUDIO_DING);
+			//CAudio::Instance()->Play(AUDIO_DING);
 			hits_left.Add(-1);
 			//
 			// 若剩餘碰撞次數為0，則跳到Game Over狀態
@@ -353,8 +352,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	neko.LoadBitmap();										//載入貓咪動畫
 	neko2.LoadBitmap();										//載入貓咪動畫
 	doge.LoadBitmap();										//載入貓咪動畫
+	
 	for (int i = 0; i < maxNeko; i++) {
-		//Neko[i].LoadBitmap();
+		Neko[i].LoadBitmap();
 	}
 	Button.LoadBitmap();									//載入貓咪按鈕
 
@@ -406,8 +406,16 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
+	string nekoName[10] = { "Cat","Tank Cat","Axe Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat","Cat"};
 	eraser.SetMovingLeft(false);
-	Button.SetClicked(point.x,point.y);
+	Button.SetClicked(point.x,point.y);			//處理按下按鈕的動作
+	for (int i = 0; i < 10; i++) {
+		if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間
+			Neko[0] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
+			Neko[0].LoadBitmap();		//去讀取該貓咪的圖片
+		}
+	
+	}
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -444,8 +452,8 @@ void CGameStateRun::OnShow()
 	neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
-	for (int i = 0; i <= showCatDelay / 100; i++) {
-		//Neko[i].OnShow();
+	for (int i = 0; i < activateNeko; i++) {
+		Neko[i].OnShow();
 	}
 	Button.ShowBitmap();				//貼上角色按鈕
 	//giant.ShowBitmap(0.8);
@@ -476,7 +484,7 @@ void CGameStateRun::OnShow()
 	char str[80];								// Demo 數字對字串的轉換
 	char str1[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
+	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), activateNeko);
 	pDC->TextOut(300, 250, str);
 	pDC->TextOut(300, 300, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)

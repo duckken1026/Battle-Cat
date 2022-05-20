@@ -13,6 +13,8 @@ namespace game_framework {
 		void SetIsClicked(int buttonNum,bool clicked);//設定是否被按下
 		void SetClicked(int pointX,int pointY);				//設定按下時的動作
 		bool checkNowClicked(int nekoNumber);				//回傳現在是不是按下去的那個瞬間
+		int  getClickedTimes();			//取得正在執行onShow，moveForward，loadBitmap的角色數量
+		int  getButtonNum(int pointX, int pointY);			//取得被按下按鈕的號碼
 	private:
 		static CMovingBitmap button[20];		//按鈕圖形
 		int xGap;						//按鈕與按鈕之間的X間距
@@ -23,5 +25,7 @@ namespace game_framework {
 		int y[10];						//按鈕y座標
 		int buttonDelay[10];			//按鈕的冷卻時間
 		int delay[10];					//按鈕目前延遲時間
+		int	currentNekoQuantity;		//目前畫面上的貓咪數量
+		int clickedTimes;				//按鈕按下的次數
 	};
 }

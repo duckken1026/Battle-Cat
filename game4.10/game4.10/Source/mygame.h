@@ -115,9 +115,9 @@ namespace game_framework {
 		rivalAnimation  doge;		//
 		ImageNumber		currentMoney; //瞷Τ窥
 		nekoAnimation	*Neko;		//窟珆皚
-		const int		maxNeko;	// 瞴羆计
+		const int		maxNeko;	// 窟珆程计秖
 		nekoButton		Button;		//à︹秙
-		int				showCatDelay;
+		int	activateNeko;				//タ磅︽onShowmoveForwardloadBitmapà︹计秖
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
