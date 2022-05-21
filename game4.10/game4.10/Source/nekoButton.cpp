@@ -20,7 +20,7 @@ namespace game_framework {
 	CMovingBitmap nekoButton::button[20];
 	nekoButton::nekoButton()
 	{
-		string nekoName[10] = {"Cat","Tank Cat","Axe Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat"};
+		string nekoName[10] = {"Cat","Tank Cat","Axe Cat","Gross Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat"};
 		isBmpLoaded = false;
 		for (int i = 0; i < 10; i++) {
 			nekoLibrary data(nekoName[i]);
@@ -84,7 +84,7 @@ namespace game_framework {
 
 	void nekoButton::SetClicked(int pointX, int pointY)
 	{
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 9; i++) {
 			if ((x[i] < pointX) && (pointX < x[i] + button->Width()) && (y[i] < pointY) && (pointY < y[i] + button->Height())) {
 				SetIsClicked(i, true);
 			}

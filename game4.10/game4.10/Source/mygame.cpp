@@ -199,7 +199,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 		Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Cat");
+	neko2 = nekoAnimation("Gross Cat");
 	doge = rivalAnimation("Doge");
 	neko.SetCoordinate(0,-101);
 }
@@ -406,7 +406,7 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	string nekoName[10] = { "Cat","Tank Cat","Axe Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat","Cat"};
+	string nekoName[10] = { "Cat","Tank Cat","Axe Cat","Gross Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat","Cat"};
 	eraser.SetMovingLeft(false);
 	Button.SetClicked(point.x,point.y);			//處理按下按鈕的動作
 	for (int i = 0; i < 10; i++) {
@@ -484,7 +484,7 @@ void CGameStateRun::OnShow()
 	char str[80];								// Demo 數字對字串的轉換
 	char str1[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), activateNeko);
+	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
 	pDC->TextOut(300, 250, str);
 	pDC->TextOut(300, 300, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)

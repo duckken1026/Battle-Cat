@@ -79,6 +79,26 @@ namespace game_framework {
 			attackAnimationSpeed = 1;
 			buttonDelay = 30;
 		}
+		else if (name == "Gross Cat") {		//äú¤ß¿ß¸ê®Æ
+			range = 50;
+			health = 400;
+			attack = 200;
+			attackDelay = 42;
+			walkAnimationStart = 0;
+			walkAnimationEnd = 5;
+			attackAnimationStart = 6;
+			attackAnimationEnd = 12;
+			deathAnimationStart = 13;
+			deathAnimationEnd = 24;
+			deathHeightChange = 0;
+			moveSpeed = 3;
+			imageQuantity = 25;
+			headGap = 221;
+			originY = 360;
+			walkAnimationSpeed = 2;
+			attackAnimationSpeed = 1;
+			buttonDelay = 40;
+		}
 		else if (name == "Cow Cat") {		//¤û¿ß¸ê®Æ
 			range = 20;
 			health = 200;
@@ -196,6 +216,10 @@ namespace game_framework {
 		}
 		else if (name == "Axe Cat") {		//¾Ô°«¿ß¸ê®Æ
 			char *temp[22] = { ".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\¦æ¨«0.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\¦æ¨«1.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\¦æ¨«2.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\¦æ¨«3.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»0.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»2.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»3.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»4.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h0.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h1.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h2.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h3.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h4.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h5.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h6.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h7.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h8.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h9.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h10.bmp",".\\bitmaps\\¿ß«}\\¾Ô°«¿ß\\À»°h11.bmp" };
+			return temp[imageNumber];
+		}
+		else if (name == "Gross Cat") {		//äú¤ß¿ß¸ê®Æ
+			char *temp[25] = { ".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«0.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«1.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«2.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«3.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«4.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«5.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\¦æ¨«4.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»2.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»6.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»7.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\§ðÀ»8.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h0.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h1.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h2.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h3.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h4.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h5.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h6.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h7.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h8.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h9.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h10.bmp",".\\bitmaps\\¿ß«}\\äú¤ß¿ß\\À»°h11.bmp" };
 			return temp[imageNumber];
 		}
 		else if (name == "Cow Cat") {		//¤û¿ß¸ê®Æ
