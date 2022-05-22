@@ -261,7 +261,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	
 	for (int i = 0; i < maxNeko; i++) {
-		if (Neko[i].GetNekoIsOnScreen() == false) {		//如果貓咪被擊退currentNekoQuantity減一
+		if (Neko[i].GetNekoStatus() == "currentNekoQuantityMiunsOne") {		//如果貓咪被擊退currentNekoQuantity減一
 			currentNekoQuantity -= 1;
 		}
 	}
@@ -417,26 +417,34 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	string nekoName[10] = { "Cat","Tank Cat","Axe Cat","Gross Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat","Cat"};
 	eraser.SetMovingLeft(false);
-	Button.SetClicked(point.x,point.y);			//處理按下按鈕的動作
-	for (int i = 0; i < 10; i++) {
-		if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間
-			if (readyToFightNeko < 19) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
-				readyToFightNeko += 1;
-				currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
-			}
-			else {									//如果超過20隻就要等畫面貓咪總數小於20隻，再去尋找Neko陣列中的貓咪哪個已經被擊退
-				for (int i = 0; i < maxNeko; i++) {
-					if (Neko[i].GetNekoIsOnScreen() == false && activateNeko > 20) {
-						readyToFightNeko = i;
-						currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
+	if (currentNekoQuantity < maxNeko) {				//目前貓咪數量小於maxNeko按下才有反應
+		Button.SetClicked(point.x, point.y);			//處理按下按鈕的動作
+		for (int i = 0; i < 10; i++) {
+			int findDisappearNeko = 0;					//找出Neko陣列哪一個貓咪以擊退的變數	
+			if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間
+				if (activateNeko < 20) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
+					readyToFightNeko += 1;
+					currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
+				}
+				else {									//如果超過20隻就要等畫面貓咪總數小於20隻，再去尋找Neko陣列中的貓咪哪個已經被擊退
+					while(findDisappearNeko<maxNeko) {
+						if (Neko[findDisappearNeko].GetNekoStatus() == "replaceable" && activateNeko == 20) {
+							readyToFightNeko = findDisappearNeko;
+							currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
+							break;
+						}
+						if (findDisappearNeko < maxNeko) {
+							findDisappearNeko += 1;
+						}
 					}
 				}
+				Neko[readyToFightNeko] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
+				Neko[readyToFightNeko].LoadBitmap();		//去讀取該貓咪的圖片
 			}
-			Neko[readyToFightNeko] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
-			Neko[readyToFightNeko].LoadBitmap();		//去讀取該貓咪的圖片
+
 		}
-	
 	}
+	
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -453,6 +461,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	eraser.SetMovingRight(false);
 	Neko[0].SetHealth(0);
+	Neko[1].SetHealth(0);
 }
 
 void CGameStateRun::OnShow()
