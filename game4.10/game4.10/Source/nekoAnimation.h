@@ -23,6 +23,7 @@ namespace game_framework {
 		int  GetAnimationNumber();				//取得現在動畫播到哪一張
 		void SetCurrentBitmap(int);				//設定目前動畫
 		int  GetHeadGap();						//回傳角色實際間距
+		bool GetNekoIsOnScreen();					//回傳貓咪是否在畫面上
 	private:
 		CAnimation	image;		// 貓咪動畫物件
 		int x1, y;				// X(左),Y座標

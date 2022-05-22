@@ -125,3 +125,15 @@ Library資料建立與更新
 
 修正按下最後一個按鈕會出現錯誤的問題，現在按最後一個按鈕不會有任何反應
 
+2022/5/22:
+
+新增三個變數在mygame.cpp中:
+
+int	activateNeko;			//正在執行onShow，moveForward，loadBitmap的角色數量
+int	currentNekoQuantity;		//目前畫面上的貓咪數量
+int   readyToFightNeko;			//即將出動的貓咪(此為Neko陣列中的第N個貓咪)
+
+可以去判斷目前貓咪的狀態
+
+修正按下按鈕後會出現兩隻貓咪的問題，現在按下能正常派出貓咪(但超過最大可派出貓咪數時還沒辦法顯示無法派出貓咪且第20隻貓咪會因為再按下按鈕被取代)
+

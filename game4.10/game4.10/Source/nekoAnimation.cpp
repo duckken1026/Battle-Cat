@@ -194,5 +194,14 @@ namespace game_framework
 
 	}
 
-
+	bool nekoAnimation::GetNekoIsOnScreen()
+	{
+		if (IsAlive == true) {			
+			return true;
+		}
+		else if (IsAlive == false && deathDelay < (deathAnimationEnd - deathAnimationStart)) {
+			return true;
+		}
+		return false;
+	}
 }

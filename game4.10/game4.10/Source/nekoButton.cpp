@@ -28,7 +28,6 @@ namespace game_framework {
 			buttonDelay[i] = data.buttonDelay;
 			delay[i] = 0;
 		}
-		currentNekoQuantity = 0;
 		clickedTimes = 0;
 	}
 

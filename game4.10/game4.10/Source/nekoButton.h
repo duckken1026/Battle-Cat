@@ -25,7 +25,6 @@ namespace game_framework {
 		int y[10];						//按鈕y座標
 		int buttonDelay[10];			//按鈕的冷卻時間
 		int delay[10];					//按鈕目前延遲時間
-		int	currentNekoQuantity;		//目前畫面上的貓咪數量
 		int clickedTimes;				//按鈕按下的次數
 	};
 }
