@@ -276,6 +276,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//doge.OnMove();										//貓咪動畫開始變換
 	doge.MoveForward(&neko2);
 	Button.SetTopLeft();									//設定按鈕位置
+	MaxNekoText.SetTopLeft(795,350);						//設定無法出擊文字位置
 	//
 	// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 	//
@@ -357,7 +358,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Background.LoadBitmap(IDB_scene);						//載入背景圖片
 	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
 	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
-
+	MaxNekoText.LoadBitmap(".\\bitmaps\\無法出擊.bmp", RGB(255, 0, 0));//載入無法出擊文字
 	neko.LoadBitmap();										//載入貓咪動畫
 	neko2.LoadBitmap();										//載入貓咪動畫
 	doge.LoadBitmap();										//載入貓咪動畫
@@ -422,13 +423,13 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 		for (int i = 0; i < 10; i++) {
 			int findDisappearNeko = 0;					//找出Neko陣列哪一個貓咪以擊退的變數	
 			if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間
-				if (activateNeko < 20) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
+				if (activateNeko < maxNeko) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
 					readyToFightNeko += 1;
 					currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
 				}
 				else {									//如果超過20隻就要等畫面貓咪總數小於20隻，再去尋找Neko陣列中的貓咪哪個已經被擊退
 					while(findDisappearNeko<maxNeko) {
-						if (Neko[findDisappearNeko].GetNekoStatus() == "replaceable" && activateNeko == 20) {
+						if (Neko[findDisappearNeko].GetNekoStatus() == "replaceable" && activateNeko == maxNeko) {
 							readyToFightNeko = findDisappearNeko;
 							currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
 							break;
@@ -487,6 +488,10 @@ void CGameStateRun::OnShow()
 		Neko[i].OnShow();
 	}
 	Button.ShowBitmap();				//貼上角色按鈕
+	if (currentNekoQuantity >= maxNeko) {	//若以達最大出擊數就會出現文字	
+		MaxNekoText.ShowBitmap();			//貼上無法出擊文字
+	}
+
 	//giant.ShowBitmap(0.8);
 	/*
 	background.ShowBitmap();			// 貼上學校圖
@@ -518,9 +523,9 @@ void CGameStateRun::OnShow()
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
 	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
 	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d",activateNeko,currentNekoQuantity,readyToFightNeko);
-	pDC->TextOut(300, 250, str);
-	pDC->TextOut(300, 300, str1);
-	pDC->TextOut(300, 350, str2);
+	pDC->TextOut(300, 0, str);
+	pDC->TextOut(300, 50, str1);
+	pDC->TextOut(300, 100, str2);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }

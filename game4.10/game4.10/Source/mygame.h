@@ -120,6 +120,7 @@ namespace game_framework {
 		int	activateNeko;				//正在執行onShow，moveForward，loadBitmap的角色數量
 		int	currentNekoQuantity;		//目前畫面上的貓咪數量
 		int readyToFightNeko;			//即將出動的貓咪(此為Neko陣列中的第N個貓咪)
+		CMovingBitmap	MaxNekoText;	//無法出擊文字
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
