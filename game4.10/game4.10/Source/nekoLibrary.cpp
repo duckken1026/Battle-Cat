@@ -38,6 +38,7 @@ namespace game_framework {
 			walkAnimationSpeed = 2;	
 			attackAnimationSpeed = 1;
 			buttonDelay = 10;
+			cost = 75;
 		}
 		else if (name == "Tank Cat") {		//牆貓資料
 			range = 3;
@@ -58,6 +59,7 @@ namespace game_framework {
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
 			buttonDelay = 20;
+			cost = 150;
 		}
 		else if (name == "Axe Cat") {		//戰鬥貓資料
 			range = 25;
@@ -78,6 +80,7 @@ namespace game_framework {
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
 			buttonDelay = 30;
+			cost = 300;
 		}
 		else if (name == "Gross Cat") {		//噁心貓資料
 			range = 50;
@@ -98,6 +101,7 @@ namespace game_framework {
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
 			buttonDelay = 40;
+			cost = 600;
 		}
 		else if (name == "Cow Cat") {		//牛貓資料
 			range = 20;
@@ -118,6 +122,7 @@ namespace game_framework {
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
 			buttonDelay = 40;
+			cost = 750;
 		}
 		else if (name == "Bird Cat") {		//鳥貓資料
 			range = 30;
@@ -138,6 +143,7 @@ namespace game_framework {
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
 			buttonDelay = 50;
+			cost = 975;
 		}
 		else if (name == "Fish Cat") {		//魚貓資料
 			range = 25;
@@ -158,6 +164,7 @@ namespace game_framework {
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
 			buttonDelay = 60;
+			cost = 1200;
 		}
 		else if (name == "Lizard Cat") {		//蜥蜴貓資料
 			range = 100;
@@ -178,6 +185,7 @@ namespace game_framework {
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
 			buttonDelay = 70;
+			cost = 1500;
 		}
 		else if (name == "Titan Cat") {		//巨神貓資料
 			range = 25;
@@ -198,6 +206,7 @@ namespace game_framework {
 			walkAnimationSpeed = 3;
 			attackAnimationSpeed = 1;
 			buttonDelay = 80;
+			cost = 1950;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////

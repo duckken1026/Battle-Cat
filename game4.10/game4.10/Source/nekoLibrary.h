@@ -27,6 +27,7 @@ namespace game_framework {
 		int walkAnimationSpeed;	//行走動畫速度
 		int attackAnimationSpeed;//攻擊動畫速度
 		int buttonDelay;		//可派出貓咪的延遲時間
+		int cost;				//派出貓咪需花費的金額
 	};
 
 

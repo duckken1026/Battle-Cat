@@ -147,3 +147,15 @@ int   readyToFightNeko;			//即將出動的貓咪(此為Neko陣列中的第N個�
 
 修正調整最大可派出貓咪數會當機的問題
 
+2022/5/25:
+
+在NekoLibrary中加入cost變數可儲存派出貓咪需花費的金額
+
+在nekoButton中加入affordable來判斷目前的金額能不能派出這隻貓
+也加入了以下函式:
+void updateAffordable();			//更新目前這隻貓是否有足夠的錢派出
+bool isAffordable();				//回傳目前的金錢是否能派出這隻貓咪
+int  costMoney();					//扣錢錢
+
+現在要有足夠的錢才能派出貓貓且派出貓貓後會扣錢錢(目前還未有角色附上金額的圖片)
+

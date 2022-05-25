@@ -301,8 +301,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 判斷擦子是否碰到球
 	//
 
-	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
-	
+	currentMoney.Add(10);			//每隔100毫秒加1到目前金額
+	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
 	
 
 
@@ -418,11 +418,12 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
 	string nekoName[10] = { "Cat","Tank Cat","Axe Cat","Gross Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat","Cat"};
 	eraser.SetMovingLeft(false);
-	if (currentNekoQuantity < maxNeko) {				//目前貓咪數量小於maxNeko按下才有反應
+	if (currentNekoQuantity < maxNeko && Button.isAffordable(point.x, point.y)) {//目前貓咪數量小於maxNeko及目前金額是足夠的按下才有反應
 		Button.SetClicked(point.x, point.y);			//處理按下按鈕的動作
 		for (int i = 0; i < 10; i++) {
 			int findDisappearNeko = 0;					//找出Neko陣列哪一個貓咪以擊退的變數	
-			if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間
+			if (Button.checkNowClicked(i) == true) {	//按下按鈕的瞬間及判斷錢夠不夠
+				currentMoney.Add(-Button.costMoney(i));
 				if (activateNeko < maxNeko) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
 					readyToFightNeko += 1;
 					currentNekoQuantity += 1;			//目前畫面上貓咪總數加一

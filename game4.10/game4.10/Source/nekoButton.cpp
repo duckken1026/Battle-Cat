@@ -20,13 +20,13 @@ namespace game_framework {
 	CMovingBitmap nekoButton::button[20];
 	nekoButton::nekoButton()
 	{
-		string nekoName[10] = {"Cat","Tank Cat","Axe Cat","Gross Cat","Cow Cat","Bird Cat","Fish Cat","Lizard Cat","Titan Cat"};
 		isBmpLoaded = false;
 		for (int i = 0; i < 10; i++) {
 			nekoLibrary data(nekoName[i]);
 			isClicked[i] = false;
 			buttonDelay[i] = data.buttonDelay;
 			delay[i] = 0;
+			affordable[i] = false;
 		}
 		clickedTimes = 0;
 	}
@@ -112,7 +112,36 @@ namespace game_framework {
 				return i;
 			}
 		}
-		return 0;
+		return -1;
 	}
+
+	void nekoButton::updateAffordable(int currentMoney)
+	{
+		for (int i = 0; i < 10; i++) {
+			nekoLibrary data(nekoName[i]);
+			if (currentMoney > data.cost) {	//若現在的錢足夠了
+				affordable[i] = true;
+			}
+			else {
+				affordable[i] = false;
+			}
+		}
+	}
+
+	bool nekoButton::isAffordable(int pointX, int pointY)
+	{
+		if (getButtonNum(pointX, pointY) != -1) {
+			return affordable[getButtonNum(pointX, pointY)];
+		}
+		return false;				//若滑鼠按下的範圍不在按鈕上就不會執行mygame.cpp中OnLButtonUp裡面的內容
+	}
+
+	int nekoButton::costMoney(int nekoNumber)
+	{
+		nekoLibrary data(nekoName[nekoNumber]);
+		return data.cost;
+	}
+
+
 	
 }
