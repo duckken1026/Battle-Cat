@@ -19,7 +19,7 @@ namespace game_framework {
 		bool isAffordable(int pointX, int pointY);			//回傳目前的金錢是否能派出這隻貓咪
 		int  costMoney(int nekoNumber);						//扣錢錢
 	private:
-		static CMovingBitmap button[20];		//按鈕圖形
+		static CMovingBitmap button[30];		//按鈕圖形
 		int xGap;						//按鈕與按鈕之間的X間距
 		int yGap;						//按鈕與按鈕之間的Y間距
 		bool isBmpLoaded;				// 是否已經載入圖形

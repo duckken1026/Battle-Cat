@@ -301,7 +301,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 判斷擦子是否碰到球
 	//
 
-	currentMoney.Add(10);			//每隔100毫秒加1到目前金額
+	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
 	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
 	
 
