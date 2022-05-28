@@ -194,5 +194,25 @@ namespace game_framework
 
 	}
 
-
+	string nekoAnimation::GetNekoStatus()
+	{
+		if (IsAlive == true) {			//還活著或還沒派出
+			return "IsAlive";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) > deathDelay) {		//播放擊退時的狀態
+			return "beak back";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) + 20 > deathDelay) {	//減掉貓咪總數的延遲
+			deathDelay += 1;
+			return "delay";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) + 20 == deathDelay) {//延遲結束貓咪總數減1
+			deathDelay += 1;
+			return "currentNekoQuantityMiunsOne";
+		}
+		else if ((deathAnimationEnd - deathAnimationStart) + 20 < deathDelay) {						//已完成任務可讓下一隻貓咪取代
+			return "replaceable";
+		}
+		return "replaceable";
+	}
 }
