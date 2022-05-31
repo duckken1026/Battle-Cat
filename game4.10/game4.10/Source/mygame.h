@@ -45,6 +45,8 @@
 #include "nekoAnimation.h"
 #include "ImageNumber.h"
 #include "nekoButton.h"
+#include "maxNumber.h"
+#include "levelUpButton.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -121,6 +123,8 @@ namespace game_framework {
 		int	currentNekoQuantity;		//目前畫面上的貓咪數量
 		int readyToFightNeko;			//即將出動的貓咪(此為Neko陣列中的第N個貓咪)
 		CMovingBitmap	MaxNekoText;	//無法出擊文字
+		maxNumber		maxMoney;	//最大金額
+		levelUpButton	workCat;	//工作貓按鈕
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

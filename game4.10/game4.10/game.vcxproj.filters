@@ -147,6 +147,12 @@
     <ClCompile Include="Source\nekoButton.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\maxNumber.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\levelUpButton.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -201,6 +207,12 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\nekoButton.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\maxNumber.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\levelUpButton.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
