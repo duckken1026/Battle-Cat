@@ -236,6 +236,9 @@ void CGameStateRun::OnBeginState()
 	currentMoney.SetDigits(1);
 	currentMoney.SetInteger(0);							//設定現有金額初始值為0
 	currentMoney.SetTopLeft(1520, 0);					//設定現有金額顯示的座標
+	maxMoney.SetInteger(300);								//設定現有最大金額初始值
+	maxMoney.SetTopLeft(1594, 0);						//設定最大金額顯示的座標
+	workCat.SetTopLeft();								//設定工作貓按鈕的座標
 	activateNeko = 0;									//設定Neko陣列中已出動貓咪的數量
 	currentNekoQuantity = 0;							//目前顯示在畫面中的貓咪數量
 	readyToFightNeko = -1;								//設定下一個要派出的貓咪在Neko陣列的哪一個值
@@ -300,10 +303,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 判斷擦子是否碰到球
 	//
-
-	currentMoney.Add(1);			//每隔100毫秒加1到目前金額
-	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
+	if (currentMoney.GetInteger() < maxMoney.GetInteger()) {	//若現有金額小於最大金額現有金額將會持續加一
+		currentMoney.Add(10);			//每隔100毫秒加1到目前金額
+	}
 	
+	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
+	workCat.checkAffordable(currentMoney.GetInteger());
 
 
 	for (i=0; i < NUMBALLS; i++)
@@ -355,6 +360,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	bball.LoadBitmap();										// 載入圖形
 	hits_left.LoadBitmap();									
 	currentMoney.LoadBitmap();								//載入數字圖形
+	maxMoney.LoadBitmap();									//載入數字圖形	
+	workCat.LoadBitmap();									//載入工作貓圖形
 	Background.LoadBitmap(IDB_scene);						//載入背景圖片
 	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
 	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
@@ -446,6 +453,10 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 		}
 	}
+	if (workCat.clickAction(point.x, point.y) == true) {		//若按下後有升級就扣錢錢
+		currentMoney.Add(-workCat.requireMoney[workCat.getCurrentLevel()-2]);
+		maxMoney.Add(workCat.maxMoney);							//增加最大金額
+	}
 	
 }
 
@@ -485,6 +496,8 @@ void CGameStateRun::OnShow()
 	neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
+	maxMoney.ShowBitmap();				//貼上現有金額
+	workCat.ShowBitmap();				//貼上工作貓
 	for (int i = 0; i < activateNeko; i++) {
 		Neko[i].OnShow();
 	}

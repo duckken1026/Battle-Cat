@@ -258,6 +258,8 @@
     <None Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\levelUpButton.cpp" />
+    <ClCompile Include="Source\maxNumber.cpp" />
     <ClCompile Include="Source\nekoButton.cpp" />
     <ClCompile Include="Source\nekoLibrary.cpp" />
     <ClCompile Include="Source\rivalAnimation.cpp" />
@@ -310,6 +312,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\levelUpButton.h" />
+    <ClInclude Include="Source\maxNumber.h" />
     <ClInclude Include="Source\nekoButton.h" />
     <ClInclude Include="Source\nekoLibrary.h" />
     <ClInclude Include="Source\rivalAnimation.h" />
