@@ -15,6 +15,7 @@ namespace game_framework {
 		bool clickAction(int pointX, int pointY);//按下時的動作並回傳有沒有升級
 		int  requireMoney[7];					//升級所需費用
 		int  maxMoney;							//升級後增加多少到最大金額
+		int  addSpeed[8];						//不同等級金錢增加的速度
 	private:
 		static CMovingBitmap button[15];		//按鈕圖形
 		bool isBmpLoaded;						//是否已經載入圖形

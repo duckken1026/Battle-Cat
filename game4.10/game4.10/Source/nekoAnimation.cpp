@@ -208,7 +208,7 @@ namespace game_framework
 		}
 		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) + 20 == deathDelay) {//延遲結束貓咪總數減1
 			deathDelay += 1;
-			return "currentNekoQuantityMiunsOne";
+			return "currentNekoQuantityMinusOne";
 		}
 		else if ((deathAnimationEnd - deathAnimationStart) + 20 < deathDelay) {						//已完成任務可讓下一隻貓咪取代
 			return "replaceable";

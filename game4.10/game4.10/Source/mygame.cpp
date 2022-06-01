@@ -199,7 +199,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 		Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Gross Cat");
+	neko2 = nekoAnimation("Cat");
 	doge = rivalAnimation("Doge");
 	neko.SetCoordinate(0,-101);
 }
@@ -242,6 +242,7 @@ void CGameStateRun::OnBeginState()
 	activateNeko = 0;									//設定Neko陣列中已出動貓咪的數量
 	currentNekoQuantity = 0;							//目前顯示在畫面中的貓咪數量
 	readyToFightNeko = -1;								//設定下一個要派出的貓咪在Neko陣列的哪一個值
+	moneyDelay = 0;										//金錢增加速度延遲
 	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 	CAudio::Instance()->Play(AUDIO_BackgroundMusic, true);			// 撥放 背景音樂
@@ -264,7 +265,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	
 	for (int i = 0; i < maxNeko; i++) {
-		if (Neko[i].GetNekoStatus() == "currentNekoQuantityMiunsOne") {		//如果貓咪被擊退currentNekoQuantity減一
+		if (Neko[i].GetNekoStatus() == "currentNekoQuantityMinusOne") {		//如果貓咪被擊退currentNekoQuantity減一
 			currentNekoQuantity -= 1;
 		}
 	}
@@ -303,12 +304,21 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 判斷擦子是否碰到球
 	//
-	if (currentMoney.GetInteger() < maxMoney.GetInteger()) {	//若現有金額小於最大金額現有金額將會持續加一
-		currentMoney.Add(10);			//每隔100毫秒加1到目前金額
+	if (moneyDelay >= 3){//延遲時間為(100ms* x)
+		if (currentMoney.GetInteger() < maxMoney.GetInteger()) {	//若現有金額小於最大金額現有金額將會持續加一
+			if (currentMoney.GetInteger() + workCat.addSpeed[workCat.getCurrentLevel() - 1] > maxMoney.GetInteger()) { //若加完後超過最大金額
+				currentMoney.Add(maxMoney.GetInteger() - currentMoney.GetInteger());//若會超過最大金額只加上值到最大值
+			}
+			else {
+				currentMoney.Add(workCat.addSpeed[workCat.getCurrentLevel() - 1]);//每隔100毫秒加1到目前金額
+			}
+			moneyDelay = 0;
+		}
 	}
+	moneyDelay += 1;
 	
 	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
-	workCat.checkAffordable(currentMoney.GetInteger());
+	workCat.checkAffordable(currentMoney.GetInteger());	//檢查是否有足夠金額升級工作貓
 
 
 	for (i=0; i < NUMBALLS; i++)

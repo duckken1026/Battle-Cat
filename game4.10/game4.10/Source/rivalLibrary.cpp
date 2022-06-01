@@ -56,8 +56,8 @@ namespace game_framework {
 		}
 		else if (name == "Those Guys") { //團結筷子幫資料
 			range = 20;
-			health = 100;
-			attack = 1;
+			health = 1000;
+			attack = 100;
 			attackDelay = 13;
 			walkAnimationStart = 0;
 			walkAnimationEnd = 3;

@@ -112,10 +112,10 @@ namespace game_framework {
 		CMovingBitmap	Mybase;		// 我方砲塔
 		CMovingBitmap	Rivalbase;	// 敵方砲塔
 		CMovingBitmap   giant;      // 巨神貓
-		nekoAnimation   neko;		//貓咪
-		nekoAnimation	neko2;		//第二隻貓咪
-		rivalAnimation  doge;		//狗仔
-		nekoAnimation	*Neko;		//貓咪陣列
+		nekoAnimation   neko;		// 貓咪
+		nekoAnimation	neko2;		// 第二隻貓咪
+		rivalAnimation  doge;		// 狗仔
+		nekoAnimation	*Neko;		// 貓咪陣列
 		const int		maxNeko;	// 貓咪的最大數量
 		ImageNumber		currentMoney; //現有的錢
 		nekoButton		Button;		//角色按鈕
@@ -125,6 +125,7 @@ namespace game_framework {
 		CMovingBitmap	MaxNekoText;	//無法出擊文字
 		maxNumber		maxMoney;	//最大金額
 		levelUpButton	workCat;	//工作貓按鈕
+		int moneyDelay;				//金錢增加速度延遲(可調整)
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
