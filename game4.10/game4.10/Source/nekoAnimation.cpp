@@ -25,7 +25,7 @@ namespace game_framework
 		nekoType = name;
 		nekoLibrary data(nekoType);//產生此物件的初始值
 
-		x1 = x2 = 1511;
+		x1 = x2 = data.originX;
 		y = data.originY;
 		IsAlive = true;
 		range = data.range;

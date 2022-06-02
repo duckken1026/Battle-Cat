@@ -34,6 +34,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 17;
 			headGap = 27;		
+			originX = 1511;
 			originY = 640;
 			walkAnimationSpeed = 2;	
 			attackAnimationSpeed = 1;
@@ -55,6 +56,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 21;
 			headGap = 76;
+			originX = 1511;
 			originY = 580;
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
@@ -76,6 +78,7 @@ namespace game_framework {
 			moveSpeed = 4;
 			imageQuantity = 22;
 			headGap = 30;
+			originX = 1511;
 			originY = 580;
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
@@ -97,6 +100,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 25;
 			headGap = 221;
+			originX = 1511;
 			originY = 360;
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
@@ -118,6 +122,7 @@ namespace game_framework {
 			moveSpeed = 10;
 			imageQuantity = 18;
 			headGap = 51;
+			originX = 1511;
 			originY = 550;
 			walkAnimationSpeed = 2;
 			attackAnimationSpeed = 1;
@@ -139,6 +144,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 21;
 			headGap = 112;
+			originX = 1511;
 			originY = 490;
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
@@ -160,6 +166,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 29;
 			headGap = 73;
+			originX = 1511;
 			originY = 510;
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
@@ -181,6 +188,7 @@ namespace game_framework {
 			moveSpeed = 3;
 			imageQuantity = 31;
 			headGap = 208;
+			originX = 1511;
 			originY = 550;
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
@@ -202,6 +210,7 @@ namespace game_framework {
 			moveSpeed = 2;
 			imageQuantity = 37;
 			headGap = 85;
+			originX = 1511;
 			originY = 400;
 			walkAnimationSpeed = 3;
 			attackAnimationSpeed = 1;

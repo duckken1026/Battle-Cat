@@ -81,7 +81,8 @@ void CGameStateInit::OnInit()
 	//
 	// 開始載入資料
 	//
-	logo.LoadBitmap(IDB_BACKGROUND);
+	//logo.LoadBitmap(IDB_BACKGROUND);
+	MainMenu.LoadBitmap(".\\bitmaps\\遊戲主畫面.bmp");
 	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -112,8 +113,10 @@ void CGameStateInit::OnShow()
 	//
 	// 貼上logo
 	//
-	logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
-	logo.ShowBitmap();
+
+	//logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
+	//logo.ShowBitmap();
+	MainMenu.ShowBitmap();
 	//
 	// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 	//
@@ -123,11 +126,11 @@ void CGameStateInit::OnShow()
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
-	pDC->TextOut(120,220,"Please click mouse or press SPACE to begin.");
-	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
+	//pDC->TextOut(120,220,"Please click mouse or press SPACE to begin.");
+	pDC->TextOut(5,895,"Press Ctrl-F to switch in between window mode and full screen mode.");
 	if (ENABLE_GAME_PAUSE)
-		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
-	pDC->TextOut(5,455,"Press Alt-F4 or ESC to Quit.");
+		pDC->TextOut(5,925,"Press Ctrl-Q to pause the Game.");
+	pDC->TextOut(5,955,"Press Alt-F4 or ESC to Quit.");
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }								
@@ -199,8 +202,8 @@ CGameStateRun::CGameStateRun(CGame *g)
 		Neko[i] = nekoAnimation("Tank Cat");
 	}
 	neko = nekoAnimation("Cat");
-	neko2 = nekoAnimation("Cat");
-	doge = rivalAnimation("Doge");
+	neko2 = nekoAnimation("Lizard Cat");
+	doge = rivalAnimation("Pigge");
 	neko.SetCoordinate(0,-101);
 }
 
@@ -545,7 +548,7 @@ void CGameStateRun::OnShow()
 	char str1[100];
 	char str2[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), neko2.GetAnimationNumber());
+	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), doge.GetAnimationNumber());
 	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d",activateNeko,currentNekoQuantity,readyToFightNeko);
 	pDC->TextOut(300, 0, str);
 	pDC->TextOut(300, 50, str1);

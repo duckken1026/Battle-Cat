@@ -24,7 +24,10 @@ namespace game_framework {
 		char *imageList(string name, int);//回傳角色圖片
 		int imageQuantity;		//圖片數量
 		int headGap;			//角色圖片起始位置間距
+		int originX;			//角色起始X位置
 		int originY;			//角色起始Y位置
+		int walkAnimationSpeed;	//行走動畫速度
+		int attackAnimationSpeed;//攻擊動畫速度
 	};
 
 

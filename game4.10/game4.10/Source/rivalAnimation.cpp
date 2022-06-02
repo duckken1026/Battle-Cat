@@ -24,7 +24,7 @@ namespace game_framework {
 		rivalType = name;
 		rivalLibrary data(rivalType);		//產生此物件的初始值
 
-		x1 = x2 = 270;
+		x1 = x2 = data.originX;
 		y = data.originY;
 		IsAlive = true;
 		range = data.range;
@@ -43,6 +43,8 @@ namespace game_framework {
 		deathXChange = data.deathXChange;
 		moveSpeed = data.moveSpeed;
 		headGap = data.headGap;
+		walkAnimationSpeed = data.walkAnimationSpeed;	
+		attackAnimationSpeed = data.attackAnimationSpeed;
 	}
 
 	void rivalAnimation::LoadBitmap() 
@@ -52,7 +54,7 @@ namespace game_framework {
 		//char *temp[9] = { ".\\bitmaps\\狗仔\\狗狗0.bmp",".\\bitmaps\\狗仔\\狗狗1.bmp",".\\bitmaps\\狗仔\\狗狗2.bmp",".\\bitmaps\\狗仔\\狗狗3.bmp",".\\bitmaps\\狗仔\\攻擊0.bmp",".\\bitmaps\\狗仔\\攻擊2.bmp",".\\bitmaps\\狗仔\\攻擊3.bmp",".\\bitmaps\\狗仔\\攻擊4.bmp",".\\bitmaps\\狗仔\\攻擊5.bmp"};
 		for (int i = 0; i < data.imageQuantity; i++)
 			image.AddBitmap(data.imageList(rivalType,i), RGB(255, 0, 0));
-		image.SetDelayCount(2);									//狗仔動畫轉換延遲速度
+		image.SetDelayCount(walkAnimationSpeed);									//狗仔動畫轉換延遲速度
 	}
 
 	void rivalAnimation::OnMove() {
@@ -108,13 +110,13 @@ namespace game_framework {
 			if (image.GetCurrentBitmapNumber() > walkAnimationEnd)		//若行走動畫播完了再重頭播一次
 			{
 				image.Reset();
-				image.SetDelayCount(2);				//設定延遲速度
+				image.SetDelayCount(walkAnimationSpeed);				//設定延遲速度
 			}
 		}
 		else {								//如果碰到開始進行攻擊
 
 			if (delay == 1) {			//設定攻擊初始動畫
-				image.SetDelayCount(1);		//設定延遲速度
+				image.SetDelayCount(attackAnimationSpeed);		//設定延遲速度
 				image.SetCurrentBitmap(attackAnimationStart);
 				delay += 1;
 				OnMove();
