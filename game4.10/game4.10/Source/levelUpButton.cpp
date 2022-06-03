@@ -25,7 +25,7 @@ namespace game_framework {
 		for (int i = 0; i < 7; i++) {
 			requireMoney[i] = 40*(i+1);
 		}
-		int speedData[8] = {1,2,3,4,5,6,7,8};//金錢增加速度資料
+		int speedData[8] = {100,100,100,100,100,100,100,100 };//金錢增加速度資料
 		for (int i = 0; i < 8; i++) {
 			addSpeed[i] = speedData[i];
 		}

@@ -197,13 +197,16 @@ CGameStateRun::CGameStateRun(CGame *g)
 {
 	
 	ball = new CBall [NUMBALLS];
-	Neko = new nekoAnimation[maxNeko];
+	Neko = new nekoAnimation[maxNeko+1];//加上一個貓咪主塔
+	Rival = new rivalAnimation[1];		//加上一個敵方主塔
 	for (int i = 0; i < maxNeko; i++) {
 		Neko[i] = nekoAnimation("Tank Cat");
 	}
+	Neko[maxNeko] = nekoAnimation("Neko Base");		//貓咪主塔
 	neko = nekoAnimation("Cat");
 	neko2 = nekoAnimation("Lizard Cat");
 	doge = rivalAnimation("Pigge");
+	Rival[0] = rivalAnimation("Taiwan Base");
 	neko.SetCoordinate(0,-101);
 }
 
@@ -211,6 +214,7 @@ CGameStateRun::~CGameStateRun()
 {
 	delete [] ball;
 	delete [] Neko;
+	delete [] Rival;
 }
 
 void CGameStateRun::OnBeginState()
@@ -254,10 +258,11 @@ void CGameStateRun::OnBeginState()
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	Background.SetTopLeft(0, 0);						// 設定背景座標
-	Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
-	Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
+	//Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
+	//Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
 	//giant.SetTopLeft(1500, 500);
-
+	Neko[maxNeko].MoveForward(&doge);					//將貓咪砲塔派出
+	Rival[0].MoveForward(&neko);						//將敵方砲塔派出
 	neko.OnMove();										//貓咪動畫開始變換
 	if (neko.GetAnimationNumber() == 0) {
 		neko.SetCurrentBitmap(9);
@@ -278,10 +283,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	
 	//neko2.OnMove();									//貓咪動畫開始變換
-	neko2.MoveForward(&doge);
-
+	//neko2.MoveForward(&Rival[0]);
+	
 	//doge.OnMove();										//貓咪動畫開始變換
-	doge.MoveForward(&neko2);
+	
+	doge.MoveForward(&Neko[NekoDetector.findTarget(Neko,maxNeko)]);
 	Button.SetTopLeft();									//設定按鈕位置
 	MaxNekoText.SetTopLeft(795,350);						//設定無法出擊文字位置
 	//
@@ -376,8 +382,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	maxMoney.LoadBitmap();									//載入數字圖形	
 	workCat.LoadBitmap();									//載入工作貓圖形
 	Background.LoadBitmap(IDB_scene);						//載入背景圖片
-	Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));				//載入我方砲塔
-	Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
+	//Mybase.LoadBitmap(IDB_Mybase,RGB(255,0,0));			//載入我方砲塔
+	Neko[maxNeko].LoadBitmap();								//載入我方砲塔
+	//Rivalbase.LoadBitmap(IDB_Rivalbase, RGB(255, 0, 0));	//載入敵方砲塔
+	Rival[0].LoadBitmap();									//載入敵方砲塔
 	MaxNekoText.LoadBitmap(".\\bitmaps\\無法出擊.bmp", RGB(255, 0, 0));//載入無法出擊文字
 	neko.LoadBitmap();										//載入貓咪動畫
 	neko2.LoadBitmap();										//載入貓咪動畫
@@ -502,15 +510,18 @@ void CGameStateRun::OnShow()
 	//
 	
 	Background.ShowBitmap();			//貼上背景圖
-	Mybase.ShowBitmap();				//貼上我方砲塔
+	//Mybase.ShowBitmap();				//貼上我方砲塔
+	Neko[maxNeko].OnShow();				//貼上我方砲塔
+	Rival[0].OnShow();					//貼上敵方砲塔
 	eraser.OnShow();					// 貼上擦子
-	Rivalbase.ShowBitmap();				//貼上敵方砲塔
+	//Rivalbase.ShowBitmap();				//貼上敵方砲塔
 	neko.OnShow();						//貼上貓咪
-	neko2.OnShow();						//貼上貓咪	
+	//neko2.OnShow();						//貼上貓咪	
 	doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
 	maxMoney.ShowBitmap();				//貼上現有金額
 	workCat.ShowBitmap();				//貼上工作貓
+	
 	for (int i = 0; i < activateNeko; i++) {
 		Neko[i].OnShow();
 	}
@@ -548,7 +559,7 @@ void CGameStateRun::OnShow()
 	char str1[100];
 	char str2[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d", doge.GetHealth(), doge.GetAnimationNumber());
+	sprintf(str1, "doge(health):%d animationNumber:%d %d %d", doge.GetHealth(), doge.GetAnimationNumber(),Neko[20].GetHealth(), NekoDetector.findTarget(Neko, maxNeko));
 	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d",activateNeko,currentNekoQuantity,readyToFightNeko);
 	pDC->TextOut(300, 0, str);
 	pDC->TextOut(300, 50, str1);

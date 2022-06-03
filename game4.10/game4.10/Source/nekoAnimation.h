@@ -23,7 +23,8 @@ namespace game_framework {
 		int  GetAnimationNumber();				//取得現在動畫播到哪一張
 		void SetCurrentBitmap(int);				//設定目前動畫
 		int  GetHeadGap();						//回傳角色實際間距
-		string GetNekoStatus();				//回傳貓咪目前狀態
+		int  GetHeadPosition();					//回傳角色頭部的座標
+		string GetNekoStatus();					//回傳貓咪目前狀態
 	private:
 		CAnimation	image;		// 貓咪動畫物件
 		int x1, y;				// X(左),Y座標
@@ -48,5 +49,6 @@ namespace game_framework {
 		int walkAnimationSpeed;	//行走動畫速度
 		int attackAnimationSpeed;//攻擊動畫速度
 		string nekoType;		//貓咪種類
+		bool isOnScreen;		//判斷角色是否在畫面上
 	};
 }

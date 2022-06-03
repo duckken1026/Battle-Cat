@@ -104,8 +104,8 @@ namespace game_framework {
 		}
 		else if (name == "Pigge") { //½Þ³¥­¦¸ê®Æ
 			range = 20;
-			health = 10;
-			attack = 1;
+			health = 100000;
+			attack = 1000;
 			attackDelay = 24;
 			walkAnimationStart = 0;
 			walkAnimationEnd = 9;
@@ -115,11 +115,32 @@ namespace game_framework {
 			deathAnimationEnd = 34;
 			deathHeightChange = 0;
 			deathXChange = 0;
-			moveSpeed = 2;
+			moveSpeed = 5;
 			imageQuantity = 35;
 			headGap = 30;
 			originX = -75;
 			originY = 490;
+			walkAnimationSpeed = 1;
+			attackAnimationSpeed = 1;
+		}
+		else if (name == "Taiwan Base") { //¥xÆW¯¥¶ð¸ê®Æ
+			range = 0;
+			health = 1000;
+			attack = 0;
+			attackDelay = 0;
+			walkAnimationStart = 0;
+			walkAnimationEnd = 0;
+			attackAnimationStart = 0;
+			attackAnimationEnd = 0;
+			deathAnimationStart = 0;
+			deathAnimationEnd = 0;
+			deathHeightChange = 0;
+			deathXChange = 0;
+			moveSpeed = 1;
+			imageQuantity = 1;
+			headGap = 25;
+			originX = 105;
+			originY = 419;
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
 		}
@@ -165,6 +186,10 @@ namespace game_framework {
 		}
 		else if (name == "Pigge") {		//½Þ³¥­¦¸ê®Æ
 			char *temp[35] = { ".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«0.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«1.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«2.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«3.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«4.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«5.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«6.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«7.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«8.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\¦æ¨«9.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»0.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»1.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»2.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»3.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»4.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»5.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»6.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»7.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»8.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»9.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»10.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\§ðÀ»11.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h0.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h1.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h2.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h3.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h4.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h5.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h6.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h7.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h8.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h9.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h10.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h11.bmp",".\\bitmaps\\¼Ä¤è\\½Þ³¥­¦\\À»°h12.bmp" };
+			return temp[imageNumber];
+		}
+		else if (name == "Taiwan Base") { //¥xÆW¯¥¶ð¸ê®Æ
+			char *temp[1] =	 { ".\\bitmaps\\¶ð\\Tw.bmp" };
 			return temp[imageNumber];
 		}
 		else {

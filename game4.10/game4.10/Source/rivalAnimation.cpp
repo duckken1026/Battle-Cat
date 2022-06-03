@@ -176,6 +176,11 @@ namespace game_framework {
 		return headGap;
 	}
 
+	int rivalAnimation::GetHeadPosition()
+	{
+		return x2 - headGap;
+	}
+
 
 	void rivalAnimation::die()
 	{

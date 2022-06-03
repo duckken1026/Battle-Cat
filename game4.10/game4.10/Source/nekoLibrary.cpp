@@ -217,6 +217,26 @@ namespace game_framework {
 			buttonDelay = 80;
 			cost = 1950;
 		}
+		else if (name == "Neko Base") {		//¿ß«}¥D¶ð¸ê®Æ
+			range = 0;
+			health = 1000;
+			attack = 0;
+			attackDelay = 0;
+			walkAnimationStart = 0;
+			walkAnimationEnd = 0;
+			attackAnimationStart = 0;
+			attackAnimationEnd = 0;
+			deathAnimationStart = 0;
+			deathAnimationEnd = 0;
+			deathHeightChange = 0;
+			moveSpeed = 0;
+			imageQuantity = 1;
+			headGap = 3;
+			originX = 1650;
+			originY = 419;
+			walkAnimationSpeed = 1;
+			attackAnimationSpeed = 1;
+		}
 	}
 	/////////////////////////////////////////////////////////////////////////////
 	//¿ß«}¹Ï¤ù¸ü¤J
@@ -258,6 +278,10 @@ namespace game_framework {
 		}
 		else if (name == "Titan Cat") {	//¥¨¯«¿ß¸ê®Æ
 			char *temp[37] = { ".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«0.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«1.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«2.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«3.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«4.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\¦æ¨«5.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»0.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»1.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»2.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»3.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»4.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»5.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»6.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»7.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»8.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»9.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»10.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»11.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»12.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»13.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»14.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»15.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»16.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»17.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»18.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»19.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\§ðÀ»20.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h0.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h1.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h2.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h3.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h4.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h5.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h6.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h7.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h8.bmp",".\\bitmaps\\¿ß«}\\¥¨¯«¿ß\\À»°h9.bmp" };
+			return temp[imageNumber];
+		}
+		else if (name == "Neko Base") {	//¿ß«}¥D¶ð¸ê®Æ
+			char *temp[1] = { ".\\bitmaps\\¶ð\\tower.bmp" };
 			return temp[imageNumber];
 		}
 		else {

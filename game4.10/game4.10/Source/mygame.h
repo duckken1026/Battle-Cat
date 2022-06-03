@@ -47,6 +47,7 @@
 #include "nekoButton.h"
 #include "maxNumber.h"
 #include "levelUpButton.h"
+#include "nekoDetector.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -117,6 +118,7 @@ namespace game_framework {
 		nekoAnimation	neko2;		// 第二隻貓咪
 		rivalAnimation  doge;		// 狗仔
 		nekoAnimation	*Neko;		// 貓咪陣列
+		rivalAnimation  *Rival;		// 敵人陣列
 		const int		maxNeko;	// 貓咪的最大數量
 		ImageNumber		currentMoney; //現有的錢
 		nekoButton		Button;		//角色按鈕
@@ -127,6 +129,7 @@ namespace game_framework {
 		maxNumber		maxMoney;	//最大金額
 		levelUpButton	workCat;	//工作貓按鈕
 		int moneyDelay;				//金錢增加速度延遲(可調整)
+		nekoDetector	NekoDetector;//偵測哪隻貓咪要設為目標
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

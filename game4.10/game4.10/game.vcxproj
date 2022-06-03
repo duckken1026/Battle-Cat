@@ -261,6 +261,7 @@
     <ClCompile Include="Source\levelUpButton.cpp" />
     <ClCompile Include="Source\maxNumber.cpp" />
     <ClCompile Include="Source\nekoButton.cpp" />
+    <ClCompile Include="Source\nekoDetector.cpp" />
     <ClCompile Include="Source\nekoLibrary.cpp" />
     <ClCompile Include="Source\rivalAnimation.cpp" />
     <ClCompile Include="Source\ImageNumber.cpp" />
@@ -315,6 +316,7 @@
     <ClInclude Include="Source\levelUpButton.h" />
     <ClInclude Include="Source\maxNumber.h" />
     <ClInclude Include="Source\nekoButton.h" />
+    <ClInclude Include="Source\nekoDetector.h" />
     <ClInclude Include="Source\nekoLibrary.h" />
     <ClInclude Include="Source\rivalAnimation.h" />
     <ClInclude Include="Source\ImageNumber.h" />

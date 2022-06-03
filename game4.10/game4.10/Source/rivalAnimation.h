@@ -25,6 +25,7 @@ namespace game_framework{
 		int  GetAnimationNumber();				//取得現在動畫播到哪一張
 		void SetCurrentBitmap(int);				//設定目前動畫
 		int  GetHeadGap();						//回傳角色實際間距
+		int  GetHeadPosition();					//回傳角色頭部的座標
 	private:
 		CAnimation	image;		// 狗仔動畫物件
 		int x1, y;				// X,Y座標

@@ -1,0 +1,15 @@
+namespace game_framework {
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class提供偵測哪隻貓咪要設為目標的能力
+	// 
+	/////////////////////////////////////////////////////////////////////////////
+
+	class nekoDetector {
+	public:
+		nekoDetector();
+		int findTarget(nekoAnimation *nekolist,int quantityOfNeko);	//從貓咪陣列中找出目標
+
+	private:
+		int target;		//將被設為目標的貓咪存在此變數中
+	};
+}
