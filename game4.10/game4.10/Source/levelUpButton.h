@@ -16,6 +16,7 @@ namespace game_framework {
 		int  requireMoney[7];					//ど┮惠禣ノ
 		int  maxMoney;							//ど糤ぶ程肂
 		int  addSpeed[8];						//ぃ单窥糤硉
+		void SetInitLevel();					//砞﹚﹍て单
 	private:
 		static CMovingBitmap button[15];		//秙瓜
 		bool isBmpLoaded;						//琌竒更瓜

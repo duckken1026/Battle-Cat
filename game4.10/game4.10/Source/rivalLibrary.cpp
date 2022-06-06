@@ -104,7 +104,7 @@ namespace game_framework {
 		}
 		else if (name == "Pigge") { //½Þ³¥­¦¸ê®Æ
 			range = 20;
-			health = 100000;
+			health = 100;
 			attack = 1000;
 			attackDelay = 24;
 			walkAnimationStart = 0;

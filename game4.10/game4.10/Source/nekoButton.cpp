@@ -112,6 +112,11 @@ namespace game_framework {
 		return clickedTimes;
 	}
 
+	void nekoButton::setClickedTimes(int number)
+	{
+		clickedTimes = number;
+	}
+
 	int nekoButton::getButtonNum(int pointX, int pointY)
 	{
 		for (int i = 0; i < 10; i++) {

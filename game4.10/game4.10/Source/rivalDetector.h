@@ -1,0 +1,15 @@
+namespace game_framework {
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class提供偵測哪隻敵方要設為目標的能力
+	// 
+	/////////////////////////////////////////////////////////////////////////////
+
+	class rivalDetector {
+	public:
+		rivalDetector();
+		int findTarget(rivalAnimation *rivallist, int quantityOfRival);	//從敵方陣列中找出目標
+
+	private:
+		int target;		//將被設為目標的敵人存在此變數中
+	};
+}

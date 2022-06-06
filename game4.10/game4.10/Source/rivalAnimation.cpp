@@ -27,6 +27,7 @@ namespace game_framework {
 		x1 = x2 = data.originX;
 		y = data.originY;
 		IsAlive = true;
+		isOnScreen = false;
 		range = data.range;
 		health = data.health;
 		attack = data.attack;
@@ -72,6 +73,7 @@ namespace game_framework {
 		else if (IsAlive == false && deathDelay < (deathAnimationEnd - deathAnimationStart)) {	//擊退時要將角色的Y座標做調整
 			image.SetTopLeft(x1 - deathXChange, y - deathHeightChange);
 			image.OnShow();
+			isOnScreen = false;
 		}
 		//死亡就不顯示在畫面
 	}
@@ -103,6 +105,7 @@ namespace game_framework {
 		if (!IsAlive)				//若死亡就不在執行以下程式碼
 			return;
 
+		isOnScreen = true;			//設定角色在畫面上為真
 		if (((neko->GetX1() + neko->GetHeadGap()) > x2 - headGap + range) || (neko->GetIsAlive() == false)){			//判斷有無碰撞和敵方是否活著
 			x1 += moveSpeed;
 			x2 += moveSpeed;
@@ -179,6 +182,31 @@ namespace game_framework {
 	int rivalAnimation::GetHeadPosition()
 	{
 		return x2 - headGap;
+	}
+
+	string rivalAnimation::GetRivalStatus()
+	{
+		if (isOnScreen == true) {			//是否在畫面上
+			return "IsOnScreen";
+		}
+		else if (IsAlive == true) {			//還活著或還沒派出
+			return "IsAlive";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) > deathDelay) {		//播放擊退時的狀態
+			return "beak back";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) + 20 > deathDelay) {	//減掉敵方總數的延遲
+			deathDelay += 1;
+			return "delay";
+		}
+		else if (IsAlive == false && (deathAnimationEnd - deathAnimationStart) + 20 == deathDelay) {//延遲結束敵方總數減1
+			deathDelay += 1;
+			return "currentRivalQuantityMinusOne";
+		}
+		else if ((deathAnimationEnd - deathAnimationStart) + 20 < deathDelay) {						//已完成任務可讓下一隻敵方取代
+			return "replaceable";
+		}
+		return "replaceable";
 	}
 
 

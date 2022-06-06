@@ -14,6 +14,7 @@ namespace game_framework {
 		void SetClicked(int pointX,int pointY);//設定按下時的動作
 		bool checkNowClicked(int nekoNumber);				//回傳現在是不是按下去的那個瞬間
 		int  getClickedTimes();			//取得正在執行onShow，moveForward，loadBitmap的角色數量
+		void setClickedTimes(int number);			//設定按鈕按下次數;
 		int  getButtonNum(int pointX, int pointY);			//取得被按下按鈕的號碼
 		void updateAffordable(int currentMoney);			//更新目前這隻貓是否有足夠的錢派出
 		bool isAffordable(int pointX, int pointY);			//回傳目前的金錢是否能派出這隻貓咪

@@ -101,4 +101,9 @@ namespace game_framework {
 		return false;
 	}
 
+	void levelUpButton::SetInitLevel()
+	{
+		level = 1;
+	}
+
 }
