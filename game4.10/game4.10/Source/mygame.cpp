@@ -98,15 +98,21 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	const char KEY_ESC = 27;
 	const char KEY_SPACE = ' ';
-	if (nChar == KEY_SPACE)
-		GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-	else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE,0,0);	// 關閉遊戲
+	if (nChar == KEY_SPACE) {
+		GotoGameState(GAME_STATE_Stage_Select);				// 切換至GAME_STATE_Stage_Select
+		CAudio::Instance()->Stop(AUDIO_Beginning);
+	}
+	else if (nChar == KEY_ESC) {								// Demo 關閉遊戲的方法
+		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+	}
 }
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+	if ((point.x >= 575 && point.x <= 1337) && (point.y >= 592 && point.y <= 700)) {
+		GotoGameState(GAME_STATE_Stage_Select);		// 切換至GAME_STATE_Stage_Select
+		CAudio::Instance()->Stop(AUDIO_Beginning);
+	}
 }
 
 void CGameStateInit::OnShow()
@@ -135,6 +141,69 @@ void CGameStateInit::OnShow()
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }								
+
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的遊戲開頭畫面物件
+/////////////////////////////////////////////////////////////////////////////
+
+CGameStateStageSelect::CGameStateStageSelect(CGame *g)
+	: CGameState(g)
+{
+}
+
+void CGameStateStageSelect::OnInit()
+{
+	stageSelect.LoadBitmap();
+	back.LoadBitmap(".\\bitmaps\\返回.bmp", RGB(255, 0, 0));
+	back.SetTopLeft(10,920);
+	start.LoadBitmap(".\\bitmaps\\戰鬥開始.bmp", RGB(255,0,0));
+	start.SetTopLeft(1280,920);
+	CAudio::Instance()->Load(AUDIO_Stage, "sounds\\Preparation.mp3");		//Load 開頭音樂
+	
+}
+
+void CGameStateStageSelect::OnBeginState()
+{
+	CAudio::Instance()->Play(AUDIO_Stage, true);
+}
+
+void CGameStateStageSelect::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	const char KEY_LEFT = 37;
+	const char KEY_RIGHT = 39;
+	if (nChar == KEY_LEFT) {
+		stageSelect.clickLeft();
+	}
+	else if (nChar == KEY_RIGHT) {
+		stageSelect.clickRight();
+	}
+}
+
+void CGameStateStageSelect::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	if ((point.y >= 140 && point.y < 920) &&(point.x>960 && point.x<=1920)) {
+		stageSelect.clickRight();
+	}
+	if ((point.y >= 140 && point.y < 920) && (point.x >= 0 && point.x <= 960)) {
+		stageSelect.clickLeft();
+	}
+	if ((point.y >= 920 && point.y <= 1102) && (point.x >= 10 && point.x <= 243)) {
+		GotoGameState(GAME_STATE_INIT);				// 切換至GAME_STATE_INIT
+		CAudio::Instance()->Stop(AUDIO_Stage);
+		CAudio::Instance()->Play(AUDIO_Beginning, true);
+	}
+	if ((point.y >= 920 && point.y <= 1089) && (point.x >= 1280 && point.x <= 1945)) {
+		GotoGameState(GAME_STATE_RUN);				// 切換至GAME_STATE_RUN
+		CAudio::Instance()->Stop(AUDIO_Stage);
+	}
+}
+
+void CGameStateStageSelect::OnShow()
+{
+	stageSelect.ShowBitmap();
+	back.ShowBitmap();
+	start.ShowBitmap();
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的結束狀態(Game Over)
@@ -190,6 +259,130 @@ void CGameStateOver::OnShow()
 	pDC->TextOut(240,210,str);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的結束狀態貓咪獲勝
+/////////////////////////////////////////////////////////////////////////////
+CGameStateNekoWin::CGameStateNekoWin(CGame *g)
+	: CGameState(g)
+{
+}
+
+void CGameStateNekoWin::OnMove()
+{
+	counter--;
+	if (counter < 0) {
+		CAudio::Instance()->Stop(AUDIO_Victory);
+		CAudio::Instance()->Play(AUDIO_Beginning, true);						//Play 開頭音樂
+		GotoGameState(GAME_STATE_INIT);
+	}
+
+}
+
+void CGameStateNekoWin::OnBeginState()
+{
+	counter = 10 * 10; // 10 seconds
+	CAudio::Instance()->Play(AUDIO_Victory);
+}
+
+void CGameStateNekoWin::OnInit()
+{
+	//
+	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+	//
+	ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
+	//
+	// 開始載入資料
+	//
+	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	//
+	// 最終進度為100%
+	//
+	ShowInitProgress(100);
+	winPhoto.LoadBitmap(".\\bitmaps\\大獲全勝.bmp");
+	winPhoto.SetTopLeft(370,200);
+	CAudio::Instance()->Load(AUDIO_Victory, "sounds\\Victory.mp3");		//Load 勝利音效
+
+}
+
+void CGameStateNekoWin::OnShow()
+{
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 0));
+	char str[80];								// Demo 數字對字串的轉換
+	sprintf(str, "(%d)", counter / 10);
+	pDC->TextOut(900, 700, str);
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	winPhoto.ShowBitmap();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的結束狀態敵人獲勝
+/////////////////////////////////////////////////////////////////////////////
+CGameStateRivalWin::CGameStateRivalWin(CGame *g)
+	: CGameState(g)
+{
+}
+
+void CGameStateRivalWin::OnMove()
+{
+	counter--;
+	if (counter < 0) {
+		CAudio::Instance()->Stop(AUDIO_Defeat);
+		CAudio::Instance()->Play(AUDIO_Beginning, true);						//Play 開頭音樂
+		GotoGameState(GAME_STATE_INIT);
+	}
+
+}
+
+void CGameStateRivalWin::OnBeginState()
+{
+	counter = 10 * 10; // 10 seconds
+	CAudio::Instance()->Play(AUDIO_Defeat);
+}
+
+void CGameStateRivalWin::OnInit()
+{
+	//
+	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+	//
+	ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
+	//
+	// 開始載入資料
+	//
+	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	//
+	// 最終進度為100%
+	//
+	ShowInitProgress(100);
+	winPhoto.LoadBitmap(".\\bitmaps\\慘敗.bmp");
+	winPhoto.SetTopLeft(500, 200);
+	CAudio::Instance()->Load(AUDIO_Defeat, "sounds\\Defeat.mp3");		//Load 失敗音效
+	
+}
+
+void CGameStateRivalWin::OnShow()
+{
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 0));
+	char str[80];								// Demo 數字對字串的轉換
+	sprintf(str, "(%d)", counter / 10);
+	pDC->TextOut(900, 700, str);
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	winPhoto.ShowBitmap();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -275,6 +468,7 @@ void CGameStateRun::OnBeginState()
 	for (int i = 0; i < maxRival; i++) {
 		Rival[i] = rivalAnimation("Doge");
 	}
+	a = 0;
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -321,10 +515,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	
 	rivalDelay += 1;
 	
-	a = 0;
+	a += 1;
+	
 	for (int i = 0; i < maxRival; i++) {
 		if (Rival[i].GetRivalStatus() == "currentRivalQuantityMinusOne") {		//如果敵方被擊退currentRivalQuantity減一
-			a = 1;
 			currentRivalQuantity -= 1;
 		}
 	}
@@ -414,9 +608,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動彈跳的球
 	//
 	bball.OnMove();
-	if (Neko[maxNeko].GetHealth() <= 0 || Rival[maxRival].GetHealth() <= 0) {//若砲塔生命值小於等於0就結束遊戲
+	if (Neko[maxNeko].GetHealth() <= 0) {					//若敵方獲勝
 		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
-		GotoGameState(GAME_STATE_OVER);
+		GotoGameState(GAME_STATE_Rival_Win);
+	}
+	if (Rival[maxRival].GetHealth() <= 0) {					//若貓咪獲勝
+		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
+		GotoGameState(GAME_STATE_Neko_Win);
 	}
 }
 
@@ -635,12 +833,18 @@ void CGameStateRun::OnShow()
 	char str[80];								// Demo 數字對字串的轉換
 	char str1[100];
 	char str2[100];
+	char str3[100];
+	char str4[100];
 	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d %d %d %d %d", doge.GetHealth(), doge.GetAnimationNumber(),Neko[20].GetHealth(),Rival[10].GetHealth(),NekoDetector.findTarget(Neko, maxNeko), RivalDetector.findTarget(Rival, maxRival));
+	sprintf(str1, "doge(health):%d animationNumber:%d %d %d", doge.GetHealth(), doge.GetAnimationNumber(),NekoDetector.findTarget(Neko, maxNeko), RivalDetector.findTarget(Rival, maxRival));
 	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d %d",activateRival,currentRivalQuantity,readyToFightRival,a);
+	sprintf(str3, "%d/%d", Rival[maxRival].GetHealth(), Rival[maxRival].GetOriginHealth());
+	sprintf(str4, "%d/%d", Neko[maxNeko].GetHealth(), Neko[maxNeko].GetOriginHealth());
 	pDC->TextOut(300, 0, str);
 	pDC->TextOut(300, 50, str1);
-	pDC->TextOut(300, 100, str2);
+	pDC->TextOut(300, 100, str2); 
+	pDC->TextOut(130, 360, str3);
+	pDC->TextOut(1650,360, str4);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }

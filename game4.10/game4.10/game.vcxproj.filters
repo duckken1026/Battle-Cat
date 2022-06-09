@@ -159,6 +159,9 @@
     <ClCompile Include="Source\rivalDetector.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\stageSelector.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -225,6 +228,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\rivalDetector.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stageSelector.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

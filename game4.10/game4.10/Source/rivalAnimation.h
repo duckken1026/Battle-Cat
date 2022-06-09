@@ -27,6 +27,7 @@ namespace game_framework{
 		int  GetHeadGap();						//回傳角色實際間距
 		int  GetHeadPosition();					//回傳角色頭部的座標
 		string GetRivalStatus();				//回傳敵方目前狀態
+		int	 GetOriginHealth();					//取得原始體力
 	private:
 		CAnimation	image;		// 狗仔動畫物件
 		int x1, y;				// X,Y座標
@@ -53,5 +54,6 @@ namespace game_framework{
 		int attackAnimationSpeed;//攻擊動畫速度
 		string rivalType;		//敵方種類
 		bool isOnScreen;		//判斷角色是否在畫面上
+		int OriginHealth;		//原始體力
 	};
 }

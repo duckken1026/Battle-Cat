@@ -49,6 +49,7 @@
 #include "levelUpButton.h"
 #include "nekoDetector.h"
 #include "rivalDetector.h"
+#include "stageSelector.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,10 @@ namespace game_framework {
 		AUDIO_DING,				// 0
 		AUDIO_LAKE,				// 1
 		AUDIO_BackgroundMusic,	// 2   背景音樂
-		AUDIO_Beginning			// 3   開頭音樂
+		AUDIO_Beginning,		// 3   開頭音樂
+		AUDIO_Victory,			// 4   勝利音效
+		AUDIO_Defeat,			// 5   失敗音效
+		AUDIO_Stage				// 6   選擇關卡音樂
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -79,6 +83,26 @@ namespace game_framework {
 	private:
 		CMovingBitmap logo;								// csie的logo
 		CMovingBitmap MainMenu;							// 主畫面圖片
+	};
+
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的遊戲選擇關卡
+	/////////////////////////////////////////////////////////////////////////////
+
+	class CGameStateStageSelect : public CGameState {
+	public:
+		CGameStateStageSelect(CGame *g);
+		void OnInit();  								// 遊戲的初值及圖形設定
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+	protected:
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		CMovingBitmap SelectStageMenu;					// 關卡選擇畫面圖片
+		CMovingBitmap back;								// 返回圖片
+		CMovingBitmap start;							// 開始戰鬥圖片
+		stageSelector stageSelect;						// 選擇關卡的功能
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -157,4 +181,35 @@ namespace game_framework {
 		int counter;	// 倒數之計數器
 	};
 
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的結束狀態貓咪獲勝
+	/////////////////////////////////////////////////////////////////////////////
+	class CGameStateNekoWin : public CGameState {
+	public:
+		CGameStateNekoWin(CGame *g);
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnInit();
+	protected:
+		void OnMove();									// 移動遊戲元素
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		int counter;	// 倒數之計數器
+		CMovingBitmap winPhoto;							// 勝利圖片
+	};
+
+	/////////////////////////////////////////////////////////////////////////////
+	// 這個class為遊戲的結束狀態敵人獲勝
+	/////////////////////////////////////////////////////////////////////////////
+	class CGameStateRivalWin : public CGameState {
+	public:
+		CGameStateRivalWin(CGame *g);
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnInit();
+	protected:
+		void OnMove();									// 移動遊戲元素
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		int counter;	// 倒數之計數器
+		CMovingBitmap winPhoto;							// 勝利圖片
+	};
 }

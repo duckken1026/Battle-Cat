@@ -29,6 +29,7 @@ namespace game_framework {
 		IsAlive = true;
 		isOnScreen = false;
 		range = data.range;
+		OriginHealth = data.health;
 		health = data.health;
 		attack = data.attack;
 		attackDelay = data.attackDelay;	//framework一秒執行10次延遲10次就等於1秒執行一次
@@ -209,6 +210,11 @@ namespace game_framework {
 		return "replaceable";
 	}
 
+	int rivalAnimation::GetOriginHealth()
+	{
+		return OriginHealth;
+	}
+
 
 	void rivalAnimation::die()
 	{
@@ -216,6 +222,7 @@ namespace game_framework {
 		{
 			IsAlive = false;
 			if (deathDelay == 0) {			//體力小於等於零後先初始化讓動畫變成第一張擊退動畫
+				image.SetDelayCount(attackAnimationSpeed);
 				image.SetCurrentBitmap(deathAnimationStart);
 				deathDelay++;
 				image.OnMove();
