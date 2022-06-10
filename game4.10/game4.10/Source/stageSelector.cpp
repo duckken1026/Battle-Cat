@@ -56,4 +56,9 @@ namespace game_framework {
 		}
 	}
 
+	int stageSelector::getStage()
+	{
+		return targetStage;
+	}
+
 }

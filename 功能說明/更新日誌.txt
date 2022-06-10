@@ -240,3 +240,13 @@ Game_STATES全部建置完畢(從遊戲開始到選擇關卡到開始遊戲到�
 新Class:新增stageSelector:這個class提供選擇關卡的能力
 
 加入遊戲音效
+
+2022/06/10:
+
+新Class:新增stageImformation:這個class提供關卡資訊的能力
+
+可依照目前關卡更改敵方砲塔，背景圖，關卡名稱，音樂
+
+新增中止遊戲按鈕
+
+Bug:bitmap讀取一次後就無法再重新讀取可能需要在class中寫好讀取和顯示哪一個

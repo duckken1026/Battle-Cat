@@ -50,6 +50,7 @@
 #include "nekoDetector.h"
 #include "rivalDetector.h"
 #include "stageSelector.h"
+#include "stageImformation.h" 
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -65,7 +66,6 @@ namespace game_framework {
 		AUDIO_Defeat,			// 5   失敗音效
 		AUDIO_Stage				// 6   選擇關卡音樂
 	};
-
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂
@@ -96,13 +96,13 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		stageSelector stageSelect;						// 選擇關卡的功能
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap SelectStageMenu;					// 關卡選擇畫面圖片
 		CMovingBitmap back;								// 返回圖片
 		CMovingBitmap start;							// 開始戰鬥圖片
-		stageSelector stageSelect;						// 選擇關卡的功能
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -161,7 +161,9 @@ namespace game_framework {
 		nekoDetector	NekoDetector;//偵測哪隻貓咪要設為目標
 		rivalDetector	RivalDetector;//偵測哪隻敵方要設為目標
 		int rivalDelay;				//派出敵人的延遲時間
-		int a = 0;
+		stageImformation stageData;	//關卡資訊
+		CMovingBitmap	stopButton;	//退出遊戲按鈕	
+		CMovingBitmap	stageName;	//此關卡名稱
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

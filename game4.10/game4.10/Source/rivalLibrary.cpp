@@ -144,6 +144,48 @@ namespace game_framework {
 			walkAnimationSpeed = 1;
 			attackAnimationSpeed = 1;
 		}
+		else if (name == "Hong Kong Base") { //香港砲塔資料
+		range = 0;
+		health = 2000;
+		attack = 0;
+		attackDelay = 0;
+		walkAnimationStart = 0;
+		walkAnimationEnd = 0;
+		attackAnimationStart = 0;
+		attackAnimationEnd = 0;
+		deathAnimationStart = 0;
+		deathAnimationEnd = 0;
+		deathHeightChange = 0;
+		deathXChange = 0;
+		moveSpeed = 1;
+		imageQuantity = 1;
+		headGap = 25;
+		originX = 105;
+		originY = 419;
+		walkAnimationSpeed = 1;
+		attackAnimationSpeed = 1;
+		}
+		else if (name == "Thailand Base") { //泰國砲塔資料
+		range = 0;
+		health = 2500;
+		attack = 0;
+		attackDelay = 0;
+		walkAnimationStart = 0;
+		walkAnimationEnd = 0;
+		attackAnimationStart = 0;
+		attackAnimationEnd = 0;
+		deathAnimationStart = 0;
+		deathAnimationEnd = 0;
+		deathHeightChange = 0;
+		deathXChange = 0;
+		moveSpeed = 1;
+		imageQuantity = 1;
+		headGap = 25;
+		originX = 105;
+		originY = 419;
+		walkAnimationSpeed = 1;
+		attackAnimationSpeed = 1;
+		}
 		else {
 			range = 4;
 			health = 100;
@@ -189,7 +231,15 @@ namespace game_framework {
 			return temp[imageNumber];
 		}
 		else if (name == "Taiwan Base") { //台灣砲塔資料
-			char *temp[1] =	 { ".\\bitmaps\\塔\\Tw.bmp" };
+			char *temp[1] =	 { ".\\bitmaps\\塔\\台灣.bmp" };
+			return temp[imageNumber];
+		}
+		else if (name == "Hong Kong Base") { //香港砲塔資料
+			char *temp[1] = { ".\\bitmaps\\塔\\香港.bmp" };
+			return temp[imageNumber];
+		}
+		else if (name == "Thailand Base") { //泰國砲塔資料
+			char *temp[1] = { ".\\bitmaps\\塔\\泰國.bmp" };
 			return temp[imageNumber];
 		}
 		else {

@@ -292,6 +292,7 @@
     </ClCompile>
     <ClCompile Include="Source\rivalDetector.cpp" />
     <ClCompile Include="Source\rivalLibrary.cpp" />
+    <ClCompile Include="Source\stageImformation.cpp" />
     <ClCompile Include="Source\stageSelector.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -334,6 +335,7 @@
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\rivalDetector.h" />
     <ClInclude Include="Source\rivalLibrary.h" />
+    <ClInclude Include="Source\stageImformation.h" />
     <ClInclude Include="Source\stageSelector.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
