@@ -670,7 +670,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));			// 載入巨神貓
 	
 
-	CAudio::Instance()->Load(AUDIO_BackgroundMusic,  stageData.getMusic(stage));	// 載入編號2的聲音Invading Japan!.mp3
+	CAudio::Instance()->Load(AUDIO_BackgroundMusic, "sounds\\InvadingJapan!.mp3");	// 載入編號2的聲音Invading Japan!.mp3
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
