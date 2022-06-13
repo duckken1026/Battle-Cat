@@ -19,14 +19,14 @@ namespace game_framework {
 	{
 		isBmpLoaded = false;
 		targetStage = 1;
-		finalStage = 3;
+		finalStage = 7;
 	}
 
 	void stageSelector::LoadBitmap()
 	{
 		if (!isBmpLoaded) {
-			char *L[3] = { ".\\bitmaps\\關卡圖片\\台灣.bmp",".\\bitmaps\\關卡圖片\\香港.bmp",".\\bitmaps\\關卡圖片\\泰國.bmp" };
-			for (int i = 0; i < 3; i++) {
+			char *L[7] = { ".\\bitmaps\\關卡圖片\\台灣.bmp",".\\bitmaps\\關卡圖片\\香港.bmp",".\\bitmaps\\關卡圖片\\泰國.bmp",".\\bitmaps\\關卡圖片\\中國.bmp",".\\bitmaps\\關卡圖片\\蒙古.bmp",".\\bitmaps\\關卡圖片\\韓國.bmp",".\\bitmaps\\關卡圖片\\日本.bmp" };
+			for (int i = 0; i < 7; i++) {
 				stageImage[i].LoadBitmap(L[i]);
 			}
 			isBmpLoaded = true;

@@ -135,7 +135,6 @@ namespace game_framework {
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-		CMovingBitmap   Background; // 遊戲背景圖
 		CMovingBitmap	Mybase;		// 我方砲塔
 		CMovingBitmap	Rivalbase;	// 敵方砲塔
 		CMovingBitmap   giant;      // 巨神貓
@@ -163,7 +162,6 @@ namespace game_framework {
 		int rivalDelay;				//派出敵人的延遲時間
 		stageImformation stageData;	//關卡資訊
 		CMovingBitmap	stopButton;	//退出遊戲按鈕	
-		CMovingBitmap	stageName;	//此關卡名稱
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

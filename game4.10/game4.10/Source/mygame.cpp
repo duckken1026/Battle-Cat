@@ -440,7 +440,6 @@ void CGameStateRun::OnBeginState()
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-	stageName.SetTopLeft(110,0);						//設定關卡名稱顯示的座標
 	stopButton.SetTopLeft(0,0);							//設定中止按鈕顯示的座標
 	currentMoney.SetDigits(1);
 	currentMoney.SetInteger(0);							//設定現有金額初始值為0
@@ -476,7 +475,6 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	Background.SetTopLeft(0, 0);						// 設定背景座標
 	//Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
 	//Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
 	//giant.SetTopLeft(1500, 500);
@@ -647,9 +645,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background
 	bball.LoadBitmap();										// 載入圖形
-	hits_left.LoadBitmap();			
-	stageName.LoadBitmap(stageData.getStageName(stage), RGB(255, 0, 0));	//載入關卡名稱圖形
-	Background.LoadBitmap(stageData.getStageBackground(stage));//載入背景圖片
+	hits_left.LoadBitmap();		
+	stageData.LoadBitmap();									//載入背景圖片和關卡名稱
 	stopButton.LoadBitmap(".\\bitmaps\\中止.bmp", RGB(255, 0, 0));//載入退出遊戲圖形
 	currentMoney.LoadBitmap();								//載入數字圖形
 	maxMoney.LoadBitmap();									//載入數字圖形	
@@ -786,8 +783,7 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
-	
-	Background.ShowBitmap();			//貼上背景圖
+	stageData.ShowBitmapBackGround(stage);//貼上背景圖
 	//Mybase.ShowBitmap();				//貼上我方砲塔
 	Neko[maxNeko].OnShow();				//貼上我方砲塔
 	Rival[maxRival].OnShow();					//貼上敵方砲塔
@@ -799,7 +795,7 @@ void CGameStateRun::OnShow()
 	maxMoney.ShowBitmap();				//貼上現有金額
 	workCat.ShowBitmap();				//貼上工作貓
 	stopButton.ShowBitmap();			//貼上離開遊戲按鈕
-	stageName.ShowBitmap();				//貼上關卡名稱
+	stageData.ShowBitmapName(stage);	//貼上關卡名稱	
 	for (int i = 0; i < activateNeko; i++) {
 		Neko[i].OnShow();
 	}
