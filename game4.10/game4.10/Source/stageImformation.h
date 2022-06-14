@@ -12,9 +12,9 @@ namespace game_framework {
 		void   ShowBitmapBackGround(int stage);		//顯示背景圖片
 		void   ShowBitmapName(int stage);			//顯示關卡名稱圖片
 	private:
-		static CMovingBitmap BackGround[7];			//背景
-		static CMovingBitmap Name[7];				//關卡名稱
-		string stageRivalBase[7] = { "Taiwan Base","Hong Kong Base","Thailand Base","China Base","Mongolia Base","Korea Base","Japan Base"};//該關卡敵方的塔
+		static CMovingBitmap BackGround[10];			//背景
+		static CMovingBitmap Name[10];				//關卡名稱
+		string stageRivalBase[10] = { "Taiwan Base","Hong Kong Base","Thailand Base","China Base","Mongolia Base","Korea Base","Japan Base","Australia Base","Singapore Base","Maldives Base"};//該關卡敵方的塔
 		bool isBmpLoaded;				// 是否已經載入圖形
 	};
 }

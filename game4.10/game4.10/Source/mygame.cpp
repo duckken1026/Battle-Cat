@@ -391,7 +391,7 @@ void CGameStateRivalWin::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateRun::CGameStateRun(CGame *g)
-: CGameState(g), NUMBALLS(28), maxNeko(20),maxRival(10)
+: CGameState(g), NUMBALLS(28), maxNeko(20),maxRival(3)
 {
 	ball = new CBall [NUMBALLS];	
 	Rival = new rivalAnimation[maxRival + 1];//加上一個敵方主塔
@@ -488,7 +488,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 
 	if (currentRivalQuantity < maxRival) {
-		if (rivalDelay / 20 >= 1) {						    //每隔10秒派出一隻敵人
+		if (rivalDelay / 50 >= 1) {						    //每隔10秒派出一隻敵人
 			rivalDelay = 0;									//重設RivalDelay
 			int findDisappearRival = 0;						//找出Rival陣列哪一個敵方已擊退的變數
 
@@ -496,12 +496,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				activateRival += 1;
 				readyToFightRival += 1;
 				currentRivalQuantity += 1;			//目前畫面上敵方總數加一
+				Rival[readyToFightRival] = rivalAnimation("Doge");//傳入敵方的名字然後載入敵方資料
+				Rival[readyToFightRival].LoadBitmap();		//去讀取該敵方的圖片
 			}
 			else {									//如果超過20隻就要等畫面敵方總數小於20隻，再去尋找Rival陣列中的敵方哪個已經被擊退
 				while (findDisappearRival < maxRival) {
 					if (Rival[findDisappearRival].GetRivalStatus() == "replaceable" && activateRival == maxRival) {
 						readyToFightRival = findDisappearRival;
 						currentRivalQuantity += 1;			//目前畫面上敵方總數加一
+						Rival[readyToFightRival] = rivalAnimation("Doge");//傳入敵方的名字然後載入敵方資料
+						Rival[readyToFightRival].LoadBitmap();		//去讀取該敵方的圖片
 						break;
 					}
 					if (findDisappearRival < maxRival) {
@@ -509,17 +513,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 					}
 				}
 			}
-			Rival[readyToFightRival] = rivalAnimation("Doge");//傳入敵方的名字然後載入敵方資料
-			Rival[readyToFightRival].LoadBitmap();		//去讀取該敵方的圖片
+			
 		}
 	}
 	
 	rivalDelay += 1;
 	
-	
+	currentRivalQuantity = 0;
 	for (int i = 0; i < maxRival; i++) {
-		if (Rival[i].GetRivalStatus() == "currentRivalQuantityMinusOne") {		//如果敵方被擊退currentRivalQuantity減一
-			currentRivalQuantity -= 1;
+		if (Rival[i].GetRivalStatus() == "IsOnScreen") {		//計算現在在畫面上的敵方
+			currentRivalQuantity += 1;
 		}
 	}
 
@@ -531,9 +534,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	activateNeko = Button.getClickedTimes();			//activateNeko加一
 	}
 	
+	currentNekoQuantity = 0;
 	for (int i = 0; i < maxNeko; i++) {
-		if (Neko[i].GetNekoStatus() == "currentNekoQuantityMinusOne") {		//如果貓咪被擊退currentNekoQuantity減一
-			currentNekoQuantity -= 1;
+		if (Neko[i].GetNekoStatus() == "IsOnScreen") {		//計算現在在畫面上的貓咪
+			currentNekoQuantity += 1;
 		}
 	}
 
@@ -726,12 +730,16 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 				if (activateNeko < maxNeko) {			//如果已派出的貓咪小於20隻，readyToFightNeko就依序加一
 					readyToFightNeko += 1;
 					currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
+					Neko[readyToFightNeko] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
+					Neko[readyToFightNeko].LoadBitmap();		//去讀取該貓咪的圖片
 				}
 				else {									//如果超過20隻就要等畫面貓咪總數小於20隻，再去尋找Neko陣列中的貓咪哪個已經被擊退
 					while(findDisappearNeko<maxNeko) {
 						if (Neko[findDisappearNeko].GetNekoStatus() == "replaceable" && activateNeko == maxNeko) {
 							readyToFightNeko = findDisappearNeko;
 							currentNekoQuantity += 1;			//目前畫面上貓咪總數加一
+							Neko[readyToFightNeko] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
+							Neko[readyToFightNeko].LoadBitmap();		//去讀取該貓咪的圖片
 							break;
 						}
 						if (findDisappearNeko < maxNeko) {
@@ -739,8 +747,6 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 						}
 					}
 				}
-				Neko[readyToFightNeko] = nekoAnimation(nekoName[Button.getButtonNum(point.x, point.y)]);//傳入貓咪的名字然後載入貓咪資料
-				Neko[readyToFightNeko].LoadBitmap();		//去讀取該貓咪的圖片
 			}
 
 		}
@@ -842,9 +848,9 @@ void CGameStateRun::OnShow()
 	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d",activateRival,currentRivalQuantity,readyToFightRival);
 	sprintf(str3, "%d/%d", Rival[maxRival].GetHealth(), Rival[maxRival].GetOriginHealth());
 	sprintf(str4, "%d/%d", Neko[maxNeko].GetHealth(), Neko[maxNeko].GetOriginHealth());
-	pDC->TextOut(300, 0, str);
-	pDC->TextOut(300, 50, str1);
-	pDC->TextOut(300, 100, str2); 
+	pDC->TextOut(400, 0, str);
+	pDC->TextOut(400, 50, str1);
+	pDC->TextOut(400, 100, str2); 
 	pDC->TextOut(130, 360, str3);
 	pDC->TextOut(1650,360, str4);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
