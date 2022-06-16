@@ -113,6 +113,9 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 		GotoGameState(GAME_STATE_Stage_Select);		// 切換至GAME_STATE_Stage_Select
 		CAudio::Instance()->Stop(AUDIO_Beginning);
 	}
+	if ((point.x >= 575 && point.x <= 1337) && (point.y >= 730 && point.y <= 838)) {
+		GotoGameState(GAME_STATE_ABOUT);		// 切換至GAME_STATE_ABOUT
+	}
 }
 
 void CGameStateInit::OnShow()
@@ -140,7 +143,33 @@ void CGameStateInit::OnShow()
 	pDC->TextOut(5,955,"Press Alt-F4 or ESC to Quit.");
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-}								
+}			
+
+/////////////////////////////////////////////////////////////////////////////
+// 這個class為遊戲的遊戲說明
+/////////////////////////////////////////////////////////////////////////////
+
+CGameStateAbout::CGameStateAbout(CGame * g)
+: CGameState(g)
+{
+}
+
+void CGameStateAbout::OnInit()
+{
+	about.LoadBitmap(".\\bitmaps\\遊戲說明.bmp");
+}
+
+void CGameStateAbout::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	if ((point.x >= 2 && point.x <= 142) && (point.y >= 914 && point.y <= 1075)) {
+		GotoGameState(GAME_STATE_INIT);		// 切換至GAME_STATE_INIT
+	}
+}
+
+void CGameStateAbout::OnShow()
+{
+	about.ShowBitmap();
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的遊戲開頭畫面物件
@@ -856,4 +885,7 @@ void CGameStateRun::OnShow()
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
+
+
+
 }
