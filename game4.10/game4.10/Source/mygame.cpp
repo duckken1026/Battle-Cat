@@ -299,6 +299,16 @@ CGameStateNekoWin::CGameStateNekoWin(CGame *g)
 {
 }
 
+void CGameStateNekoWin::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	if ((point.y >= 0 && point.y <= 1080) && (point.x >= 0 && point.x <= 1920)) {
+		CAudio::Instance()->Stop(AUDIO_Victory);
+		CAudio::Instance()->Play(AUDIO_Beginning, true);						//Play 開頭音樂
+		GotoGameState(GAME_STATE_INIT);
+	}
+
+}
+
 void CGameStateNekoWin::OnMove()
 {
 	counter--;
@@ -346,8 +356,11 @@ void CGameStateNekoWin::OnShow()
 	pDC->SetBkColor(RGB(0, 0, 0));
 	pDC->SetTextColor(RGB(255, 255, 0));
 	char str[80];								// Demo 數字對字串的轉換
+	char str1[80];								// Demo 數字對字串的轉換
 	sprintf(str, "(%d)", counter / 10);
-	pDC->TextOut(900, 700, str);
+	sprintf(str1, "%s", "點擊回到主畫面");
+	pDC->TextOut(925, 700, str);
+	pDC->TextOut(875, 800, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	winPhoto.ShowBitmap();
@@ -359,6 +372,16 @@ void CGameStateNekoWin::OnShow()
 CGameStateRivalWin::CGameStateRivalWin(CGame *g)
 	: CGameState(g)
 {
+}
+
+void CGameStateRivalWin::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	if ((point.y >= 0 && point.y <= 1080) && (point.x >= 0 && point.x <= 1920)) {
+		CAudio::Instance()->Stop(AUDIO_Victory);
+		CAudio::Instance()->Play(AUDIO_Beginning, true);						//Play 開頭音樂
+		GotoGameState(GAME_STATE_INIT);
+	}
+
 }
 
 void CGameStateRivalWin::OnMove()
@@ -408,8 +431,11 @@ void CGameStateRivalWin::OnShow()
 	pDC->SetBkColor(RGB(0, 0, 0));
 	pDC->SetTextColor(RGB(255, 255, 0));
 	char str[80];								// Demo 數字對字串的轉換
+	char str1[80];								// Demo 數字對字串的轉換
 	sprintf(str, "(%d)", counter / 10);
-	pDC->TextOut(900, 700, str);
+	sprintf(str1, "%s", "點擊回到主畫面");
+	pDC->TextOut(925, 700, str);
+	pDC->TextOut(875, 600, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	winPhoto.ShowBitmap();

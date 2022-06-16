@@ -207,6 +207,7 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 按鈕
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap winPhoto;							// 勝利圖片
@@ -223,6 +224,7 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 按鈕
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap winPhoto;							// 勝利圖片
