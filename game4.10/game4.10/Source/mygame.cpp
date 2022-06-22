@@ -377,7 +377,7 @@ CGameStateRivalWin::CGameStateRivalWin(CGame *g)
 void CGameStateRivalWin::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if ((point.y >= 0 && point.y <= 1080) && (point.x >= 0 && point.x <= 1920)) {
-		CAudio::Instance()->Stop(AUDIO_Victory);
+		CAudio::Instance()->Stop(AUDIO_Defeat);
 		CAudio::Instance()->Play(AUDIO_Beginning, true);						//Play 開頭音樂
 		GotoGameState(GAME_STATE_INIT);
 	}
@@ -496,6 +496,8 @@ void CGameStateRun::OnBeginState()
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	stopButton.SetTopLeft(0,0);							//設定中止按鈕顯示的座標
+	CatWinButton.SetTopLeft(1600,900);					//設定中止按鈕顯示的座標
+	RivalWinButton.SetTopLeft(1600,990);				//設定中止按鈕顯示的座標
 	currentMoney.SetDigits(1);
 	currentMoney.SetInteger(0);							//設定現有金額初始值為0
 	currentMoney.SetTopLeft(1520, 0);					//設定現有金額顯示的座標
@@ -530,18 +532,12 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	//Mybase.SetTopLeft(1650,419);						// 設定我方砲塔座標
-	//Rivalbase.SetTopLeft(105, 419);						// 設定敵方砲塔座標
-	//giant.SetTopLeft(1500, 500);
 	Neko[maxNeko].MoveForward(&doge);					//將貓咪砲塔派出
 	Rival[maxRival].MoveForward(&neko);					//將敵方砲塔派出
 	neko.OnMove();										//貓咪動畫開始變換
 	if (neko.GetAnimationNumber() == 0) {
 		neko.SetCurrentBitmap(9);
 	}
-
-
-
 	if (currentRivalQuantity < maxRival) {
 		if (rivalDelay / 50 >= 1) {						    //每隔10秒派出一隻敵人
 			rivalDelay = 0;									//重設RivalDelay
@@ -599,13 +595,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (int i = 0; i < activateNeko; i++) {			//派出貓咪
 		Neko[i].MoveForward(&Rival[RivalDetector.findTarget(Rival, maxRival)]);
 	}
-	
-	//neko2.OnMove();									//貓咪動畫開始變換
-	//neko2.MoveForward(&Rival[0]);
-	
-	//doge.OnMove();										//貓咪動畫開始變換
-	
-	//doge.MoveForward(&Neko[NekoDetector.findTarget(Neko,maxNeko)]);
 	Button.SetTopLeft();									//設定按鈕位置
 	MaxNekoText.SetTopLeft(795,350);						//設定無法出擊文字位置
 	
@@ -647,26 +636,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	
 	Button.updateAffordable(currentMoney.GetInteger());	//更新目前這隻貓是否有足夠的錢派出
 	workCat.checkAffordable(currentMoney.GetInteger());	//檢查是否有足夠金額升級工作貓
-
-
-	//for (i=0; i < NUMBALLS; i++)
-		//if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
-			//ball[i].SetIsAlive(false);
-			//CAudio::Instance()->Play(AUDIO_DING);
-			//hits_left.Add(-1);
-			//
-			// 若剩餘碰撞次數為0，則跳到Game Over狀態
-			//
-			//if (hits_left.GetInteger() <= 0) {
-			//	CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-			//	CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
-			//	GotoGameState(GAME_STATE_OVER);
-			//}
-		//}
-	//
-	// 移動彈跳的球
-	//
-	bball.OnMove();
 	if (Neko[maxNeko].GetHealth() <= 0) {					//若敵方獲勝
 		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
 		GotoGameState(GAME_STATE_Rival_Win);
@@ -707,6 +676,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	hits_left.LoadBitmap();		
 	stageData.LoadBitmap();									//載入背景圖片和關卡名稱
 	stopButton.LoadBitmap(".\\bitmaps\\中止.bmp", RGB(255, 0, 0));//載入退出遊戲圖形
+	CatWinButton.LoadBitmap(".\\bitmaps\\SKIP-Cat.bmp", RGB(255, 0, 0));//載入CatWin遊戲圖形
+	RivalWinButton.LoadBitmap(".\\bitmaps\\SKIP - Rival.bmp", RGB(255, 0, 0));//載入RivalWin遊戲圖形
 	currentMoney.LoadBitmap();								//載入數字圖形
 	maxMoney.LoadBitmap();									//載入數字圖形	
 	workCat.LoadBitmap();									//載入工作貓圖形
@@ -725,8 +696,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		Rival[i].LoadBitmap();
 	}
 	Button.LoadBitmap();									//載入貓咪按鈕
-	
-	//giant.LoadBitmap(IDB_giant, RGB(255, 0, 0));			// 載入巨神貓
+
 	
 
 	CAudio::Instance()->Load(AUDIO_BackgroundMusic, "sounds\\InvadingJapan!.mp3");	// 載入編號2的聲音Invading Japan!.mp3
@@ -741,14 +711,6 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	//if (nChar == KEY_LEFT)
-		//eraser.SetMovingLeft(true);
-	//if (nChar == KEY_RIGHT)
-		//eraser.SetMovingRight(true);
-	//if (nChar == KEY_UP)
-		//eraser.SetMovingUp(true);
-	//if (nChar == KEY_DOWN)
-		//eraser.SetMovingDown(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -757,14 +719,6 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	//if (nChar == KEY_LEFT)
-		//eraser.SetMovingLeft(false);
-	//if (nChar == KEY_RIGHT)
-		//eraser.SetMovingRight(false);
-	//if (nChar == KEY_UP)
-		//eraser.SetMovingUp(false);
-	//if (nChar == KEY_DOWN)
-		//eraser.SetMovingDown(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -811,8 +765,16 @@ void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 		maxMoney.Add(workCat.maxMoney);							//增加最大金額
 	}
 	if ((point.x >= 0 && point.x <= 100) && (point.y >= 0 && point.y <= 90)) {	//按到中止遊戲按鈕
-		GotoGameState(GAME_STATE_Stage_Select);
 		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
+		GotoGameState(GAME_STATE_Stage_Select);
+	}
+	if ((point.x >= 1600 && point.x <= 1877) && (point.y >= 900 && point.y <= 989)) {	//按到中止遊戲按鈕
+		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
+		GotoGameState(GAME_STATE_Neko_Win);
+	}
+	if ((point.x >= 1600 && point.x <= 1877) && (point.y >= 990 && point.y <= 1089)) {	//按到中止遊戲按鈕
+		CAudio::Instance()->Stop(AUDIO_BackgroundMusic);	// 停止 背景音樂
+		GotoGameState(GAME_STATE_Rival_Win);
 	}
 }
 
@@ -848,14 +810,12 @@ void CGameStateRun::OnShow()
 	//Mybase.ShowBitmap();				//貼上我方砲塔
 	Neko[maxNeko].OnShow();				//貼上我方砲塔
 	Rival[maxRival].OnShow();					//貼上敵方砲塔
-	//Rivalbase.ShowBitmap();				//貼上敵方砲塔
-	//neko.OnShow();						//貼上貓咪
-	//neko2.OnShow();						//貼上貓咪	
-	//doge.OnShow();						//貼上狗仔
 	currentMoney.ShowBitmap();			//貼上現有金額
 	maxMoney.ShowBitmap();				//貼上現有金額
 	workCat.ShowBitmap();				//貼上工作貓
 	stopButton.ShowBitmap();			//貼上離開遊戲按鈕
+	CatWinButton.ShowBitmap();			//貼上CatWin按鈕
+	RivalWinButton.ShowBitmap();		//貼上RivalWin按鈕
 	stageData.ShowBitmapName(stage);	//貼上關卡名稱	
 	for (int i = 0; i < activateNeko; i++) {
 		Neko[i].OnShow();
@@ -867,49 +827,6 @@ void CGameStateRun::OnShow()
 	if (currentNekoQuantity >= maxNeko) {	//若以達最大出擊數就會出現文字	
 		MaxNekoText.ShowBitmap();			//貼上無法出擊文字
 	}
-
-	//giant.ShowBitmap(0.8);
-	/*
-	background.ShowBitmap();			// 貼上學校圖
-	help.ShowBitmap();					// 貼上說明圖
-	hits_left.ShowBitmap();
-	for (int i=0; i < NUMBALLS; i++)
-		ball[i].OnShow();				// 貼上第i號球
-	bball.OnShow();						// 貼上彈跳的球
-	
-	//
-	//  貼上左上及右下角落的圖
-	//
-	corner.SetTopLeft(0,0);
-	corner.ShowBitmap();
-	corner.SetTopLeft(SIZE_X-corner.Width(), SIZE_Y-corner.Height());
-	corner.ShowBitmap();*/
-
-
-	//將數值顯示在螢幕上
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-	CFont f, *fp;
-	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(0, 0, 0));
-	pDC->SetTextColor(RGB(255, 255, 0));
-	char str[80];								// Demo 數字對字串的轉換
-	char str1[100];
-	char str2[100];
-	char str3[100];
-	char str4[100];
-	sprintf(str, "neko(x1):%d neko(x2):%d doge(x1):%d doge(x2):%d neko(health):%d", neko2.GetX1(), neko2.GetX2(), doge.GetX1(), doge.GetX2(), neko2.GetHealth());
-	sprintf(str1, "doge(health):%d animationNumber:%d %d %d", doge.GetHealth(), doge.GetAnimationNumber(),NekoDetector.findTarget(Neko, maxNeko), RivalDetector.findTarget(Rival, maxRival));
-	sprintf(str2, "activateNeko:%d currentNekoQuantity:%d readyToFightNeko:%d",activateRival,currentRivalQuantity,readyToFightRival);
-	sprintf(str3, "%d/%d", Rival[maxRival].GetHealth(), Rival[maxRival].GetOriginHealth());
-	sprintf(str4, "%d/%d", Neko[maxNeko].GetHealth(), Neko[maxNeko].GetOriginHealth());
-	pDC->TextOut(400, 0, str);
-	pDC->TextOut(400, 50, str1);
-	pDC->TextOut(400, 100, str2); 
-	pDC->TextOut(130, 360, str3);
-	pDC->TextOut(1650,360, str4);
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 
 

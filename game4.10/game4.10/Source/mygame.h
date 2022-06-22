@@ -177,6 +177,8 @@ namespace game_framework {
 		int rivalDelay;				//派出敵人的延遲時間
 		stageImformation stageData;	//關卡資訊
 		CMovingBitmap	stopButton;	//退出遊戲按鈕	
+		CMovingBitmap	RivalWinButton;	//RivalWin按鈕	
+		CMovingBitmap	CatWinButton;	//CatWin按鈕	
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
