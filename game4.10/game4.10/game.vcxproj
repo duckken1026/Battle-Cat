@@ -351,6 +351,7 @@
   <ItemGroup>
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
+    <Image Include="RES\icon32.ico" />
     <Image Include="RES\圖片\neko9.bmp" />
     <Image Include="RES\塔\tower.bmp" />
     <Image Include="RES\塔\Tw.bmp" />

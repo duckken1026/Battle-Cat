@@ -25,6 +25,16 @@ namespace game_framework {
 		return stageRivalBase[stage-1];
 	}
 
+	string stageImformation::getRival(int stage)
+	{
+		return stageRival[stage-1];
+	}
+
+	int stageImformation::getStageDelay(int stage)
+	{
+		return stageDelay[stage-1];
+	}
+
 	void stageImformation::LoadBitmap()
 	{
 		if (!isBmpLoaded) {

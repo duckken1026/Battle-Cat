@@ -22,10 +22,11 @@ namespace game_framework {
 		level = 1;
 		affordable = false;
 		maxMoney = 300;
+		int RequireMoney[8] = { 80,200,400,700,1000,1200,1500,1800 };//升級所需金額
 		for (int i = 0; i < 7; i++) {
-			requireMoney[i] = 40*(i+1);
+			requireMoney[i] = RequireMoney[i];
 		}
-		int speedData[8] = {100,100,100,100,100,100,100,100 };//金錢增加速度資料
+		int speedData[8] = {5,10,15,20,25,30,40,50 };//金錢增加速度資料
 		for (int i = 0; i < 8; i++) {
 			addSpeed[i] = speedData[i];
 		}

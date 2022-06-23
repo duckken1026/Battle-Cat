@@ -41,8 +41,8 @@ namespace game_framework {
 		}
 		else if (name == "Snache") {	//扭扭蛇資料
 			range = 20;
-			health = 10;
-			attack = 1;
+			health = 200;
+			attack = 50;
 			attackDelay = 20;
 			walkAnimationStart = 0;
 			walkAnimationEnd = 4;
@@ -62,7 +62,7 @@ namespace game_framework {
 		}
 		else if (name == "Those Guys") { //團結筷子幫資料
 			range = 20;
-			health = 1000;
+			health = 500;
 			attack = 100;
 			attackDelay = 13;
 			walkAnimationStart = 0;
@@ -83,8 +83,8 @@ namespace game_framework {
 		}
 		else if (name == "Hippoe") { //河馬將資料
 			range = 20;
-			health = 10;
-			attack = 1;
+			health = 800;
+			attack = 300;
 			attackDelay = 22;
 			walkAnimationStart = 0;
 			walkAnimationEnd = 5;
@@ -104,8 +104,8 @@ namespace game_framework {
 		}
 		else if (name == "Pigge") { //豬野郎資料
 			range = 20;
-			health = 100;
-			attack = 1000;
+			health = 1000;
+			attack = 500;
 			attackDelay = 24;
 			walkAnimationStart = 0;
 			walkAnimationEnd = 9;
@@ -115,7 +115,7 @@ namespace game_framework {
 			deathAnimationEnd = 34;
 			deathHeightChange = 0;
 			deathXChange = 0;
-			moveSpeed = 5;
+			moveSpeed = 2;
 			imageQuantity = 35;
 			headGap = 30;
 			originX = -75;
@@ -188,7 +188,7 @@ namespace game_framework {
 		}
 		else if (name == "China Base") { //中國砲塔資料
 		range = 0;
-		health = 2500;
+		health = 3000;
 		attack = 0;
 		attackDelay = 0;
 		walkAnimationStart = 0;
@@ -209,7 +209,7 @@ namespace game_framework {
 		}
 		else if (name == "Mongolia Base") { //蒙古砲塔資料
 		range = 0;
-		health = 2500;
+		health = 3500;
 		attack = 0;
 		attackDelay = 0;
 		walkAnimationStart = 0;
@@ -230,7 +230,7 @@ namespace game_framework {
 		}
 		else if (name == "Korea Base") { //韓國砲塔資料
 		range = 0;
-		health = 2500;
+		health = 4000;
 		attack = 0;
 		attackDelay = 0;
 		walkAnimationStart = 0;
@@ -251,7 +251,7 @@ namespace game_framework {
 		}
 		else if (name == "Japan Base") { //日本砲塔資料
 		range = 0;
-		health = 2500;
+		health = 4500;
 		attack = 0;
 		attackDelay = 0;
 		walkAnimationStart = 0;
@@ -272,7 +272,7 @@ namespace game_framework {
 		}
 		else if (name == "Australia Base") { //澳大利亞砲塔資料
 			range = 0;
-			health = 2500;
+			health = 5000;
 			attack = 0;
 			attackDelay = 0;
 			walkAnimationStart = 0;
@@ -293,7 +293,7 @@ namespace game_framework {
 		}
 		else if (name == "Singapore Base") { //新加坡砲塔資料
 			range = 0;
-			health = 2500;
+			health = 5500;
 			attack = 0;
 			attackDelay = 0;
 			walkAnimationStart = 0;
@@ -314,7 +314,7 @@ namespace game_framework {
 		}
 		else if (name == "Maldives Base") { //馬爾地夫砲塔資料
 			range = 0;
-			health = 2500;
+			health = 6000;
 			attack = 0;
 			attackDelay = 0;
 			walkAnimationStart = 0;

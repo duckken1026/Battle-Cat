@@ -77,7 +77,7 @@ namespace game_framework {
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnLButtonUp(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
@@ -110,7 +110,7 @@ namespace game_framework {
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnLButtonUp(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		stageSelector stageSelect;						// 選擇關卡的功能
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -209,7 +209,7 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 按鈕
+		void OnLButtonUp(UINT nFlags, CPoint point);  // 按鈕
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap winPhoto;							// 勝利圖片
@@ -226,7 +226,7 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 按鈕
+		void OnLButtonUp(UINT nFlags, CPoint point);  // 按鈕
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap winPhoto;							// 勝利圖片

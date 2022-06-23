@@ -107,7 +107,7 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
+void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	if ((point.x >= 575 && point.x <= 1337) && (point.y >= 592 && point.y <= 700)) {
 		GotoGameState(GAME_STATE_Stage_Select);		// 切換至GAME_STATE_Stage_Select
@@ -208,7 +208,7 @@ void CGameStateStageSelect::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-void CGameStateStageSelect::OnLButtonDown(UINT nFlags, CPoint point)
+void CGameStateStageSelect::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	if ((point.y >= 140 && point.y < 920) &&(point.x>960 && point.x<=1920)) {
 		stageSelect.clickRight();
@@ -299,7 +299,7 @@ CGameStateNekoWin::CGameStateNekoWin(CGame *g)
 {
 }
 
-void CGameStateNekoWin::OnLButtonDown(UINT nFlags, CPoint point)
+void CGameStateNekoWin::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	if ((point.y >= 0 && point.y <= 1080) && (point.x >= 0 && point.x <= 1920)) {
 		CAudio::Instance()->Stop(AUDIO_Victory);
@@ -374,7 +374,7 @@ CGameStateRivalWin::CGameStateRivalWin(CGame *g)
 {
 }
 
-void CGameStateRivalWin::OnLButtonDown(UINT nFlags, CPoint point)
+void CGameStateRivalWin::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	if ((point.y >= 0 && point.y <= 1080) && (point.x >= 0 && point.x <= 1920)) {
 		CAudio::Instance()->Stop(AUDIO_Defeat);
@@ -446,7 +446,7 @@ void CGameStateRivalWin::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateRun::CGameStateRun(CGame *g)
-: CGameState(g), NUMBALLS(28), maxNeko(20),maxRival(3)
+: CGameState(g), NUMBALLS(28), maxNeko(20),maxRival(10)
 {
 	ball = new CBall [NUMBALLS];	
 	Rival = new rivalAnimation[maxRival + 1];//加上一個敵方主塔
@@ -539,7 +539,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		neko.SetCurrentBitmap(9);
 	}
 	if (currentRivalQuantity < maxRival) {
-		if (rivalDelay / 50 >= 1) {						    //每隔10秒派出一隻敵人
+		if (rivalDelay / stageData.getStageDelay(stage) >= 1) {						    //每隔10秒派出一隻敵人
 			rivalDelay = 0;									//重設RivalDelay
 			int findDisappearRival = 0;						//找出Rival陣列哪一個敵方已擊退的變數
 
@@ -547,7 +547,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				activateRival += 1;
 				readyToFightRival += 1;
 				currentRivalQuantity += 1;			//目前畫面上敵方總數加一
-				Rival[readyToFightRival] = rivalAnimation("Doge");//傳入敵方的名字然後載入敵方資料
+				Rival[readyToFightRival] = rivalAnimation(stageData.getRival(stage));//傳入敵方的名字然後載入敵方資料
 				Rival[readyToFightRival].LoadBitmap();		//去讀取該敵方的圖片
 			}
 			else {									//如果超過20隻就要等畫面敵方總數小於20隻，再去尋找Rival陣列中的敵方哪個已經被擊退
@@ -555,7 +555,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 					if (Rival[findDisappearRival].GetRivalStatus() == "replaceable" && activateRival == maxRival) {
 						readyToFightRival = findDisappearRival;
 						currentRivalQuantity += 1;			//目前畫面上敵方總數加一
-						Rival[readyToFightRival] = rivalAnimation("Doge");//傳入敵方的名字然後載入敵方資料
+						Rival[readyToFightRival] = rivalAnimation(stageData.getRival(stage));//傳入敵方的名字然後載入敵方資料
 						Rival[readyToFightRival].LoadBitmap();		//去讀取該敵方的圖片
 						break;
 					}
@@ -827,6 +827,21 @@ void CGameStateRun::OnShow()
 	if (currentNekoQuantity >= maxNeko) {	//若以達最大出擊數就會出現文字	
 		MaxNekoText.ShowBitmap();			//貼上無法出擊文字
 	}
+	//將數值顯示在螢幕上
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 0));
+	char str3[100];
+	char str4[100];
+	sprintf(str3, "%d/%d", Rival[maxRival].GetHealth(), Rival[maxRival].GetOriginHealth());
+	sprintf(str4, "%d/%d", Neko[maxNeko].GetHealth(), Neko[maxNeko].GetOriginHealth());
+	pDC->TextOut(130, 360, str3);
+	pDC->TextOut(1650, 360, str4);
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 
 
