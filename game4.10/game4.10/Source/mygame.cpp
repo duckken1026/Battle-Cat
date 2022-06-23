@@ -360,7 +360,7 @@ void CGameStateNekoWin::OnShow()
 	sprintf(str, "(%d)", counter / 10);
 	sprintf(str1, "%s", "點擊回到主畫面");
 	pDC->TextOut(925, 700, str);
-	pDC->TextOut(875, 800, str1);
+	pDC->TextOut(835, 800, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	winPhoto.ShowBitmap();
@@ -435,7 +435,7 @@ void CGameStateRivalWin::OnShow()
 	sprintf(str, "(%d)", counter / 10);
 	sprintf(str1, "%s", "點擊回到主畫面");
 	pDC->TextOut(925, 700, str);
-	pDC->TextOut(875, 600, str1);
+	pDC->TextOut(835, 600, str1);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	winPhoto.ShowBitmap();
