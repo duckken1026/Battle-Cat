@@ -1,0 +1,5 @@
+﻿  GitTutorial.cpp
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(12): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(27): error C2374: 'target': 重複定義; 多個初始設定
+  c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(10): note: 請參閱 'target' 的宣告
+c:\users\jimbo\onedrive\桌面\subject\program\oop\project\gittutorial\gittutorial\gittutorial.cpp(29): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失

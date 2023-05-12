@@ -1,0 +1,14 @@
+記得在mygame.h宣告你的音樂(編號)
+enum AUDIO_ID {				// 定義各種音效的編號
+		AUDIO_DING,				// 0
+		AUDIO_LAKE,				// 1
+		AUDIO_BackgroundMusic	// 2   背景音樂
+	};
+先load音樂在你要的位子上，通常都是initialize(OnInit)
+CAudio::Instance()->Load(AUDIO_BackgroundMusic,  "sounds\\InvadingJapan!.mp3");
+再來play
+一樣在你要放的位子play例如onshow
+CAudio::Instance()->Play(AUDIO_BackgroundMusic);
+不要放在進去別人的OnInite
+CAudio::Instance()->Stop(AUDIO_BackgroundMusic);
+

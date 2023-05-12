@@ -1,0 +1,51 @@
+***********************
+放入圖片方式
+***********************
+把圖片放進RES資料夾，在Bitmap按下右鍵匯入圖片，更改圖片ID。
+
+
+在mygame.h宣告 class CGameStateRun : public CGameState
+
+宣告 CMovingBitmap   XXX;
+
+mygame.cpp 
+
+-----------------------
+CGameStateRun::OnInit()  
+
+XXX.LoadBitmap(ID)	讀取圖片
+-----------------------
+CGameStateRun::OnMove()	
+XXX.SetTopLeft(10, 10);	設定座標
+-----------------------
+CGameStateRun::OnShow()
+XXX.ShowBitmap();	顯示圖片	
+
+OnShow部分:
+先貼的會顯示在後面
+
+***********************
+圖片移動方式
+***********************
+在mygame.h 中找到CGameStateRun
+
+新增 int格式的 X,Y座標
+
+再到mygame.cpp 找到CGameStateRun::CGameStateRun(CGame *g)加入 X=Y=0; 
+
+把SetTopLeft內的參數改為X，Y 加入移動的程式碼
+
+
+***********************
+動畫製作方式
+***********************
+需先在mygame.h檔中宣告出CAnimation類別的物件
+
+然後到mygame.cpp中 將AddBitmap(圖片，RGB)依序放入void CGameStateRun::OnInit()  	
+
+設定動畫延遲可用nekoneko.SetDelayCount(5); 一樣加在void CGameStateRun::OnInit()中
+
+在void CGameStateRun::OnMove()中加入nekoneko.OnMove(); //若沒加動畫就不會動
+
+最後在void CGameStateRun::OnShow()加入nekoneko.SetTopLeft(1300, 700);	//設定座標
+	    					  nekoneko.OnShow();			//顯示圖片
