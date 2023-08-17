@@ -1,4 +1,6 @@
 # Battle-Cat 貓咪大戰爭(自製版)
+# 遊玩影片
+https://youtu.be/FscnovoOnVs
 # 遊戲內容
 
 開始畫面:
